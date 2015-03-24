@@ -1,22 +1,44 @@
 String.toLocaleString({
-	"en": {
-		"%title": "SPViewer(en)",
-		"%info": "Radioisotope spectrum viewer",
-                "%menu1": "Select",
-                "%menu2": "View",
-                "%menu3": "Setting",
-		"%spectrumList": "Select Spectrum",
-		"%spectrumView": "View Spectrum",
-		"%spectrumEdit": "Spectrum Setting"
-	},
-	"ja": {
-		"%title": "SPViewer(ja)",
-                "%info": "放射線スペクトル表示ツール",
-                "%menu1": "スペクトル選択",
-                "%menu2": "スペクトル表示",
-                "%menu3": "描画要素変更",
-		"%spectrumList": "スペクトル選択",
-		"%spectrumView": "スペクトル表示",
-		"%spectrumEdit": "セッティング変更"
-	}
+"en": {
+    "%title": "SPViewer(en)",
+    "%info": "Radioisotope spectrum viewer",
+    "%menu1": "Select",
+    "%menu2": "View",
+    "%menu3": "Setting",
+    "%spectrumList": "Select Spectrum",
+    "%spectrumView": "View Spectrum",
+    "%spectrumEdit": "Spectrum Setting",
+    "%sp_info": "Spectrum Information",
+    "%zoom": "Zoom in",
+    "%zoomout": "Zoom out",
+    "%bg_range": "BG width",
+    "%bg_range_left": "Left side BG",
+    "%bg_range_right": "Right side BG",
+    "%v_range": "max Y",
+    "%f_type": "Filter",
+    "%none": "None",
+    "%sma": "Simple average",
+    "%wma": "Simple average"
+},
+"ja": {
+    "%title": "SPViewer(ja)",
+    "%info": "放射線スペクトル表示ツール",
+    "%menu1": "スペクトル選択",
+    "%menu2": "スペクトル表示",
+    "%menu3": "描画要素変更",
+    "%spectrumList": "スペクトル選択",
+    "%spectrumView": "スペクトル表示",
+    "%spectrumEdit": "セッティング変更",
+    "%sp_info": "■ スペクトル情報",
+    "%zoom": "選択範囲を拡大",
+    "%zoomout": "ズームアウト",
+    "%bg_range": "BG計算幅",
+    "%bg_range_left": "左側BG範囲を選ぶ",
+    "%bg_range_right": "右側BG範囲を選ぶ",
+    "%v_range": "縦軸表示範囲",
+    "%f_type": "フィルタ",
+    "%none": "なし",
+    "%sma": "単純移動平均",
+    "%wma": "加重移動平均"
+}
 });

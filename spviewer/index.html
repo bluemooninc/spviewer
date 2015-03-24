@@ -39,10 +39,10 @@
                     <a href="#" id="menu1">Select</a>
                 </li>
                 <li>
-                    <a href="#Spectrum" id="menu2">View</a>
+                    <a href="#spectrumView" id="menu2">View</a>
                 </li>
                 <li>
-                    <a href="#Spectrum_Config" id="menu3">Setting</a>
+                    <a href="#spectrumEdit" id="menu3">Setting</a>
                 </li>
             </ul>
         </div><!--/.nav-collapse -->
@@ -50,32 +50,29 @@
 </div>
 <div class="container">    
     
-<h1 id="title">title</h1>
-<p id="info">Your locale is unsupported.</p>
+<h2 id="spectrumList">Spectrum List</h2>
+<p id="info">Your locale is unsupported.firefox will work well.</p>
 
 <form id="file_select">
 </form>
 
-<H2 id="spectrumView">スペクトル表示</H2>
+<H2 id="spectrumView">Spectrum View</H2>
 
-<div id="sp_sel">
-</div>
+<div id="sp_sel"></div>
 
-<div id="sp_info">
-	■ スペクトル情報<br>
-</div>
-
+<div id="sp_info">Spectrum Info<br></div>
 
 <div id="sp_graph" style="width: 800px; height: 400px;"></div>
 
-<H2 id="spectrumEdit">スペクトル設定</H2>
+<H2 id="spectrumEdit">Spectrum Edit</H2>
 
 <div>
     <form>
         <input type="button" id="zoom" value="選択範囲を拡大">
         <input type="button" id="zoomout" value="ズームアウト">
+        <div id="bg_range">BG計算幅</div>
         <span id="bg_range_selector">
-        BG計算幅<select id="bgrange">
+            <select id="bgrange">
             <option value="0.001">0.1%
             <option value="0.002">0.2%
             <option value="0.005">0.5%
@@ -89,7 +86,8 @@
         <input type="button" id="bg_range_right" value="右側BG範囲を選ぶ">
         </span>
         <br>
-        縦軸表示範囲<select id="max_range">
+        <div id="v_range">縦軸表示範囲</div>
+        <select id="max_range">
             <option value="100">100%
             <option value="90">90%
             <option value="80">80%
@@ -103,13 +101,15 @@
             <option value="5">5%
             <option value="3">3%
         </select>
-        フィルタ
+        <div id="f_type">フィルタ</div>
         <select id="filter_type">
-            <option value="none">なし
-            <option value="sma">単純移動平均
-            <option value="wma">加重移動平均
+            <option value="none" id="none">なし</option>
+            <option value="sma" id="sma">単純移動平均</option>
+            <option value="wma" id="wma">加重移動平均</option>
         </select>
-        平均範囲<select id="filter">
+        <div id="a_type">平均範囲</div>
+        
+        <select id="filter">
             <option value="0">なし
             <option value="1">3ch
             <option value="2">5ch
@@ -346,16 +346,23 @@ var localize = function (string, fallback) {
 
 var 
 info = document.getElementById("info").firstChild,
-title = document.getElementById("title").firstChild;
 menu1 = document.getElementById("menu1").firstChild;
 menu2 = document.getElementById("menu2").firstChild;
 menu3 = document.getElementById("menu3").firstChild;
+spectrumList = document.getElementById("spectrumList").firstChild;
+spectrumView = document.getElementById("spectrumView").firstChild;
+spectrumEdit = document.getElementById("spectrumEdit").firstChild;
+sp_info = document.getElementById("sp_info").firstChild;
+
 
 info.nodeValue = localize("%info", info.nodeValue);
-document.title = title.nodeValue = localize("%title", title.nodeValue);
 document.menu1 = menu1.nodeValue = localize("%menu1", menu1.nodeValue);
 document.menu2 = menu2.nodeValue = localize("%menu2", menu2.nodeValue);
 document.menu3 = menu3.nodeValue = localize("%menu3", menu3.nodeValue);
+document.spectrumList = spectrumList.nodeValue = localize("%spectrumList", spectrumList.nodeValue);
+document.spectrumView = spectrumView.nodeValue = localize("%spectrumView", spectrumView.nodeValue);
+document.spectrumEdit = spectrumEdit.nodeValue = localize("%spectrumEdit", spectrumEdit.nodeValue);
+document.sp_info = sp_info.nodeValue = localize("%sp_info", sp_info.nodeValue);
 document.documentElement.dir = localize("%locale.dir", document.documentElement.dir);
 
 document.documentElement.lang = String.locale || document.documentElement.lang;
