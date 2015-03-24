@@ -32,7 +32,9 @@
               <span class="icon-bar"></span>
             </button>
         </div>
-        <div class="brand">SPViewer</div>
+        <div class="brand">
+            <div id="title">SPViewer</div>            
+        </div>
         <div class="nav-collapse collapse">
             <ul class="nav">
                 <li class="active">
@@ -49,7 +51,6 @@
     </div>
 </div>
 <div class="container">    
-    
 <h2 id="spectrumList">Spectrum List</h2>
 <p id="info">Your locale is unsupported.firefox will work well.</p>
 
@@ -64,21 +65,19 @@
 
 <div id="sp_graph" style="width: 800px; height: 400px;"></div>
 
-<H2 id="spectrumEdit">Spectrum Edit</H2>
 
 <div>
     <form>
         <input type="button" id="zoom" value="選択範囲を拡大">
         <input type="button" id="zoomout" value="ズームアウト">
-        <div id="bg_range">BG計算幅</div>
         <span id="bg_range_selector">
-            <select id="bgrange">
-            <option value="0.001">0.1%
-            <option value="0.002">0.2%
-            <option value="0.005">0.5%
-            <option value="0.01" selected>1%
-            <option value="0.02">2%
-            <option value="0.03">3%
+        BG計算幅<select id="bgrange">
+                <option value="0.001">0.1%
+                <option value="0.002">0.2%
+                <option value="0.005">0.5%
+                <option value="0.01" selected>1%
+                <option value="0.02">2%
+                <option value="0.03">3%
         </select>
         </span>
         <span id="bg_range_selector_manual">
@@ -86,38 +85,35 @@
         <input type="button" id="bg_range_right" value="右側BG範囲を選ぶ">
         </span>
         <br>
-        <div id="v_range">縦軸表示範囲</div>
-        <select id="max_range">
-            <option value="100">100%
-            <option value="90">90%
-            <option value="80">80%
-            <option value="70">70%
-            <option value="60">60%
-            <option value="50">50%
-            <option value="40">40%
-            <option value="30">30%
-            <option value="20">20%
-            <option value="10">10%
-            <option value="5">5%
-            <option value="3">3%
+        縦軸表示範囲<select id="max_range">
+                <option value="100">100%
+                <option value="90">90%
+                <option value="80">80%
+                <option value="70">70%
+                <option value="60">60%
+                <option value="50">50%
+                <option value="40">40%
+                <option value="30">30%
+                <option value="20">20%
+                <option value="10">10%
+                <option value="5">5%
+                <option value="3">3%
         </select>
-        <div id="f_type">フィルタ</div>
+        フィルタ
         <select id="filter_type">
-            <option value="none" id="none">なし</option>
-            <option value="sma" id="sma">単純移動平均</option>
-            <option value="wma" id="wma">加重移動平均</option>
+                <option value="none">なし
+                <option value="sma">単純移動平均
+                <option value="wma">加重移動平均
         </select>
-        <div id="a_type">平均範囲</div>
-        
-        <select id="filter">
-            <option value="0">なし
-            <option value="1">3ch
-            <option value="2">5ch
-            <option value="3">7ch
-            <option value="4">9ch
-            <option value="5">11ch
-            <option value="6">13ch
-            <option value="7">15ch
+        平均範囲<select id="filter">
+                <option value="0">なし
+                <option value="1">3ch
+                <option value="2">5ch
+                <option value="3">7ch
+                <option value="4">9ch
+                <option value="5">11ch
+                <option value="6">13ch
+                <option value="7">15ch
         </select>
         <input type="checkbox" id="log" value="on">対数表示
         <input type="button" id="save_tsv" value="TSV変換">
@@ -205,10 +201,10 @@
     ■ カーソル位置核種情報<br>
     <table class="csv">
         <tr id="sp_cursor_nuclear_table">
-            <th style="width: 6em;">エネルギー</th>
-            <th style="width: 9em;">核種</th>
-            <th style="width: 13em;">半減期</th>
-            <th style="width: 4em;">放出比</th>
+            <th id="energy" style="width: 6em;">エネルギー</th>
+            <th id="isotope" style="width: 9em;">核種</th>
+            <th id="halflife" style="width: 13em;">半減期</th>
+            <th id="percentage" style="width: 4em;">放出比</th>
         </tr>
     </table>
 </div>
@@ -217,35 +213,35 @@
     ■ 選択範囲情報<br>
     <table class="csv">
         <tr>
-            <th style="width: 9em;">始ch</th>
+            <th id="startch" style="width: 9em;">始ch</th>
             <td style="width: 7em; text-align: right;"><span id="sel_s_ch"></span>ch</td>
         </tr>
         <tr>
-            <th>終ch</th>
+            <th id="endch">終ch</th>
             <td style="text-align: right;"><span id="sel_e_ch"></span>ch</td>
         </tr>
         <tr>
-            <th>始ev</th>
+            <th id="startev">始ev</th>
             <td style="text-align: right;"><span id="sel_s_ev"></span>keV</td>
         </tr>
         <tr>
-            <th>終ev</th>
+            <th id="endev">終ev</th>
             <td style="text-align: right;"><span id="sel_e_ev"></span>keV</td>
         </tr>
         <tr>
-            <th>グロスcps(BG含)</th>
+            <th id="grosscps">グロスcps(BG含)</th>
             <td style="text-align: right;"><span id="sel_gross"></span></td>
         </tr>
         <tr>
-            <th>ネットcps(BG除)</th>
+            <th id="netcps">ネットcps(BG除)</th>
             <td style="text-align: right;"><span id="sel_net"></span></td>
         </tr>
         <tr>
-            <th>グロスcount(BG含)</th>
+            <th id="grosscount">グロスcount(BG含)</th>
             <td style="text-align: right;"><span id="sel_gross_count"></span></td>
         </tr>
         <tr>
-            <th>ネットcount(BG除)</th>
+            <th id="netcount">ネットcount(BG除)</th>
             <td style="text-align: right;"><span id="sel_net_count"></span></td>
         </tr>
     </table>
@@ -255,11 +251,11 @@
     ■ 選択範囲情報<br>
     <table class="csv">
         <tr>
-            <th>始ev</th>
+            <th id="startch2">始ev</th>
             <td style="text-align: right;"><span id="cmp_sel_s_ev"></span>keV</td>
         </tr>
         <tr>
-            <th>終ev</th>
+            <th id="endch2">終ev</th>
             <td style="text-align: right;"><span id="cmp_sel_e_ev"></span>keV</td>
         </tr>
         <tr>
@@ -281,11 +277,11 @@
     ■ 選択範囲情報<br>
     <table class="csv">
         <tr>
-            <th>始ev</th>
+            <th id="startch3">始ev</th>
             <td style="text-align: right;"><span id="multi_sel_s_ev"></span>keV</td>
         </tr>
         <tr>
-            <th>終ev</th>
+            <th id="endch3">終ev</th>
             <td style="text-align: right;"><span id="multi_sel_e_ev"></span>keV</td>
         </tr>
         <tr>
@@ -344,7 +340,7 @@ var localize = function (string, fallback) {
     }
 };
 
-var 
+var title = document.getElementById("title").firstChild,
 info = document.getElementById("info").firstChild,
 menu1 = document.getElementById("menu1").firstChild;
 menu2 = document.getElementById("menu2").firstChild;
@@ -353,9 +349,44 @@ spectrumList = document.getElementById("spectrumList").firstChild;
 spectrumView = document.getElementById("spectrumView").firstChild;
 spectrumEdit = document.getElementById("spectrumEdit").firstChild;
 sp_info = document.getElementById("sp_info").firstChild;
+zoom = document.getElementById("zoom").firstChild;
+zoomout = document.getElementById("zoomout").firstChild;
+bg_range = document.getElementById("bg_range").firstChild;
+bg_range_left = document.getElementById("bg_range_left").firstChild;
+bg_range_right = document.getElementById("bg_range_right").firstChild;
+v_range = document.getElementById("v_range").firstChild;
+f_type = document.getElementById("f_type").firstChild;
+none = document.getElementById("none").firstChild;
+sma = document.getElementById("sma").firstChild;
+wma = document.getElementById("wma").firstChild;
+log = document.getElementById("log").firstChild;
+sp_cursor_info = document.getElementById("sp_cursor_info").firstChild;
+sp_cursor_info_compare = document.getElementById("sp_cursor_info_compare").firstChild;
+sp_cursor_info_multi = document.getElementById("sp_cursor_info_multi").firstChild;
+sp_cursor_nuclear = document.getElementById("sp_cursor_nuclear").firstChild;
+energy = document.getElementById("energy").firstChild;
+isotope = document.getElementById("isotope").firstChild;
+halflife = document.getElementById("halflife").firstChild;
+percentage = document.getElementById("percentage").firstChild;
+sp_cursor_selection = document.getElementById("sp_cursor_selection").firstChild;
+startch = document.getElementById("startch").firstChild;
+endch = document.getElementById("endch").firstChild;
+startev = document.getElementById("startev").firstChild;
+endev = document.getElementById("endev").firstChild;
+grosscps = document.getElementById("grosscps").firstChild;
+netcps = document.getElementById("netcps").firstChild;
+grosscount = document.getElementById("grosscount").firstChild;
+netcount = document.getElementById("netcount").firstChild;
+sp_cursor_selection_compare = document.getElementById("sp_cursor_selection_compare").firstChild;
+startev2 = document.getElementById("startev2").firstChild;
+endev2 = document.getElementById("endev2").firstChild;
+sp_cursor_selection_multi = document.getElementById("sp_cursor_selection_multi").firstChild;
+startev3 = document.getElementById("startev3").firstChild;
+endev3 = document.getElementById("endev3").firstChild;
 
 
-info.nodeValue = localize("%info", info.nodeValue);
+document.title = title.nodeValue = localize("%title", title.nodeValue);
+document.info = info.nodeValue = localize("%info", info.nodeValue);
 document.menu1 = menu1.nodeValue = localize("%menu1", menu1.nodeValue);
 document.menu2 = menu2.nodeValue = localize("%menu2", menu2.nodeValue);
 document.menu3 = menu3.nodeValue = localize("%menu3", menu3.nodeValue);
@@ -363,8 +394,41 @@ document.spectrumList = spectrumList.nodeValue = localize("%spectrumList", spect
 document.spectrumView = spectrumView.nodeValue = localize("%spectrumView", spectrumView.nodeValue);
 document.spectrumEdit = spectrumEdit.nodeValue = localize("%spectrumEdit", spectrumEdit.nodeValue);
 document.sp_info = sp_info.nodeValue = localize("%sp_info", sp_info.nodeValue);
-document.documentElement.dir = localize("%locale.dir", document.documentElement.dir);
+document.zoom = zoom.nodeValue = localize("%zoom", zoom.nodeValue);
+document.zoomout = zoomout.nodeValue = localize("%zoomout", zoomout.nodeValue);
+document.bg_range = bg_range.nodeValue = localize("%bg_range", bg_range.nodeValue);
+document.bg_range_left = bg_range_left.nodeValue = localize("%bg_range_left", bg_range_left.nodeValue);
+document.bg_range_right = bg_range_right.nodeValue = localize("%bg_range_right", bg_range_right.nodeValue);
+document.v_range = v_range.nodeValue = localize("%v_range", v_range.nodeValue);
+document.f_type = f_type.nodeValue = localize("%f_type", f_type.nodeValue);
+document.none = none.nodeValue = localize("%none", none.nodeValue);
+document.sma = sma.nodeValue = localize("%sma", sma.nodeValue);
+document.wma = wma.nodeValue = localize("%wma", info.nodeValue);
+document.log = log.nodeValue = localize("%log", log.nodeValue);
+document.sp_cursor_info = sp_cursor_info.nodeValue = localize("%sp_cursor_info", sp_cursor_info.nodeValue);
+document.sp_cursor_info_compare = sp_cursor_info_compare.nodeValue = localize("%sp_cursor_info_compare", sp_cursor_info_compare.nodeValue);
+document.sp_cursor_info_multi = sp_cursor_info_multi.nodeValue = localize("%sp_cursor_info_multi", sp_cursor_info_multi.nodeValue);
+document.sp_cursor_nuclear = sp_cursor_nuclear.nodeValue = localize("%sp_cursor_nuclear", sp_cursor_nuclear.nodeValue);
+document.energy = energy.nodeValue = localize("%info", energy.nodeValue);
+document.isotope = isotope.nodeValue = localize("%isotope", isotope.nodeValue);
+document.halflife = halflife.nodeValue = localize("%halflife", halflife.nodeValue);
+document.percentage = percentage.nodeValue = localize("%percentage", percentage.nodeValue);
+document.sp_cursor_selection = sp_cursor_selection.nodeValue = localize("%sp_cursor_selection", sp_cursor_selection.nodeValue);
+document.startch = startch.nodeValue = localize("%startch", startch.nodeValue);
+document.endch = endch.nodeValue = localize("%endch", endch.nodeValue);
+document.startev = startev.nodeValue = localize("%startev", startev.nodeValue);
+document.endev = info.endev = localize("%endev", endev.nodeValue);
+document.grosscps = grosscps.nodeValue = localize("%grosscps", grosscps.nodeValue);
+document.netcps = netcps.nodeValue = localize("%netcps", netcps.nodeValue);
+document.grosscount = grosscount.nodeValue = localize("%grosscount", grosscount.nodeValue);
+document.netcount = netcount.nodeValue = localize("%netcount", netcount.nodeValue);
+document.sp_cursor_selection_compare = sp_cursor_selection_compare.nodeValue = localize("%sp_cursor_selection_compare", sp_cursor_selection_compare.nodeValue);
+document.endev2 = endev2.nodeValue = localize("%endev2", endev2.nodeValue);
+document.sp_cursor_selection_multi = sp_cursor_selection_multi.nodeValue = localize("%sp_cursor_selection_multi", sp_cursor_selection_multi.nodeValue);
+document.startev3 = startev3.nodeValue = localize("%startev3", startev3.nodeValue);
+document.endev3 = endev3.nodeValue = localize("%endev3", endev3.nodeValue);
 
+document.documentElement.dir = localize("%locale.dir", document.documentElement.dir);
 document.documentElement.lang = String.locale || document.documentElement.lang;
 </script>
 
