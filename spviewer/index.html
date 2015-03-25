@@ -1,436 +1,459 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>SPViewer(none)</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8">
-  <link rel="stylesheet" type="text/css" href="spviewer.css">
-  <script language="javascript" type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
-  <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->
-  <script language="javascript" type="text/javascript" src="js/jquery.flot.min.js"></script>
-  <script language="javascript" type="text/javascript" src="js/jquery.flot.crosshair.min.js"></script>
-  <script language="javascript" type="text/javascript" src="js/jquery.flot.selection.min.js"></script>
-  <script language="javascript" type="text/javascript" src="spviewer.js"></script>
-  <script type="text/javascript" src="js/json2.js"></script>
-  <script type="text/javascript" src="js/l10n.js"></script>
-  <script type="text/javascript" src="js/localizations.js"></script>
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
-   <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-       <style>
-      body {
-        padding-top: 30px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
-    </style>
-</head>
-<body>
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>SPViewer(none)</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script language="javascript" type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->
+        <script language="javascript" type="text/javascript" src="js/jquery.flot.min.js"></script>
+        <script language="javascript" type="text/javascript" src="js/jquery.flot.crosshair.min.js"></script>
+        <script language="javascript" type="text/javascript" src="js/jquery.flot.selection.min.js"></script>
+        <script language="javascript" type="text/javascript" src="spviewer.js"></script>
+        <script type="text/javascript" src="js/json2.js"></script>
+        <script type="text/javascript" src="js/l10n.js"></script>
+        <script type="text/javascript" src="js/localizations.js"></script>
+        <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link rel="stylesheet" type="text/css" href="spviewer.css">
+        <style>
+            body {
+                padding-top: 30px; /* 60px to make the container go all the way to the bottom of the topbar */
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Docs master nav -->
+        <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+            <div class="container">
+                <div class="navbar-header">
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="" class="navbar-brand">SPViewer</a>
+                </div>
+                <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="#spectrumList" id="menu1">Select</a>
+                        </li>
+                        <li>
+                            <a href="#spectrumView" id="menu2">View</a>
+                        </li>
+                        <li>
+                            <a href="#spectrumEdit" id="menu3">Setting</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <main class="bs-masthead" id="content" role="main">
+            <div class="container">
+                <h1>SPViewer</h1>
+                <p class="lead">Radiation Measuring Project</p>
+                <p>
+
+                </p>
+            </div>
+        </main>
+        <div class="container">    
+            <h2 id="spectrumList">Spectrum List</h2>
+            <p id="info">Your locale is unsupported.firefox will work well.</p>
+
+            <form id="file_select">
+            </form>
+
+            <H2 id="spectrumView">Spectrum View</H2>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div id="sp_sel"></div>
+
+                    <div id="sp_info">Spectrum Info</div>
+
+                    <div id="sp_graph" style="width: 100%; height: 400px;"></div>
+
+                    <div class="col-md-4">
+                        <div id="sp_cursor_info" class="right-table">
+                            ■ カーソル位置情報
+                            <table class="csv table">
+                                <tr>
+                                    <th>ch</th>
+                                    <td><span id="ch"></span>ch</td>
+                                </tr>
+                                <tr>
+                                    <th>energy</th>
+                                    <td><span id="energy"></span>keV</td>
+                                </tr>
+                                <tr>
+                                    <th>cps</th>
+                                    <td><span id="cps"></span></td>
+                                </tr>
+                                <tr>
+                                    <th>count</th>
+                                    <td><span id="count"></span></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div id="sp_cursor_info_compare" class="right-table">
+                            ■ カーソル位置情報
+                            <table class="csv table">
+                                <tr>
+                                    <th>energy</th>
+                                    <td><span id="cmp_energy"></span>keV</td>
+                                </tr>
+                                <tr>
+                                    <th>[A] cps</th>
+                                    <td><span id="cmp_cpsA"></span></td>
+                                </tr>
+                                <tr>
+                                    <th>[B] cps</th>
+                                    <td><span id="cmp_cpsB"></span></td>
+                                </tr>
+                                <tr>
+                                    <th>[B-A] cps</th>
+                                    <td><span id="cmp_cps_diff"></span></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div id="sp_cursor_info_multi" class="right-table">
+                            ■ カーソル位置情報
+                            <table class="csv table">
+                                <tr>
+                                    <th>energy</th>
+                                    <td><span id="multi_energy"></span>keV</td>
+                                </tr>
+                                <tr>
+                                    <th>[1] cps</th>
+                                    <td><span id="multi_cps1"></span></td>
+                                </tr>
+                                <tr>
+                                    <th>[2] cps</th>
+                                    <td><span id="multi_cps2"></span></td>
+                                </tr>
+                                <tr>
+                                    <th>[3] cps</th>
+                                    <td><span id="multi_cps3"></span></td>
+                                </tr>
+                                <tr>
+                                    <th>[4] cps</th>
+                                    <td><span id="multi_cps4"></span></td>
+                                </tr>
+                                <tr>
+                                    <th>[5] cps</th>
+                                    <td><span id="multi_cps5"></span></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div id="sp_cursor_nuclear" class="right-table">
+                            ■ カーソル位置核種情報
+                            <table class="csv table">
+                                <tr id="sp_cursor_nuclear_table">
+                                    <th id="energy" style="width: 6em;">エネルギー</th>
+                                    <th id="isotope" style="width: 9em;">核種</th>
+                                    <th id="halflife" style="width: 13em;">半減期</th>
+                                    <th id="percentage" style="width: 4em;">放出比</th>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div id="sp_cursor_selection" class="right-table">
+                            ■ 選択範囲情報
+                            <table class="csv table">
+                                <tr>
+                                    <th id="startch">始ch</th>
+                                    <td><span id="sel_s_ch"></span>ch</td>
+                                </tr>
+                                <tr>
+                                    <th id="endch">終ch</th>
+                                    <td><span id="sel_e_ch"></span>ch</td>
+                                </tr>
+                                <tr>
+                                    <th id="startev">始ev</th>
+                                    <td><span id="sel_s_ev"></span>keV</td>
+                                </tr>
+                                <tr>
+                                    <th id="endev">終ev</th>
+                                    <td><span id="sel_e_ev"></span>keV</td>
+                                </tr>
+                                <tr>
+                                    <th id="grosscps">グロスcps(BG含)</th>
+                                    <td><span id="sel_gross"></span></td>
+                                </tr>
+                                <tr>
+                                    <th id="netcps">ネットcps(BG除)</th>
+                                    <td><span id="sel_net"></span></td>
+                                </tr>
+                                <tr>
+                                    <th id="grosscount">グロスcount(BG含)</th>
+                                    <td><span id="sel_gross_count"></span></td>
+                                </tr>
+                                <tr>
+                                    <th id="netcount">ネットcount(BG除)</th>
+                                    <td><span id="sel_net_count"></span></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div id="sp_cursor_selection_compare" class="right-table">
+                            ■ 選択範囲情報
+                            <table class="csv table">
+                                <tr>
+                                    <th id="startch2">始ev</th>
+                                    <td><span id="cmp_sel_s_ev"></span>keV</td>
+                                </tr>
+                                <tr>
+                                    <th id="endch2">終ev</th>
+                                    <td><span id="cmp_sel_e_ev"></span>keV</td>
+                                </tr>
+                                <tr>
+                                    <th>[A] cps</th>
+                                    <td><span id="cmp_sel_cpsA"></span></td>
+                                </tr>
+                                <tr>
+                                    <th>[B] cps</th>
+                                    <td><span id="cmp_sel_cpsB"></span></td>
+                                </tr>
+                                <tr>
+                                    <th>[B-A] cps</th>
+                                    <td><span id="cmp_sel_cps_diff"></span></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div id="sp_cursor_selection_multi" class="right-table">
+                            ■ 選択範囲情報
+                            <table class="csv table">
+                                <tr>
+                                    <th id="startch3">始ev</th>
+                                    <td><span id="multi_sel_s_ev"></span>keV</td>
+                                </tr>
+                                <tr>
+                                    <th id="endch3">終ev</th>
+                                    <td><span id="multi_sel_e_ev"></span>keV</td>
+                                </tr>
+                                <tr>
+                                    <th>[1] cps
+                                        <font color="#edc240">■</font>
+                                    </th>
+                                    <td><span id="multi_sel_cps1"></span></td>
+                                </tr>
+                                <tr>
+                                    <th>[2] cps
+                                        <font color="#afd8f8">■</font>
+                                    </th>
+                                    <td><span id="multi_sel_cps2"></span></td>
+                                </tr>
+                                <tr>
+                                    <th>[3] cps
+                                        <font color="#cb4b4b">■</font>
+                                    </th>
+                                    <td><span id="multi_sel_cps3"></span></td>
+                                </tr>
+                                <tr>
+                                    <th>[4] cps
+                                        <font color="#4da74d">■</font>
+                                    </th>
+                                    <td><span id="multi_sel_cps4"></span></td>
+                                </tr>
+                                <tr>
+                                    <th>[5] cps
+                                        <font color="#9440ed">■</font>
+                                    </th>
+                                    <td><span id="multi_sel_cps5"></span></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <h2 id="spectrumEdit">Setting</h2>
+                        <form>
+                            <div>
+                                <input class="btn btn-default" type="button" id="zoom" value="選択範囲を拡大">
+                                <input class="btn btn-default" type="button" id="zoomout" value="ズームアウト">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div id="bg_range_selector">
+                                        BG計算幅
+                                    </div>
+                                    <select id="bgrange" class="form-control">
+                                        <option value="0.001">0.1%</option>
+                                        <option value="0.002">0.2%</option>
+                                        <option value="0.005">0.5%</option>
+                                        <option value="0.01" selected>1%</option>
+                                        <option value="0.02">2%</option>
+                                        <option value="0.03">3%</option>
+                                    </select>
+                                    <span id="bg_range_selector_manual">
+                                        <input class="btn btn-default" type="button" id="bg_range_left" value="左側BG範囲を選ぶ">
+                                        <input class="btn btn-default" type="button" id="bg_range_right" value="右側BG範囲を選ぶ">
+                                    </span>
+                                </div>
+                                <div class="col-md-3">
+                                    縦軸表示範囲
+                                    <select id="max_range" class="form-control">
+                                        <option value="100">100%</option>
+                                        <option value="90">90%</option>
+                                        <option value="80">80%</option>
+                                        <option value="70">70%</option>
+                                        <option value="60">60%</option>
+                                        <option value="50">50%</option>
+                                        <option value="40">40%</option>
+                                        <option value="30">30%</option>
+                                        <option value="20">20%</option>
+                                        <option value="10">10%</option>
+                                        <option value="5">5%</option>
+                                        <option value="3">3%</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    フィルタ
+                                    <select id="filter_type" class="form-control">
+                                        <option value="none">なし</option>
+                                        <option value="sma">単純移動平均</option>
+                                        <option value="wma">加重移動平均</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    平均範囲
+                                    <select id="filter" class="form-control">
+                                        <option value="0">なし</option>
+                                        <option value="1">3ch</option>
+                                        <option value="2">5ch</option>
+                                        <option value="3">7ch</option>
+                                        <option value="4">9ch</option>
+                                        <option value="5">11ch</option>
+                                        <option value="6">13ch</option>
+                                        <option value="7">15ch</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="log" value="on">対数表示
+                                </label>
+                            </div>
+                            <div id="range_preset"></div>
+                        </form>
+                        <input class="btn btn-default" type="button" id="save_tsv" value="TSV変換">
+                        <div id="tsv_data"></div>
+                    </div>
+                </div>
+            </div><!-- .row -->
         </div>
-        <div class="brand">
-            <div id="title">SPViewer</div>            
+        <hr>
+        <div class="container text-right">
+            <a href="http://www.mikage.to/radiation/spviewer/">SPViewer Ver 4.8</a>
         </div>
-        <div class="nav-collapse collapse">
-            <ul class="nav">
-                <li class="active">
-                    <a href="#" id="menu1">Select</a>
-                </li>
-                <li>
-                    <a href="#spectrumView" id="menu2">View</a>
-                </li>
-                <li>
-                    <a href="#spectrumEdit" id="menu3">Setting</a>
-                </li>
-            </ul>
-        </div><!--/.nav-collapse -->
-    </div>
-</div>
-<div class="container">    
-<h2 id="spectrumList">Spectrum List</h2>
-<p id="info">Your locale is unsupported.firefox will work well.</p>
+        <script type="text/javascript">
+            if (location.hash) {
+                String.locale = location.hash.substr(1);
+            }
+            var localize = function (string, fallback) {
+                var localized = string.toLocaleString();
+                if (localized !== string) {
+                    return localized;
+                } else {
+                    return fallback;
+                }
+            };
 
-<form id="file_select">
-</form>
-
-<H2 id="spectrumView">Spectrum View</H2>
-
-<div id="sp_sel"></div>
-
-<div id="sp_info">Spectrum Info<br></div>
-
-<div id="sp_graph" style="width: 800px; height: 400px;"></div>
-
-
-<div>
-    <form>
-        <input type="button" id="zoom" value="選択範囲を拡大">
-        <input type="button" id="zoomout" value="ズームアウト">
-        <span id="bg_range_selector">
-        BG計算幅<select id="bgrange">
-                <option value="0.001">0.1%
-                <option value="0.002">0.2%
-                <option value="0.005">0.5%
-                <option value="0.01" selected>1%
-                <option value="0.02">2%
-                <option value="0.03">3%
-        </select>
-        </span>
-        <span id="bg_range_selector_manual">
-        <input type="button" id="bg_range_left" value="左側BG範囲を選ぶ">
-        <input type="button" id="bg_range_right" value="右側BG範囲を選ぶ">
-        </span>
-        <br>
-        縦軸表示範囲<select id="max_range">
-                <option value="100">100%
-                <option value="90">90%
-                <option value="80">80%
-                <option value="70">70%
-                <option value="60">60%
-                <option value="50">50%
-                <option value="40">40%
-                <option value="30">30%
-                <option value="20">20%
-                <option value="10">10%
-                <option value="5">5%
-                <option value="3">3%
-        </select>
-        フィルタ
-        <select id="filter_type">
-                <option value="none">なし
-                <option value="sma">単純移動平均
-                <option value="wma">加重移動平均
-        </select>
-        平均範囲<select id="filter">
-                <option value="0">なし
-                <option value="1">3ch
-                <option value="2">5ch
-                <option value="3">7ch
-                <option value="4">9ch
-                <option value="5">11ch
-                <option value="6">13ch
-                <option value="7">15ch
-        </select>
-        <input type="checkbox" id="log" value="on">対数表示
-        <input type="button" id="save_tsv" value="TSV変換">
-        <br>
-        <div id="range_preset">
-        </div>
-    </form>
-</div>
-
-<div id="sp_cursor_info" style="float: left;">
-    ■ カーソル位置情報<br>
-    <table class="csv">
-        <tr>
-            <th style="width: 5em;">ch</th>
-            <td style="width: 7em; text-align: right;"><span id="ch"></span>ch</td>
-        </tr>
-        <tr>
-            <th>energy</th>
-            <td style="text-align: right;"><span id="energy"></span>keV</td>
-        </tr>
-        <tr>
-            <th>cps</th>
-            <td style="text-align: right;"><span id="cps"></span></td>
-        </tr>
-        <tr>
-            <th>count</th>
-            <td style="text-align: right;"><span id="count"></span></td>
-        </tr>
-    </table>
-</div>
-
-<div id="sp_cursor_info_compare" style="float: left; margin-left: 1em;">
-    ■ カーソル位置情報<br>
-    <table class="csv">
-        <tr>
-            <th>energy</th>
-            <td style="text-align: right;"><span id="cmp_energy"></span>keV</td>
-        </tr>
-        <tr>
-            <th>[A] cps</th>
-            <td style="text-align: right;"><span id="cmp_cpsA"></span></td>
-        </tr>
-        <tr>
-            <th>[B] cps</th>
-            <td style="text-align: right;"><span id="cmp_cpsB"></span></td>
-        </tr>
-        <tr>
-            <th>[B-A] cps</th>
-            <td style="text-align: right;"><span id="cmp_cps_diff"></span></td>
-        </tr>
-    </table>
-</div>
-
-<div id="sp_cursor_info_multi" style="float: left; margin-left: 1em;">
-    ■ カーソル位置情報<br>
-    <table class="csv">
-        <tr>
-            <th>energy</th>
-            <td style="text-align: right;"><span id="multi_energy"></span>keV</td>
-        </tr>
-        <tr>
-            <th>[1] cps</th>
-            <td style="text-align: right;"><span id="multi_cps1"></span></td>
-        </tr>
-        <tr>
-            <th>[2] cps</th>
-            <td style="text-align: right;"><span id="multi_cps2"></span></td>
-        </tr>
-        <tr>
-            <th>[3] cps</th>
-            <td style="text-align: right;"><span id="multi_cps3"></span></td>
-        </tr>
-        <tr>
-            <th>[4] cps</th>
-            <td style="text-align: right;"><span id="multi_cps4"></span></td>
-        </tr>
-        <tr>
-            <th>[5] cps</th>
-            <td style="text-align: right;"><span id="multi_cps5"></span></td>
-        </tr>
-    </table>
-</div>
-
-<div id="sp_cursor_nuclear" style="float: left; margin-left: 1em;">
-    ■ カーソル位置核種情報<br>
-    <table class="csv">
-        <tr id="sp_cursor_nuclear_table">
-            <th id="energy" style="width: 6em;">エネルギー</th>
-            <th id="isotope" style="width: 9em;">核種</th>
-            <th id="halflife" style="width: 13em;">半減期</th>
-            <th id="percentage" style="width: 4em;">放出比</th>
-        </tr>
-    </table>
-</div>
-
-<div id="sp_cursor_selection" style="float: left; margin-left: 1em;">
-    ■ 選択範囲情報<br>
-    <table class="csv">
-        <tr>
-            <th id="startch" style="width: 9em;">始ch</th>
-            <td style="width: 7em; text-align: right;"><span id="sel_s_ch"></span>ch</td>
-        </tr>
-        <tr>
-            <th id="endch">終ch</th>
-            <td style="text-align: right;"><span id="sel_e_ch"></span>ch</td>
-        </tr>
-        <tr>
-            <th id="startev">始ev</th>
-            <td style="text-align: right;"><span id="sel_s_ev"></span>keV</td>
-        </tr>
-        <tr>
-            <th id="endev">終ev</th>
-            <td style="text-align: right;"><span id="sel_e_ev"></span>keV</td>
-        </tr>
-        <tr>
-            <th id="grosscps">グロスcps(BG含)</th>
-            <td style="text-align: right;"><span id="sel_gross"></span></td>
-        </tr>
-        <tr>
-            <th id="netcps">ネットcps(BG除)</th>
-            <td style="text-align: right;"><span id="sel_net"></span></td>
-        </tr>
-        <tr>
-            <th id="grosscount">グロスcount(BG含)</th>
-            <td style="text-align: right;"><span id="sel_gross_count"></span></td>
-        </tr>
-        <tr>
-            <th id="netcount">ネットcount(BG除)</th>
-            <td style="text-align: right;"><span id="sel_net_count"></span></td>
-        </tr>
-    </table>
-</div>
-
-<div id="sp_cursor_selection_compare" style="float: left; margin-left: 1em;">
-    ■ 選択範囲情報<br>
-    <table class="csv">
-        <tr>
-            <th id="startch2">始ev</th>
-            <td style="text-align: right;"><span id="cmp_sel_s_ev"></span>keV</td>
-        </tr>
-        <tr>
-            <th id="endch2">終ev</th>
-            <td style="text-align: right;"><span id="cmp_sel_e_ev"></span>keV</td>
-        </tr>
-        <tr>
-            <th>[A] cps</th>
-            <td style="text-align: right;"><span id="cmp_sel_cpsA"></span></td>
-        </tr>
-        <tr>
-            <th>[B] cps</th>
-            <td style="text-align: right;"><span id="cmp_sel_cpsB"></span></td>
-        </tr>
-        <tr>
-            <th>[B-A] cps</th>
-            <td style="text-align: right;"><span id="cmp_sel_cps_diff"></span></td>
-        </tr>
-    </table>
-</div>
-
-<div id="sp_cursor_selection_multi" style="float: left; margin-left: 1em;">
-    ■ 選択範囲情報<br>
-    <table class="csv">
-        <tr>
-            <th id="startch3">始ev</th>
-            <td style="text-align: right;"><span id="multi_sel_s_ev"></span>keV</td>
-        </tr>
-        <tr>
-            <th id="endch3">終ev</th>
-            <td style="text-align: right;"><span id="multi_sel_e_ev"></span>keV</td>
-        </tr>
-        <tr>
-            <th>[1] cps<br>
-                    <font color="#edc240">■</font>
-            </th>
-            <td style="text-align: right;"><span id="multi_sel_cps1"></span></td>
-        </tr>
-        <tr>
-            <th>[2] cps<br>
-                    <font color="#afd8f8">■</font>
-            </th>
-            <td style="text-align: right;"><span id="multi_sel_cps2"></span></td>
-        </tr>
-        <tr>
-            <th>[3] cps<br>
-                    <font color="#cb4b4b">■</font>
-            </th>
-            <td style="text-align: right;"><span id="multi_sel_cps3"></span></td>
-        </tr>
-        <tr>
-            <th>[4] cps<br>
-                    <font color="#4da74d">■</font>
-            </th>
-            <td style="text-align: right;"><span id="multi_sel_cps4"></span></td>
-        </tr>
-        <tr>
-            <th>[5] cps<br>
-                    <font color="#9440ed">■</font>
-            </th>
-            <td style="text-align: right;"><span id="multi_sel_cps5"></span></td>
-        </tr>
-    </table>
-</div>
-
-<div style="clear: left;">
-</div>
-
-<div id="tsv_data"></div>
-
-<hr>
-
-<div style="text-align: right;">
-    <a href="http://www.mikage.to/radiation/spviewer/">SPViewer Ver 4.8</a></div>
-</div>
-<script type="text/javascript">
-if (location.hash) {
-    String.locale = location.hash.substr(1);	
-}
-var localize = function (string, fallback) {
-    var localized = string.toLocaleString();
-    if (localized !== string) {
-        return localized;
-    } else {
-        return fallback;
-    }
-};
-
-var title = document.getElementById("title").firstChild,
-info = document.getElementById("info").firstChild,
-menu1 = document.getElementById("menu1").firstChild;
-menu2 = document.getElementById("menu2").firstChild;
-menu3 = document.getElementById("menu3").firstChild;
-spectrumList = document.getElementById("spectrumList").firstChild;
-spectrumView = document.getElementById("spectrumView").firstChild;
-spectrumEdit = document.getElementById("spectrumEdit").firstChild;
-sp_info = document.getElementById("sp_info").firstChild;
-zoom = document.getElementById("zoom").firstChild;
-zoomout = document.getElementById("zoomout").firstChild;
-bg_range = document.getElementById("bg_range").firstChild;
-bg_range_left = document.getElementById("bg_range_left").firstChild;
-bg_range_right = document.getElementById("bg_range_right").firstChild;
-v_range = document.getElementById("v_range").firstChild;
-f_type = document.getElementById("f_type").firstChild;
-none = document.getElementById("none").firstChild;
-sma = document.getElementById("sma").firstChild;
-wma = document.getElementById("wma").firstChild;
-log = document.getElementById("log").firstChild;
-sp_cursor_info = document.getElementById("sp_cursor_info").firstChild;
-sp_cursor_info_compare = document.getElementById("sp_cursor_info_compare").firstChild;
-sp_cursor_info_multi = document.getElementById("sp_cursor_info_multi").firstChild;
-sp_cursor_nuclear = document.getElementById("sp_cursor_nuclear").firstChild;
-energy = document.getElementById("energy").firstChild;
-isotope = document.getElementById("isotope").firstChild;
-halflife = document.getElementById("halflife").firstChild;
-percentage = document.getElementById("percentage").firstChild;
-sp_cursor_selection = document.getElementById("sp_cursor_selection").firstChild;
-startch = document.getElementById("startch").firstChild;
-endch = document.getElementById("endch").firstChild;
-startev = document.getElementById("startev").firstChild;
-endev = document.getElementById("endev").firstChild;
-grosscps = document.getElementById("grosscps").firstChild;
-netcps = document.getElementById("netcps").firstChild;
-grosscount = document.getElementById("grosscount").firstChild;
-netcount = document.getElementById("netcount").firstChild;
-sp_cursor_selection_compare = document.getElementById("sp_cursor_selection_compare").firstChild;
-startev2 = document.getElementById("startev2").firstChild;
-endev2 = document.getElementById("endev2").firstChild;
-sp_cursor_selection_multi = document.getElementById("sp_cursor_selection_multi").firstChild;
-startev3 = document.getElementById("startev3").firstChild;
-endev3 = document.getElementById("endev3").firstChild;
+            var title = document.getElementById("title").firstChild,
+                    info = document.getElementById("info").firstChild,
+                    menu1 = document.getElementById("menu1").firstChild;
+            menu2 = document.getElementById("menu2").firstChild;
+            menu3 = document.getElementById("menu3").firstChild;
+            spectrumList = document.getElementById("spectrumList").firstChild;
+            spectrumView = document.getElementById("spectrumView").firstChild;
+            spectrumEdit = document.getElementById("spectrumEdit").firstChild;
+            sp_info = document.getElementById("sp_info").firstChild;
+            zoom = document.getElementById("zoom").firstChild;
+            zoomout = document.getElementById("zoomout").firstChild;
+            bg_range = document.getElementById("bg_range").firstChild;
+            bg_range_left = document.getElementById("bg_range_left").firstChild;
+            bg_range_right = document.getElementById("bg_range_right").firstChild;
+            v_range = document.getElementById("v_range").firstChild;
+            f_type = document.getElementById("f_type").firstChild;
+            none = document.getElementById("none").firstChild;
+            sma = document.getElementById("sma").firstChild;
+            wma = document.getElementById("wma").firstChild;
+            log = document.getElementById("log").firstChild;
+            sp_cursor_info = document.getElementById("sp_cursor_info").firstChild;
+            sp_cursor_info_compare = document.getElementById("sp_cursor_info_compare").firstChild;
+            sp_cursor_info_multi = document.getElementById("sp_cursor_info_multi").firstChild;
+            sp_cursor_nuclear = document.getElementById("sp_cursor_nuclear").firstChild;
+            energy = document.getElementById("energy").firstChild;
+            isotope = document.getElementById("isotope").firstChild;
+            halflife = document.getElementById("halflife").firstChild;
+            percentage = document.getElementById("percentage").firstChild;
+            sp_cursor_selection = document.getElementById("sp_cursor_selection").firstChild;
+            startch = document.getElementById("startch").firstChild;
+            endch = document.getElementById("endch").firstChild;
+            startev = document.getElementById("startev").firstChild;
+            endev = document.getElementById("endev").firstChild;
+            grosscps = document.getElementById("grosscps").firstChild;
+            netcps = document.getElementById("netcps").firstChild;
+            grosscount = document.getElementById("grosscount").firstChild;
+            netcount = document.getElementById("netcount").firstChild;
+            sp_cursor_selection_compare = document.getElementById("sp_cursor_selection_compare").firstChild;
+            startev2 = document.getElementById("startev2").firstChild;
+            endev2 = document.getElementById("endev2").firstChild;
+            sp_cursor_selection_multi = document.getElementById("sp_cursor_selection_multi").firstChild;
+            startev3 = document.getElementById("startev3").firstChild;
+            endev3 = document.getElementById("endev3").firstChild;
 
 
-document.title = title.nodeValue = localize("%title", title.nodeValue);
-document.info = info.nodeValue = localize("%info", info.nodeValue);
-document.menu1 = menu1.nodeValue = localize("%menu1", menu1.nodeValue);
-document.menu2 = menu2.nodeValue = localize("%menu2", menu2.nodeValue);
-document.menu3 = menu3.nodeValue = localize("%menu3", menu3.nodeValue);
-document.spectrumList = spectrumList.nodeValue = localize("%spectrumList", spectrumList.nodeValue);
-document.spectrumView = spectrumView.nodeValue = localize("%spectrumView", spectrumView.nodeValue);
-document.spectrumEdit = spectrumEdit.nodeValue = localize("%spectrumEdit", spectrumEdit.nodeValue);
-document.sp_info = sp_info.nodeValue = localize("%sp_info", sp_info.nodeValue);
-document.zoom = zoom.nodeValue = localize("%zoom", zoom.nodeValue);
-document.zoomout = zoomout.nodeValue = localize("%zoomout", zoomout.nodeValue);
-document.bg_range = bg_range.nodeValue = localize("%bg_range", bg_range.nodeValue);
-document.bg_range_left = bg_range_left.nodeValue = localize("%bg_range_left", bg_range_left.nodeValue);
-document.bg_range_right = bg_range_right.nodeValue = localize("%bg_range_right", bg_range_right.nodeValue);
-document.v_range = v_range.nodeValue = localize("%v_range", v_range.nodeValue);
-document.f_type = f_type.nodeValue = localize("%f_type", f_type.nodeValue);
-document.none = none.nodeValue = localize("%none", none.nodeValue);
-document.sma = sma.nodeValue = localize("%sma", sma.nodeValue);
-document.wma = wma.nodeValue = localize("%wma", info.nodeValue);
-document.log = log.nodeValue = localize("%log", log.nodeValue);
-document.sp_cursor_info = sp_cursor_info.nodeValue = localize("%sp_cursor_info", sp_cursor_info.nodeValue);
-document.sp_cursor_info_compare = sp_cursor_info_compare.nodeValue = localize("%sp_cursor_info_compare", sp_cursor_info_compare.nodeValue);
-document.sp_cursor_info_multi = sp_cursor_info_multi.nodeValue = localize("%sp_cursor_info_multi", sp_cursor_info_multi.nodeValue);
-document.sp_cursor_nuclear = sp_cursor_nuclear.nodeValue = localize("%sp_cursor_nuclear", sp_cursor_nuclear.nodeValue);
-document.energy = energy.nodeValue = localize("%info", energy.nodeValue);
-document.isotope = isotope.nodeValue = localize("%isotope", isotope.nodeValue);
-document.halflife = halflife.nodeValue = localize("%halflife", halflife.nodeValue);
-document.percentage = percentage.nodeValue = localize("%percentage", percentage.nodeValue);
-document.sp_cursor_selection = sp_cursor_selection.nodeValue = localize("%sp_cursor_selection", sp_cursor_selection.nodeValue);
-document.startch = startch.nodeValue = localize("%startch", startch.nodeValue);
-document.endch = endch.nodeValue = localize("%endch", endch.nodeValue);
-document.startev = startev.nodeValue = localize("%startev", startev.nodeValue);
-document.endev = info.endev = localize("%endev", endev.nodeValue);
-document.grosscps = grosscps.nodeValue = localize("%grosscps", grosscps.nodeValue);
-document.netcps = netcps.nodeValue = localize("%netcps", netcps.nodeValue);
-document.grosscount = grosscount.nodeValue = localize("%grosscount", grosscount.nodeValue);
-document.netcount = netcount.nodeValue = localize("%netcount", netcount.nodeValue);
-document.sp_cursor_selection_compare = sp_cursor_selection_compare.nodeValue = localize("%sp_cursor_selection_compare", sp_cursor_selection_compare.nodeValue);
-document.endev2 = endev2.nodeValue = localize("%endev2", endev2.nodeValue);
-document.sp_cursor_selection_multi = sp_cursor_selection_multi.nodeValue = localize("%sp_cursor_selection_multi", sp_cursor_selection_multi.nodeValue);
-document.startev3 = startev3.nodeValue = localize("%startev3", startev3.nodeValue);
-document.endev3 = endev3.nodeValue = localize("%endev3", endev3.nodeValue);
+            document.title = title.nodeValue = localize("%title", title.nodeValue);
+            document.info = info.nodeValue = localize("%info", info.nodeValue);
+            document.menu1 = menu1.nodeValue = localize("%menu1", menu1.nodeValue);
+            document.menu2 = menu2.nodeValue = localize("%menu2", menu2.nodeValue);
+            document.menu3 = menu3.nodeValue = localize("%menu3", menu3.nodeValue);
+            document.spectrumList = spectrumList.nodeValue = localize("%spectrumList", spectrumList.nodeValue);
+            document.spectrumView = spectrumView.nodeValue = localize("%spectrumView", spectrumView.nodeValue);
+            document.spectrumEdit = spectrumEdit.nodeValue = localize("%spectrumEdit", spectrumEdit.nodeValue);
+            document.sp_info = sp_info.nodeValue = localize("%sp_info", sp_info.nodeValue);
+            document.zoom = zoom.nodeValue = localize("%zoom", zoom.nodeValue);
+            document.zoomout = zoomout.nodeValue = localize("%zoomout", zoomout.nodeValue);
+            document.bg_range = bg_range.nodeValue = localize("%bg_range", bg_range.nodeValue);
+            document.bg_range_left = bg_range_left.nodeValue = localize("%bg_range_left", bg_range_left.nodeValue);
+            document.bg_range_right = bg_range_right.nodeValue = localize("%bg_range_right", bg_range_right.nodeValue);
+            document.v_range = v_range.nodeValue = localize("%v_range", v_range.nodeValue);
+            document.f_type = f_type.nodeValue = localize("%f_type", f_type.nodeValue);
+            document.none = none.nodeValue = localize("%none", none.nodeValue);
+            document.sma = sma.nodeValue = localize("%sma", sma.nodeValue);
+            document.wma = wma.nodeValue = localize("%wma", info.nodeValue);
+            document.log = log.nodeValue = localize("%log", log.nodeValue);
+            document.sp_cursor_info = sp_cursor_info.nodeValue = localize("%sp_cursor_info", sp_cursor_info.nodeValue);
+            document.sp_cursor_info_compare = sp_cursor_info_compare.nodeValue = localize("%sp_cursor_info_compare", sp_cursor_info_compare.nodeValue);
+            document.sp_cursor_info_multi = sp_cursor_info_multi.nodeValue = localize("%sp_cursor_info_multi", sp_cursor_info_multi.nodeValue);
+            document.sp_cursor_nuclear = sp_cursor_nuclear.nodeValue = localize("%sp_cursor_nuclear", sp_cursor_nuclear.nodeValue);
+            document.energy = energy.nodeValue = localize("%info", energy.nodeValue);
+            document.isotope = isotope.nodeValue = localize("%isotope", isotope.nodeValue);
+            document.halflife = halflife.nodeValue = localize("%halflife", halflife.nodeValue);
+            document.percentage = percentage.nodeValue = localize("%percentage", percentage.nodeValue);
+            document.sp_cursor_selection = sp_cursor_selection.nodeValue = localize("%sp_cursor_selection", sp_cursor_selection.nodeValue);
+            document.startch = startch.nodeValue = localize("%startch", startch.nodeValue);
+            document.endch = endch.nodeValue = localize("%endch", endch.nodeValue);
+            document.startev = startev.nodeValue = localize("%startev", startev.nodeValue);
+            document.endev = info.endev = localize("%endev", endev.nodeValue);
+            document.grosscps = grosscps.nodeValue = localize("%grosscps", grosscps.nodeValue);
+            document.netcps = netcps.nodeValue = localize("%netcps", netcps.nodeValue);
+            document.grosscount = grosscount.nodeValue = localize("%grosscount", grosscount.nodeValue);
+            document.netcount = netcount.nodeValue = localize("%netcount", netcount.nodeValue);
+            document.sp_cursor_selection_compare = sp_cursor_selection_compare.nodeValue = localize("%sp_cursor_selection_compare", sp_cursor_selection_compare.nodeValue);
+            document.endev2 = endev2.nodeValue = localize("%endev2", endev2.nodeValue);
+            document.sp_cursor_selection_multi = sp_cursor_selection_multi.nodeValue = localize("%sp_cursor_selection_multi", sp_cursor_selection_multi.nodeValue);
+            document.startev3 = startev3.nodeValue = localize("%startev3", startev3.nodeValue);
+            document.endev3 = endev3.nodeValue = localize("%endev3", endev3.nodeValue);
 
-document.documentElement.dir = localize("%locale.dir", document.documentElement.dir);
-document.documentElement.lang = String.locale || document.documentElement.lang;
-</script>
-
-</body>
+            document.documentElement.dir = localize("%locale.dir", document.documentElement.dir);
+            document.documentElement.lang = String.locale || document.documentElement.lang;
+        </script>
+    </body>
 </html>
