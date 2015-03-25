@@ -146,3 +146,10 @@ table.csv td{
     text-align: left;
   }
 }
+@media (max-width: 767px) {
+  .bs-masthead {
+    text-align: center;
+    padding-top:    32px;
+    padding-bottom: 24px;
+  }
+}
