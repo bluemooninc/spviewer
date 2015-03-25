@@ -10,6 +10,7 @@ a:link{
 	text-decoration: underline;
 	font-weight:bold;
 	color:#B6B6B6;
+	word-break: break-all;
 }
 a:visited{
 	text-decoration: underline;
