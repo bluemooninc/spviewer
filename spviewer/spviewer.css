@@ -2,13 +2,8 @@
 	  css file
 */
 
-body
-{
-	margin: 2em 2em 2em 2em;
-	font-size: 16px;
-	font-family: 'Verdana','Tahoma','MS PGothic', sans-serif;
-	color: #434343;
-	background-color: #ffffff;
+body {
+	font-family: 'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
 }
 
 div#sp_sel {
@@ -22,52 +17,34 @@ div#sp_info {
 a:link{
 	text-decoration: underline;
 	font-weight:bold;
-	color:#f9f;
+	color:#B6B6B6;
 }
 a:visited{
 	text-decoration: underline;
 	font-weight:bold;
-	color:#bbd;
+	color:#727272;
 }
 a:hover{
 	text-decoration: underline;
-	color:#f00;
+	color:#7C4DFF;
 	background-color:#ffffff;
+}
+
+header a:link{
+	text-decoration: none;
 }
 
 hr {
 	color: #aad;
-	border: 1px solid #dde;
-	height: 3px;
-	background-color: #aad;
-}
-
-h1
-{
-	color: #a26;
-	font-size: 1.5em;
-	line-height: 1.4em;
-	font-weight: bold;
-	text-align: left;
-	margin: 0.5em 0em 0.75em 0em;
-	padding: 0em 1.2em 0.25em 1em;
-	background-color: #efefff;
-	border-left: solid 5px #999;
-	border-bottom: solid 2px #999;
+	border: 1px solid #03A9F4;
+	
 }
 
 h2
 {
-	color: #82a;
-	font-size: 1.2em;
-	line-height: 1.25em;
-	text-align: left;
-	font-weight: bold;
-	margin: 2em 0em 0.75em 0em;
-	padding: 0em 0em 0em 1em;
-	border-width:2px 0px 0px 0px;
-	background-color: #efefff;
-	border-left: solid 2px #999;
+	background-color: #0288D1;
+	padding: 16px 8px;
+	color: #fff;
 }
 
 h3
@@ -86,35 +63,86 @@ h3
 
 
 /* --- Table setting ------------------------------------------------------ */
-table.col {border-collapse:collapse;}
-table.sep {border-collapse:separate;}
 
 table.csv{
-	border-color: #f0f0ff #d0d0dd #d0d0dd #f0f0ff;
-	border-width: 2px;
-	border-style: groove ridge ridge groove;
-	border-collapse:collapse;
-	padding:0px;
-	margin:0px 0px 0px 0px;
+	margin:8px 0px 0px 0px;
 	empty-cells:show;
 }
 table.csv th{
-	border-color: #d0d0dd #f0f0ff #f0f0ff #d0d0dd;
-	border-width: 2px;
-	border-style: groove;
-	background-color: #eeffff;
-	font-size:12px;
+	background-color: #B3E5FC;
 	font-weight:bold;
 	text-align:center;
 	vertical-align:middle;
 	padding:3px;
 }
 table.csv td{
-	border-color: #d0d0dd #f0f0ff #f0f0ff #d0d0dd;
-	border-width: 2px;
-	border-style: groove;
 	font-size:9pt;
 	vertical-align:top;
 	padding:3px;
 }
 
+.bs-docs-nav,
+.bs-docs-home,
+.bs-header {
+  color: #ceb6b8;
+  background-color: #03A9F4;
+}
+
+.bs-docs-nav {
+  text-shadow: 0 -1px 0 rgba(0,0,0,.15);
+  box-shadow: 0 1px 0 rgba(255,255,255,.1);
+}
+.bs-docs-nav .navbar-brand {
+  color: #fff;
+}
+.bs-docs-nav .navbar-nav > li > a {
+  color: #ceb6b8;
+}
+.bs-docs-nav .navbar-nav > li > a:hover {
+  color: #fff;
+}
+.bs-docs-nav .navbar-nav > .active > a,
+.bs-docs-nav .navbar-nav > .active > a:hover {
+  color: #fff;
+  background-color: #6B313B;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+.bs-docs-nav .navbar-toggle,
+.bs-docs-nav .navbar-toggle:focus {
+  border-color: #86555C;
+  border-color: rgba(255, 255, 255, 0.3);
+  background: transparent;
+}
+.bs-docs-nav .navbar-toggle:hover {
+  background-color: #63303A;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: transparent;
+}
+
+.right-table {
+	margin: 16px 0;
+}
+@media (min-width: 768px) {
+  .bs-masthead {
+    text-align: left;
+    padding-top:    140px;
+    padding-bottom: 140px;
+  }
+  .bs-masthead h1 {
+    font-size: 100px;
+  }
+  .bs-masthead .lead {
+    margin-right: 25%;
+    font-size: 30px;
+  }
+  .bs-masthead .btn-outline-inverse {
+    width: auto;
+    margin: 20px 5px 20px 0;
+    padding: 18px 24px;
+    font-size: 21px;
+  }
+  .bs-masthead-links {
+    padding: 0;
+    text-align: left;
+  }
+}
