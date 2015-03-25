@@ -201,7 +201,7 @@ function init_list(files) {
 	
 	html += '[スペクトル表示][<a href="#" id="compare_list">BGスペクトル比較（Ｂ－Ａ）</a>][<a href="#" id="multi_list">複数スペクトル比較</a>]';
 	
-	html += '<table class="csv">';
+	html += '<div class="table-responsive"><table class="csv table">';
 	html += '<tr><th>－</th><th>スペクトルファイル</th></tr>';
 	for(var i in files) {
 		if(files[i] != "") {
@@ -216,7 +216,7 @@ function init_list(files) {
 			html += '</td></tr>';
 		}
 	}
-	html += '</table>';
+	html += '</table></div>';
 	$("#file_select").html(html);
 	$("#file_select input").bind('change', function() {
 		var file = $(this).val();
@@ -250,7 +250,7 @@ function init_list_compare(files) {
 	
 	html += '[<a href="#" id="list">スペクトル表示</a>][BGスペクトル比較（Ｂ－Ａ）][<a href="#" id="multi_list">複数スペクトル比較</a>]';
 	
-	html += '<table class="csv">';
+	html += '<div class="table-responsive"><table class="csv table">';
 	html += '<tr><th>Ａ(BG)</th><th>Ｂ</th><th>スペクトルファイル</th></tr>';
 	for(var i in files) {
 		if(files[i] != "") {
@@ -268,7 +268,7 @@ function init_list_compare(files) {
 			html += '</td></tr>';
 		}
 	}
-	html += '</table>';
+	html += '</table></div>';
 	$("#file_select").html(html);
 	$("#file_select input").bind('change', function() {
 		var file1 = $("input[name='file1']:checked").val();
@@ -303,7 +303,7 @@ function init_list_multi(files) {
 	
 	html += '[<a href="#" id="list">スペクトル表示</a>][<a href="#" id="compare_list">BGスペクトル比較（Ｂ－Ａ）</a>][複数スペクトル比較]';
 	
-	html += '<table class="csv">';
+	html += '<div class="table-responsive"><table class="csv table">';
 	html += '<tr><th>－</th><th>スペクトルファイル</th></tr>';
 	for(var i in files) {
 		if(files[i] != "") {
@@ -322,10 +322,10 @@ function init_list_multi(files) {
 			html += '</td></tr>';
 		}
 	}
-	html += '</table>';
-	html += '<form>';
-	html += '<input type="button" value="スペクトル表示">';
-	html += '</form>';
+	html += '</table></div>';
+	html += '<form"><div class="form-group">';
+	html += '<input class="btn btn-default" type="button" value="スペクトル表示">';
+	html += '</div></form>';
 	$("#file_select").html(html);
 	$("#file_select input[type='button']").bind('click', function() {
 		var file = [];
@@ -619,7 +619,7 @@ function draw_graph_ts100b_bq(file, file_comment, data) {
 	var additional_sp_info_html = '';
 	var additional_sp_info = [];
 	
-	additional_sp_info_html += '<table class="csv">';
+	additional_sp_info_html += '<div class="table-responsive"><table class="csv table">';
 	additional_sp_info_html += '<tr><th>NUCLUIDE</th><th>ACTIVITY(Bq/kg)</th><th>ERROR(Bq/kg)</th></tr>';
 	
 	var mode = "";
@@ -643,8 +643,8 @@ function draw_graph_ts100b_bq(file, file_comment, data) {
 			var fields = line.split(",");
 			if(fields.length == 3) {
 				additional_sp_info_html += '<tr id="isotope_' + fields[0] + '"><th>' + fields[0]
-					+ '</th><td style="text-align: right;">' + fields[1]
-					+ '</td><td style="text-align: right;">' + fields[2] + '</td></tr>';
+					+ '</th><td>' + fields[1]
+					+ '</td><td>' + fields[2] + '</td></tr>';
 			} else if(fields.length == 2) {
 				additional_sp_info_html += '<tr id="isotope_' + fields[0] + '"><th>' + fields[0]
 					+ '</th><td style="text-align: right;" colspan="2">' + fields[1] + '</td></tr>';
@@ -655,7 +655,7 @@ function draw_graph_ts100b_bq(file, file_comment, data) {
 		}
 	}
 	
-	additional_sp_info_html += '</table>';
+	additional_sp_info_html += '</table></div>';
 	
 	var peak_info = {
 		"I-131":  [[364, 20]],
@@ -718,7 +718,7 @@ function draw_graph_ts100b_spectrum(file, file_comment, data) {
 	var additional_sp_info_html = '';
 	var additional_sp_info = [];
 	
-	additional_sp_info_html += '<table class="csv">';
+	additional_sp_info_html += '<div class="table-responsive"><table class="csv table">';
 	additional_sp_info_html += '<tr><th>ID</th><th>NUCLIDE</th><th>sROI(CH)</th><th>eROI(CH)</th><th>Center(CH)</th><th>Center(keV)</th>'
 		+ '<th>NET(cnt)</th><th>NETRATE(cps)</th><th>GROSS(cnt)</th><th>GROSSRATE(cps)</th></tr>';
 	
@@ -738,14 +738,14 @@ function draw_graph_ts100b_spectrum(file, file_comment, data) {
 			if(fields.length == 11) {	// なぜか最後に余分な,があるので11フィールド
 				additional_sp_info_html += '<tr id="isotope_' + fields[0] + '"><th>' + fields[0]
 					+ '</th><th style="text-align: right;">' + fields[1]
-					+ '</th><td style="text-align: right;">' + fields[2]
-					+ '</td><td style="text-align: right;">' + fields[3]
-					+ '</td><td style="text-align: right;">' + fields[4]
-					+ '</td><td style="text-align: right;">' + fields[5]
-					+ '</td><td style="text-align: right;">' + fields[6]
-					+ '</td><td style="text-align: right;">' + fields[7]
-					+ '</td><td style="text-align: right;">' + fields[8]
-					+ '</td><td style="text-align: right;">' + fields[9]
+					+ '</th><td>' + fields[2]
+					+ '</td><td>' + fields[3]
+					+ '</td><td>' + fields[4]
+					+ '</td><td>' + fields[5]
+					+ '</td><td>' + fields[6]
+					+ '</td><td>' + fields[7]
+					+ '</td><td>' + fields[8]
+					+ '</td><td>' + fields[9]
 					+ '</td></tr>';
 				peak_info[fields[0]] = [fields[2], fields[3]];
 			} else {
@@ -755,7 +755,7 @@ function draw_graph_ts100b_spectrum(file, file_comment, data) {
 		}
 	}
 	
-	additional_sp_info_html += '</table>';
+	additional_sp_info_html += '</table></div>';
 	
 	
 	var additional_html_callback = function(slope) {
@@ -1074,7 +1074,7 @@ function draw_graph_tn300b_spectrum(file, file_comment, data) {
 		var fields_head = lines[isotope_start_line - 1].split("\t");
 		var fields_data = lines[isotope_start_line + no - 1].split("\t");
 		
-		additional_sp_info_html += '<table class="csv">';
+		additional_sp_info_html += '<div class="table-responsive"><table class="csv table">';
 		
 		additional_sp_info_html += '<tr>';
 		for(var i in fields_head) {
@@ -1088,7 +1088,7 @@ function draw_graph_tn300b_spectrum(file, file_comment, data) {
 		}
 		additional_sp_info_html += '</tr>';
 		
-		additional_sp_info_html += '</table>';
+		additional_sp_info_html += '</table></div>';
 	}
 	
 	var spectrum_data_ch = [];
@@ -1143,7 +1143,7 @@ function draw_graph_tn300b_2_spectrum(file, file_comment, data) {
 	var spectrum_data_ch = [];
 	var spectrum_data_ev = [];
 	
-	additional_sp_info_html += '<table class="csv">';
+	additional_sp_info_html += '<div class="table-responsive"><table class="csv table">';
 	
 	for(var i = 0; i < lines.length; i++) {
 		if(lines[i].match(/^\[(.*)\]$/)) {
@@ -1177,7 +1177,7 @@ function draw_graph_tn300b_2_spectrum(file, file_comment, data) {
 				
 				additional_sp_info_html += '<tr>';
 				additional_sp_info_html += '<th>' + data[0] + '</th>';
-				additional_sp_info_html += '<td style="text-align: right;">' + data[1] + '</td>';
+				additional_sp_info_html += '<td>' + data[1] + '</td>';
 				additional_sp_info_html += '</tr>';
 				
 				if(data[0] == "測定時間(秒)") {
@@ -1187,7 +1187,7 @@ function draw_graph_tn300b_2_spectrum(file, file_comment, data) {
 		}
 	}
 	
-	additional_sp_info_html += '</table>';
+	additional_sp_info_html += '</table></div>';
 	
 	if(spectrum_ch == 512 || spectrum_ch == 1024 || spectrum_ch == 2048 || spectrum_ch == 4096) {
 	} else if(spectrum_ch == 461 || spectrum_ch == 442 || spectrum_ch == 446 || spectrum_ch == 428) {
@@ -1295,14 +1295,14 @@ function draw_graph_xml_spectrum(file, file_comment, data) {
 	});
 	
 	if(additional_sp_info_html != '') {
-		additional_sp_info_html = '<table class="csv">'
+		additional_sp_info_html = '<div class="table-responsive"><table class="csv table">'
 			+ '<tr>'
 			+ '<th>Name</th>'
 			+ '<th>Type</th>'
 			+ '<th>IDConfidence</th>'
 			+ '</tr>'
 			+ additional_sp_info_html
-			+ '</table>';
+			+ '</table></div>';
 	}
 	
 	
@@ -1575,12 +1575,12 @@ function draw_graph_fnf401_spectrum(file, file_comment, data) {
 			continue;
 		}
 		if(mode == "ISOTOPE" && line.match(/^ *$/)) {
-			additional_sp_info_html += '</table>';
+			additional_sp_info_html += '</table></div>';
 			mode = "";
 			continue;
 		}
 		if(mode == "PEAK" && line.match(/^ *$/)) {
-			additional_sp_info_html += '</table><div style="clear: left;"></div>';
+			additional_sp_info_html += '</table></div><div style="clear: left;"></div>';
 			mode = "";
 			continue;
 		}
@@ -1602,13 +1602,13 @@ function draw_graph_fnf401_spectrum(file, file_comment, data) {
 			var fields = line.split(",");
 			if(fields.length == 8 && fields[0] != "核種") {
 				additional_sp_info_html += '<tr id="isotope_' + fields[0] + '"><th>' + fields[0]
-					+ '</th><td style="text-align: right;">' + fields[1]
-					+ '</td><td style="text-align: right;">' + fields[2]
-					+ '</td><td style="text-align: right;">' + fields[3]
-					+ '</td><td style="text-align: right;">' + fields[4]
-					+ '</td><td style="text-align: right;">' + fields[5]
-					+ '</td><td style="text-align: right;">' + fields[6]
-					+ '</td><td style="text-align: right;">' + fields[7]
+					+ '</th><td>' + fields[1]
+					+ '</td><td>' + fields[2]
+					+ '</td><td>' + fields[3]
+					+ '</td><td>' + fields[4]
+					+ '</td><td>' + fields[5]
+					+ '</td><td>' + fields[6]
+					+ '</td><td>' + fields[7]
 					+ '</td></tr>';
 			}
 			continue;
@@ -1617,8 +1617,8 @@ function draw_graph_fnf401_spectrum(file, file_comment, data) {
 			var fields = line.split(",");
 			if(fields.length == 3 && fields[0] != "核種") {
 				additional_sp_info_html += '<tr><th>' + fields[0]
-					+ '</th><td style="text-align: right;">' + fields[1]
-					+ '</td><td style="text-align: right;">' + fields[2]
+					+ '</th><td>' + fields[1]
+					+ '</td><td>' + fields[2]
 					+ '</td></tr>';
 				peak_info[fields[0]] = [
 					parseFloat(fields[1]),
@@ -1629,7 +1629,7 @@ function draw_graph_fnf401_spectrum(file, file_comment, data) {
 		}
 	}
 	if(mode == "PEAK") {
-		additional_sp_info_html += '</table><div style="clear: left;"></div>';
+		additional_sp_info_html += '</table></div><div style="clear: left;"></div>';
 	}
 	
 	// エネルギー換算係数を I-131 と Cs-134 のピーク検出領域から求める
@@ -2007,7 +2007,7 @@ function draw_graph_wintmca_spectrum(file, file_comment, data) {
 			var hch = parseInt(RegExp.$3);
 			
 			if(additional_sp_info_html == "") {
-				additional_sp_info_html += '<table class="csv">';
+				additional_sp_info_html += '<div class="table-responsive"><table class="csv table">';
 				additional_sp_info_html += '<tr>';
 				additional_sp_info_html += '<th>ID</th>';
 				additional_sp_info_html += '<th>Lch</th>';
@@ -2016,8 +2016,8 @@ function draw_graph_wintmca_spectrum(file, file_comment, data) {
 			}
 			
 			additional_sp_info_html += '<tr id="isotope_' + id + '"><th>' + id
-				+ '</th><td style="text-align: right;">' + lch
-				+ '</td><td style="text-align: right;">' + hch
+				+ '</th><td>' + lch
+				+ '</td><td>' + hch
 				+ '</td></tr>';
 			
 			peak_info[id] = [parseInt(lch), parseInt(hch)];
@@ -2053,7 +2053,7 @@ function draw_graph_wintmca_spectrum(file, file_comment, data) {
 	}
 	
 	if(additional_sp_info_html != "") {
-		additional_sp_info_html += '</table>';
+		additional_sp_info_html += '</table></div>';
 	}
 	
 	if(data.length == 0 || !slope || !time) {
@@ -2272,7 +2272,7 @@ function draw_graph_emf211_spectrum(file, file_comment, data) {
 	
 	
 	// 核種情報
-	additional_sp_info_html += '<table class="csv">';
+	additional_sp_info_html += '<div class="table-responsive"><table class="csv table">';
 	additional_sp_info_html += '<tr>';
 	additional_sp_info_html += '<th>ID</th>';
 	additional_sp_info_html += '<th>keV</th>';
@@ -2317,19 +2317,19 @@ function draw_graph_emf211_spectrum(file, file_comment, data) {
 //		var half_coef = 1 / Math.pow(1/2, pastsecond/halflife[iso]);
 		
 		additional_sp_info_html += '<tr id="isotope_' + iso + '"><th>' + isotope
-			+ '</th><td style="text-align: right;">' + kev_center
-			+ '</th><td style="text-align: right;">' + kev_l
-			+ '</td><td style="text-align: right;">' + kev_h
-			+ '</td><td style="text-align: right;">' + bq_kg_cps
-//			+ '</td><td style="text-align: right;">' + density
-			+ '</td><td style="text-align: right;">' + net_count
-			+ '</td><td style="text-align: right;">' + net_cps.toFixed(4)
-//			+ '</td><td style="text-align: right;">' + bq_kg.toFixed(2)
-//			+ '</td><td style="text-align: right;">' + half_coef.toFixed(4)
+			+ '</th><td>' + kev_center
+			+ '</th><td>' + kev_l
+			+ '</td><td>' + kev_h
+			+ '</td><td>' + bq_kg_cps
+//			+ '</td><td>' + density
+			+ '</td><td>' + net_count
+			+ '</td><td>' + net_cps.toFixed(4)
+//			+ '</td><td>' + bq_kg.toFixed(2)
+//			+ '</td><td>' + half_coef.toFixed(4)
 			+ '</td></tr>';
 		
 	}
-	additional_sp_info_html += '</table>';
+	additional_sp_info_html += '</table></div>';
 	
 	
 	if(data.length == 0 || !time) {
@@ -2590,7 +2590,7 @@ function draw_graph_emf211b_spectrum(file, file_comment, data) {
 	
 	if(isotope_info['濃度']) {
 		// 核種情報
-		additional_sp_info_html += '<table class="csv">';
+		additional_sp_info_html += '<div class="table-responsive"><table class="csv table">';
 		additional_sp_info_html += '<tr>';
 		additional_sp_info_html += '<th>核種</th>';
 		additional_sp_info_html += '<th>keV</th>';
@@ -2619,20 +2619,20 @@ function draw_graph_emf211b_spectrum(file, file_comment, data) {
 			peak_info[iso] = [from, to];
 			
 			additional_sp_info_html += '<tr id="isotope_' + iso + '"><th>' + isotope
-				+ '</th><td style="text-align: right;">' + kev_center
-				+ '</th><td style="text-align: right;">' + kev_l
-				+ '</td><td style="text-align: right;">' + kev_h
-				+ '</td><td style="text-align: right;">' + round_to_fixed(2, parseFloat(isotope_info['濃度'][iso]))
-				+ '</td><td style="text-align: right;">' + round_to_fixed(3, parseFloat(isotope_info['不確かさ'][iso]))
-				+ '</td><td style="text-align: right;">' + round_to_fixed(3, parseFloat(isotope_info['最小検出限界'][iso]))
-				+ '</td><td style="text-align: right;">' + round_to_fixed(3, parseFloat(isotope_info['換算係数'][iso]))
-				+ '</td><td style="text-align: right;">' + round_to_fixed(3, parseFloat(isotope_info['質量補正'][iso]))
-				+ '</td><td style="text-align: right;">' + round_to_fixed(3, parseFloat(isotope_info['減衰補正'][iso]))
-				+ '</td><td style="text-align: right;">' + round_to_fixed(3, parseFloat(isotope_info['ネットレート'][iso]))
+				+ '</th><td>' + kev_center
+				+ '</th><td>' + kev_l
+				+ '</td><td>' + kev_h
+				+ '</td><td>' + round_to_fixed(2, parseFloat(isotope_info['濃度'][iso]))
+				+ '</td><td>' + round_to_fixed(3, parseFloat(isotope_info['不確かさ'][iso]))
+				+ '</td><td>' + round_to_fixed(3, parseFloat(isotope_info['最小検出限界'][iso]))
+				+ '</td><td>' + round_to_fixed(3, parseFloat(isotope_info['換算係数'][iso]))
+				+ '</td><td>' + round_to_fixed(3, parseFloat(isotope_info['質量補正'][iso]))
+				+ '</td><td>' + round_to_fixed(3, parseFloat(isotope_info['減衰補正'][iso]))
+				+ '</td><td>' + round_to_fixed(3, parseFloat(isotope_info['ネットレート'][iso]))
 				+ '</td></tr>';
 			
 		}
-		additional_sp_info_html += '</table>';
+		additional_sp_info_html += '</table></div>';
 	}
 	
 	var additional_html_callback = function() {
@@ -2884,7 +2884,7 @@ function draw_graph_at1320_spectrum(file, file_comment, data) {
 			});
 			if(csvdata != '') {
 				var additional_sp_info_html = '';
-				additional_sp_info_html += '<table class="csv">';
+				additional_sp_info_html += '<div class="table-responsive"><table class="csv table">';
 				additional_sp_info_html += '<tr><th>核種</th><th>判定</th><th>放射能濃度</th><th>Relative error</th><th>Absolute error</th><th>Statistical error</th></tr>';
 				
 				var csvlines = split_line(csvdata);
@@ -2892,16 +2892,16 @@ function draw_graph_at1320_spectrum(file, file_comment, data) {
 					var fields = csvlines[i].split(",");
 					if(fields.length == 7) {
 						additional_sp_info_html += '<tr id="isotope_' + fields[1] + '"><th>' + fields[1]
-							+ '</th><td style="text-align: right;">' + fields[0]
-							+ '</td><td style="text-align: right;">' + fields[2] + " " + fields[6]
-							+ '</td><td style="text-align: right;">' + fields[3]
-							+ '</td><td style="text-align: right;">' + fields[4]
-							+ '</td><td style="text-align: right;">' + fields[5]
+							+ '</th><td>' + fields[0]
+							+ '</td><td>' + fields[2] + " " + fields[6]
+							+ '</td><td>' + fields[3]
+							+ '</td><td>' + fields[4]
+							+ '</td><td>' + fields[5]
 							+ '</td></tr>';
 					}
 				}
 				
-				additional_sp_info_html += '</table>';
+				additional_sp_info_html += '</table></div>';
 				
 				spectrums['data'][0]['additional_sp_info_html'] = additional_sp_info_html;
 			}
@@ -2995,7 +2995,7 @@ function draw_graph_lb2045_spectrum(file, file_comment, data) {
 		} else if(mode == 'nuclide') {
 			if(lines[i].match(/^$/)) {
 				if(additional_sp_info_html != "") {
-					additional_sp_info_html += '</table>';
+					additional_sp_info_html += '</table></div>';
 				}
 				mode = 'info';
 			}
@@ -3003,7 +3003,7 @@ function draw_graph_lb2045_spectrum(file, file_comment, data) {
 				var field = lines[i].split(/ +/);
 				
 				if(additional_sp_info_html == "") {
-					additional_sp_info_html += '<table class="csv">';
+					additional_sp_info_html += '<div class="table-responsive"><table class="csv table">';
 					additional_sp_info_html += '<tr>';
 					additional_sp_info_html += '<th>Nuclide</th>';
 					additional_sp_info_html += '<th>Raw Data</th>';
@@ -3015,15 +3015,15 @@ function draw_graph_lb2045_spectrum(file, file_comment, data) {
 				}
 				additional_sp_info_html += '<tr id="isotope_' + isotope_no + '">';
 				additional_sp_info_html += '<td>' + field[0] + '</td>';
-				additional_sp_info_html += '<td style="text-align: right;">' + field[1] + '</td>';
+				additional_sp_info_html += '<td>' + field[1] + '</td>';
 				var status = '';
 				if(parseFloat(field[2]) < parseFloat(field[4])) {
 					status = '<br><font size="-2">検出限界未満</font>';
 				}
-				additional_sp_info_html += '<td style="text-align: right;">' + field[2] + status + '</td>';
-				additional_sp_info_html += '<td style="text-align: right;">' + field[3] + '</td>';
-				additional_sp_info_html += '<td style="text-align: right;">' + field[4] + '</td>';
-				additional_sp_info_html += '<td style="text-align: right;">' + field[5] + '</td>';
+				additional_sp_info_html += '<td>' + field[2] + status + '</td>';
+				additional_sp_info_html += '<td>' + field[3] + '</td>';
+				additional_sp_info_html += '<td>' + field[4] + '</td>';
+				additional_sp_info_html += '<td>' + field[5] + '</td>';
 				additional_sp_info_html += '</tr>';
 				
 				isotope_no++;
@@ -3219,7 +3219,7 @@ function draw_graph_canberra_gc2020_spectrum(file, file_comment, data) {
 	additional_sp_info_html += '[<a href="javascript: gs2020_nuclide(3);">ピーク検索結果</a>]';
 	additional_sp_info_html += '<div id="gs2020_nuclide1" style="display: none;">';
 	
-	additional_sp_info_html += '<table class="csv">';
+	additional_sp_info_html += '<div class="table-responsive"><table class="csv table">';
 	additional_sp_info_html += '<tr>';
 	additional_sp_info_html += '<th>検出</th>';
 	additional_sp_info_html += '<th>核種名</th>';
@@ -3243,27 +3243,27 @@ function draw_graph_canberra_gc2020_spectrum(file, file_comment, data) {
 		additional_sp_info_html += '<tr id="nuclide_info_dat_' + i + '">';
 		additional_sp_info_html += '<td style="text-align: center;">' + nuclide_info_dat[i][4] + '</td>';
 		additional_sp_info_html += '<td style="text-align: left;">'   + nuclide_info_dat[i][7] + '</td>';
-		additional_sp_info_html += '<td style="text-align: right;">'  + Number(nuclide_info_dat[i][8]).toFixed(2) + '</td>';
-	//	additional_sp_info_html += '<td style="text-align: right;">'  + 'ピーク面積' + '</td>';
-	//	additional_sp_info_html += '<td style="text-align: right;">'  + '検出限界' + '</td>';
-		additional_sp_info_html += '<td style="text-align: right;">'  + nuclide_info_dat[i][10] + ' ' + nuclide_info_dat[i][11] + '</td>';
-		additional_sp_info_html += '<td style="text-align: right;">'  + Number(nuclide_info_dat[i][9]).toFixed(2) + '</td>';
-		additional_sp_info_html += '<td style="text-align: right;">'  + Number(nuclide_info_dat[i][20]).toFixed(6) + '</td>';
-		additional_sp_info_html += '<td style="text-align: right;">'  + Number(nuclide_info_dat[i][19]).toFixed(6) + '</td>';
-	//	additional_sp_info_html += '<td style="text-align: right;">'  + '減衰補正' + '</td>';
-		additional_sp_info_html += '<td style="text-align: right;">'  + (Number(nuclide_info_dat[i][12]) * 100).toFixed(3) + '</td>';
-		additional_sp_info_html += '<td style="text-align: right;">'  + (nuclide_info_dat[i][29] == 0 ? Number(nuclide_info_dat[i][24]).toExponential(3) : Number(nuclide_info_dat[i][29]).toExponential(3))
+		additional_sp_info_html += '<td>'  + Number(nuclide_info_dat[i][8]).toFixed(2) + '</td>';
+	//	additional_sp_info_html += '<td>'  + 'ピーク面積' + '</td>';
+	//	additional_sp_info_html += '<td>'  + '検出限界' + '</td>';
+		additional_sp_info_html += '<td>'  + nuclide_info_dat[i][10] + ' ' + nuclide_info_dat[i][11] + '</td>';
+		additional_sp_info_html += '<td>'  + Number(nuclide_info_dat[i][9]).toFixed(2) + '</td>';
+		additional_sp_info_html += '<td>'  + Number(nuclide_info_dat[i][20]).toFixed(6) + '</td>';
+		additional_sp_info_html += '<td>'  + Number(nuclide_info_dat[i][19]).toFixed(6) + '</td>';
+	//	additional_sp_info_html += '<td>'  + '減衰補正' + '</td>';
+		additional_sp_info_html += '<td>'  + (Number(nuclide_info_dat[i][12]) * 100).toFixed(3) + '</td>';
+		additional_sp_info_html += '<td>'  + (nuclide_info_dat[i][29] == 0 ? Number(nuclide_info_dat[i][24]).toExponential(3) : Number(nuclide_info_dat[i][29]).toExponential(3))
 																		+ ' ± ' + (nuclide_info_dat[i][30] == 0 ? Number(nuclide_info_dat[i][25]).toExponential(3) : Number(nuclide_info_dat[i][30]).toExponential(3)) + '</td>';
 		var kazyu = '';
 		if(nuclide_info_dat[i][46] != 0) {
 			kazyu = (nuclide_info_dat[i][48] == 0 ? Number(nuclide_info_dat[i][46]).toExponential(3) : Number(nuclide_info_dat[i][48]).toExponential(3))
 						+ ' ± ' + (nuclide_info_dat[i][49] == 0 ? Number(nuclide_info_dat[i][47]).toExponential(3) : Number(nuclide_info_dat[i][49]).toExponential(3));
 		}
-		additional_sp_info_html += '<td style="text-align: right;">'  + kazyu + '</td>';
-		additional_sp_info_html += '<td style="text-align: right;">'  + Number(nuclide_info_dat[i][34]).toExponential(3) + '</td>';
-	//	additional_sp_info_html += '<td style="text-align: right;">'  + '属性' + '</td>';
+		additional_sp_info_html += '<td>'  + kazyu + '</td>';
+		additional_sp_info_html += '<td>'  + Number(nuclide_info_dat[i][34]).toExponential(3) + '</td>';
+	//	additional_sp_info_html += '<td>'  + '属性' + '</td>';
 		additional_sp_info_html += '<td style="text-align: center;">' + nuclide_info_dat[i][5] + '</td>';
-		additional_sp_info_html += '<td style="text-align: right;">'  + (nuclide_info_dat[i][33] == 1 ? '関数適合' : '積算法') + '</td>';
+		additional_sp_info_html += '<td>'  + (nuclide_info_dat[i][33] == 1 ? '関数適合' : '積算法') + '</td>';
 		var all = '';
 		for(var f = 0; f < nuclide_info_dat[i].length; f++) {
 			if(f <= 4 || f == 6 || f == 7 || f == 8 || f == 9 || f == 12 || f == 24 || f == 25 || f == 26 || f == 27 || f== 5
@@ -3271,10 +3271,10 @@ function draw_graph_canberra_gc2020_spectrum(file, file_comment, data) {
 				continue;
 			all += '[' + f + ']' + nuclide_info_dat[i][f] + ' ';
 		}
-	//	additional_sp_info_html += '<td style="text-align: right;">'  + all + '</td>';
+	//	additional_sp_info_html += '<td>'  + all + '</td>';
 		additional_sp_info_html += '</tr>';
 	}
-	additional_sp_info_html += '</table><br>';
+	additional_sp_info_html += '</table></div><br>';
 	additional_sp_info_html += '※Mark：C:積算法，N:近接処理，D:分割，S:寄与差引，E:同一核種処理，W:和処理，';
 	additional_sp_info_html += 'X:レンジ外(測定レンジ外にピークがある)，L:２σ以上，';
 	additional_sp_info_html += 'A:注意(サーチされていない計数が，BG分析なら２σ以上，核種分析ならDL以上)，';
@@ -3284,7 +3284,7 @@ function draw_graph_canberra_gc2020_spectrum(file, file_comment, data) {
 	additional_sp_info_html += '</div>';
 	additional_sp_info_html += '<div id="gs2020_nuclide2" style="display: none;">';
 	
-	additional_sp_info_html += '<table class="csv">';
+	additional_sp_info_html += '<div class="table-responsive"><table class="csv table">';
 	additional_sp_info_html += '<tr>';
 	additional_sp_info_html += '<th>核種名</th>';
 	additional_sp_info_html += '<th>エネルギー<br>(keV)</th>';
@@ -3302,8 +3302,8 @@ function draw_graph_canberra_gc2020_spectrum(file, file_comment, data) {
 	for(var i = 0; i < nuclide_info_act.length; i++) {
 		additional_sp_info_html += '<tr id="nuclide_info_act_' + i + '">';
 		additional_sp_info_html += '<td style="text-align: left;">'   + nuclide_info_act[i][40] + '</td>';
-		additional_sp_info_html += '<td style="text-align: right;">'  + Number(nuclide_info_act[i][7]).toFixed(2) + '</td>';
-		additional_sp_info_html += '<td style="text-align: right;">'  + Number(nuclide_info_act[i][4]).toFixed(2) + '</td>';
+		additional_sp_info_html += '<td>'  + Number(nuclide_info_act[i][7]).toFixed(2) + '</td>';
+		additional_sp_info_html += '<td>'  + Number(nuclide_info_act[i][4]).toFixed(2) + '</td>';
 		// 25列がフラグとなっていて，1なら3つの領域全てをピーク領域と扱う
 		if(nuclide_info_act[i][25] == 1) {
 			additional_sp_info_html += '<td style="text-align: center;">' + nuclide_info_act[i][9] + ' - ' + nuclide_info_act[i][14] + '</td>';
@@ -3314,11 +3314,11 @@ function draw_graph_canberra_gc2020_spectrum(file, file_comment, data) {
 			additional_sp_info_html += '<td style="text-align: center;">' + nuclide_info_act[i][9] + ' - ' + nuclide_info_act[i][10] + '</td>';
 			additional_sp_info_html += '<td style="text-align: center;">' + nuclide_info_act[i][13] + ' - ' + nuclide_info_act[i][14] + '</td>';
 		}
-		additional_sp_info_html += '<td style="text-align: right;">'  + Number(nuclide_info_act[i][8]).toFixed(3) + '</td>';
-		additional_sp_info_html += '<td style="text-align: right;">'  + Number(nuclide_info_act[i][15]).toFixed(1) + '</td>';
-		additional_sp_info_html += '<td style="text-align: right;">'  + Number(nuclide_info_act[i][20]).toFixed(1) + ' ± ' + Number(nuclide_info_act[i][21]).toFixed(1) + '</td>';
-	//	additional_sp_info_html += '<td style="text-align: right;">'  + '</td>';
-	//	additional_sp_info_html += '<td style="text-align: right;">'  + '</td>';
+		additional_sp_info_html += '<td>'  + Number(nuclide_info_act[i][8]).toFixed(3) + '</td>';
+		additional_sp_info_html += '<td>'  + Number(nuclide_info_act[i][15]).toFixed(1) + '</td>';
+		additional_sp_info_html += '<td>'  + Number(nuclide_info_act[i][20]).toFixed(1) + ' ± ' + Number(nuclide_info_act[i][21]).toFixed(1) + '</td>';
+	//	additional_sp_info_html += '<td>'  + '</td>';
+	//	additional_sp_info_html += '<td>'  + '</td>';
 		var flag = nuclide_info_act[i][39];
 		if(nuclide_info_act[i][24] & 1 || nuclide_info_act[i][24] & 2) {
 			flag += 'N';
@@ -3327,15 +3327,15 @@ function draw_graph_canberra_gc2020_spectrum(file, file_comment, data) {
 			flag += 'S';
 		}
 	//	additional_sp_info_html += '<td style="text-align: center;">' + flag + '</td>';
-	//	additional_sp_info_html += '<td style="text-align: right;">'  + 'ピーク面積' + '</td>';
-	//	additional_sp_info_html += '<td style="text-align: right;">'  + '検出限界' + '</td>';
-	//	additional_sp_info_html += '<td style="text-align: right;">'  + nuclide_info_act[i][10] + ' ' + nuclide_info_act[i][11] + '</td>';
-	//	additional_sp_info_html += '<td style="text-align: right;">'  + Number(nuclide_info_act[i][9]).toFixed(2) + '</td>';
-	//	additional_sp_info_html += '<td style="text-align: right;">'  + Number(nuclide_info_act[i][20]).toFixed(6) + '</td>';
-	//	additional_sp_info_html += '<td style="text-align: right;">'  + Number(nuclide_info_act[i][19]).toFixed(6) + '</td>';
-	//	additional_sp_info_html += '<td style="text-align: right;">'  + '減衰補正' + '</td>';
-	//	additional_sp_info_html += '<td style="text-align: right;">'  + (Number(nuclide_info_act[i][12]) * 100).toFixed(3) + '</td>';
-	//	additional_sp_info_html += '<td style="text-align: right;">'  + (nuclide_info_act[i][29] == 0 ? Number(nuclide_info_act[i][24]).toExponential(3) : Number(nuclide_info_act[i][29]).toExponential(3))
+	//	additional_sp_info_html += '<td>'  + 'ピーク面積' + '</td>';
+	//	additional_sp_info_html += '<td>'  + '検出限界' + '</td>';
+	//	additional_sp_info_html += '<td>'  + nuclide_info_act[i][10] + ' ' + nuclide_info_act[i][11] + '</td>';
+	//	additional_sp_info_html += '<td>'  + Number(nuclide_info_act[i][9]).toFixed(2) + '</td>';
+	//	additional_sp_info_html += '<td>'  + Number(nuclide_info_act[i][20]).toFixed(6) + '</td>';
+	//	additional_sp_info_html += '<td>'  + Number(nuclide_info_act[i][19]).toFixed(6) + '</td>';
+	//	additional_sp_info_html += '<td>'  + '減衰補正' + '</td>';
+	//	additional_sp_info_html += '<td>'  + (Number(nuclide_info_act[i][12]) * 100).toFixed(3) + '</td>';
+	//	additional_sp_info_html += '<td>'  + (nuclide_info_act[i][29] == 0 ? Number(nuclide_info_act[i][24]).toExponential(3) : Number(nuclide_info_act[i][29]).toExponential(3))
 		var all = '';
 		for(var f = 0; f < nuclide_info_act[i].length; f++) {
 			if(f == 0 || f == 40 || f == 7 || f == 4 || ( f >= 9 && f <= 14) || f == 8 || f == 15 || f == 20 || f == 21 || f == 1 || f == 39
@@ -3343,15 +3343,15 @@ function draw_graph_canberra_gc2020_spectrum(file, file_comment, data) {
 				continue;
 			all += '[' + f + ']' + nuclide_info_act[i][f] + ' ';
 		}
-	//	additional_sp_info_html += '<td style="text-align: right;">'  + all + '</td>';
+	//	additional_sp_info_html += '<td>'  + all + '</td>';
 		additional_sp_info_html += '</tr>';
 	}
-	additional_sp_info_html += '</table><br>';
+	additional_sp_info_html += '</table></div><br>';
 	
 	additional_sp_info_html += '</div>';
 	additional_sp_info_html += '<div id="gs2020_nuclide3" style="display: none;">';
 	
-	additional_sp_info_html += '<table class="csv">';
+	additional_sp_info_html += '<div class="table-responsive"><table class="csv table">';
 	additional_sp_info_html += '<tr>';
 	additional_sp_info_html += '<th>No.</th>';
 	additional_sp_info_html += '<th>ピーク<br>チャンネル<br>(ch)</th>';
@@ -3367,18 +3367,18 @@ function draw_graph_canberra_gc2020_spectrum(file, file_comment, data) {
 	additional_sp_info_html += '</tr>';
 	for(var i = 0; i < nuclide_info_peak.length; i++) {
 		additional_sp_info_html += '<tr id="nuclide_info_peak_' + i + '">';
-		additional_sp_info_html += '<td style="text-align: right;">'  + nuclide_info_peak[i][1] + '</td>';
-		additional_sp_info_html += '<td style="text-align: right;">'  + Number(nuclide_info_peak[i][4]).toFixed(2) + '</td>';
-		additional_sp_info_html += '<td style="text-align: right;">'  + Number(nuclide_info_peak[i][6]).toFixed(2) + '</td>';
-		additional_sp_info_html += '<td style="text-align: right;">'  + (nuclide_info_peak[i][31] == 0 ? Number(nuclide_info_peak[i][8]).toFixed(3) : Number(nuclide_info_peak[i][31]).toFixed(3)) + '</td>';
-		additional_sp_info_html += '<td style="text-align: right;">'  + Number(nuclide_info_peak[i][7]).toFixed(2) + '</td>';
-		additional_sp_info_html += '<td style="text-align: right;">'  + Number(nuclide_info_peak[i][15]).toFixed(1) + '</td>';
-		additional_sp_info_html += '<td style="text-align: right;">'  + Number(nuclide_info_peak[i][20]).toFixed(1) + '</td>';
+		additional_sp_info_html += '<td>'  + nuclide_info_peak[i][1] + '</td>';
+		additional_sp_info_html += '<td>'  + Number(nuclide_info_peak[i][4]).toFixed(2) + '</td>';
+		additional_sp_info_html += '<td>'  + Number(nuclide_info_peak[i][6]).toFixed(2) + '</td>';
+		additional_sp_info_html += '<td>'  + (nuclide_info_peak[i][31] == 0 ? Number(nuclide_info_peak[i][8]).toFixed(3) : Number(nuclide_info_peak[i][31]).toFixed(3)) + '</td>';
+		additional_sp_info_html += '<td>'  + Number(nuclide_info_peak[i][7]).toFixed(2) + '</td>';
+		additional_sp_info_html += '<td>'  + Number(nuclide_info_peak[i][15]).toFixed(1) + '</td>';
+		additional_sp_info_html += '<td>'  + Number(nuclide_info_peak[i][20]).toFixed(1) + '</td>';
 		var netcount = (nuclide_info_peak[i][33] == 0 ? Number(nuclide_info_peak[i][22]).toFixed(1) : Number(nuclide_info_peak[i][33]).toFixed(1))
 						+ ' ± ' + (nuclide_info_peak[i][34] == 0 ? Number(nuclide_info_peak[i][23]).toFixed(1) : Number(nuclide_info_peak[i][34]).toFixed(1));
-		additional_sp_info_html += '<td style="text-align: right;">'  + netcount + '</td>';
+		additional_sp_info_html += '<td>'  + netcount + '</td>';
 		additional_sp_info_html += '<td style="text-align: center;">' + nuclide_info_peak[i][38] + '</td>';
-		additional_sp_info_html += '<td style="text-align: right;">'  + Number(nuclide_info_peak[i][35]).toFixed(1) + '</td>';
+		additional_sp_info_html += '<td>'  + Number(nuclide_info_peak[i][35]).toFixed(1) + '</td>';
 		additional_sp_info_html += '<td style="text-align: left;">'  + nuclide_info_peak[i][40].replace("_", ",") + '</td>';
 		var all = '';
 		for(var f = 0; f < nuclide_info_peak[i].length; f++) {
@@ -3386,10 +3386,10 @@ function draw_graph_canberra_gc2020_spectrum(file, file_comment, data) {
 				continue;
 			all += '[' + f + ']' + nuclide_info_peak[i][f] + ' ';
 		}
-	//	additional_sp_info_html += '<td style="text-align: right;">'  + all + '</td>';
+	//	additional_sp_info_html += '<td>'  + all + '</td>';
 		additional_sp_info_html += '</tr>';
 	}
-	additional_sp_info_html += '</table><br>';
+	additional_sp_info_html += '</table></div><br>';
 	
 	additional_sp_info_html += '</div>';
 	
@@ -3603,7 +3603,7 @@ function draw_graph_csk2i_spectrum(file, file_comment, data) {
 	var spectrum_data_ev_bg = [];
 	
 	var additional_sp_info_html = '';
-	additional_sp_info_html += '<table class="csv">';
+	additional_sp_info_html += '<div class="table-responsive"><table class="csv table">';
 	additional_sp_info_html += '<tr>';
 	additional_sp_info_html += '<th>核種</th>';
 	additional_sp_info_html += '<th>濃度[Bq/kg]</th>';
@@ -3690,9 +3690,9 @@ function draw_graph_csk2i_spectrum(file, file_comment, data) {
 		if(line.match(/^\tROI配列$/)) {
 			mode = 'isotope';
 			
-			additional_sp_info_html += '</table>';
+			additional_sp_info_html += '</table></div>';
 			additional_sp_info_html += '<br>';
-			additional_sp_info_html += '<table class="csv">';
+			additional_sp_info_html += '<div class="table-responsive"><table class="csv table">';
 			additional_sp_info_html += '<tr>';
 			additional_sp_info_html += '<th>ROI</th>';
 			additional_sp_info_html += '<th>開始(keV)</th>';
@@ -3700,7 +3700,7 @@ function draw_graph_csk2i_spectrum(file, file_comment, data) {
 			additional_sp_info_html += '</tr>';
 		}
 	}
-	additional_sp_info_html += '</table>';
+	additional_sp_info_html += '</table></div>';
 	
 	var additional_html_callback = function() {
 		for(var isotope in isotope_range) {
@@ -3811,7 +3811,7 @@ function draw_graph_csk3ix_spectrum(file, file_comment, data) {
 	var spectrum_data_ev_bg = [];
 	
 	var additional_sp_info_html = '';
-	additional_sp_info_html += '<table class="csv">';
+	additional_sp_info_html += '<div class="table-responsive"><table class="csv table">';
 	
 	var mode = 'info';
 	for(var i in lines) {
@@ -3895,7 +3895,7 @@ function draw_graph_csk3ix_spectrum(file, file_comment, data) {
 			}
 		}
 	}
-	additional_sp_info_html += '</table>';
+	additional_sp_info_html += '</table></div>';
 	
 	
 	if(!time)
@@ -4033,7 +4033,7 @@ function setup_multiple_spectrum(spectrum) {
 		}
 	}
 	
-	var html = '■スペクトル選択<br><table class="csv">';
+	var html = '■スペクトル選択<br><div class="table-responsive"><table class="csv table">';
 	for(var no = 0; no < spectrum['data'].length; no++) {
 		html += '<tr>';
 		html += '<td><input type="radio" name="spe_sel" value="' + no + '" '
@@ -4043,7 +4043,7 @@ function setup_multiple_spectrum(spectrum) {
 		html += '<td>' + spectrum['data'][no]['file_comment'] + '</td>';
 		html += '</tr>';
 	}
-	html += '</table>';
+	html += '</table></div>';
 	$("#sp_sel").html(html);
 	
 	// 選択変更時の再表示
@@ -4259,7 +4259,7 @@ function draw_graph_common(spectrum) {
 	// 範囲プリセット
 	var range_preset_html = '範囲設定：';
 	for(var i in range_preset) {
-		range_preset_html += '<input type="button" id="range_preset_' + i + '" value="' + range_preset[i][0] + '">';
+		range_preset_html += '<input class="btn btn-default" type="button" id="range_preset_' + i + '" value="' + range_preset[i][0] + '">';
 	}
 	range_preset_html += '<br><br>';
 	$("#range_preset").html(range_preset_html);
@@ -4367,8 +4367,8 @@ function draw_graph_common(spectrum) {
 function save_tsv(spectrum) {
 	var html = '';
 	html += 'TSVデータ: 測定時間: ' + spectrum['time'] + ' 秒 ';
-	html += '<input type="button" id="tsv_data_close" value="閉じる"><br>';
-	html += '<textarea id="tsv_data_text" cols="80" rows="20"></textarea>';
+	html += '<input class="btn btn-default" type="button" id="tsv_data_close" value="閉じる">';
+	html += '<textarea id="tsv_data_text" rows="20" class="form-control" disabled></textarea>';
 	$("#tsv_data").html(html);
 	
 	$("#tsv_data_close").unbind('click').bind('click', function() {
@@ -4430,7 +4430,7 @@ function setup_multiple_spectrum_compare(spectrums) {
 		}
 	}
 	
-	var html = '■スペクトル選択<br><table class="csv">';
+	var html = '■スペクトル選択<div class="table-responsive"><table class="csv table">';
 	for(var no = 0; no < spectrums[0]['data'].length; no++) {
 		html += '<tr>';
 		html += '<td><input type="radio" name="spe_sel1" value="' + no + '" '
@@ -4440,7 +4440,7 @@ function setup_multiple_spectrum_compare(spectrums) {
 		html += '<td>' + spectrums[0]['data'][no]['file_comment'] + '</td>';
 		html += '</tr>';
 	}
-	html += '</table><br><table class="csv">';
+	html += '</table></div><br><div class="table-responsive"><table class="csv table">';
 	for(var no = 0; no < spectrums[1]['data'].length; no++) {
 		html += '<tr>';
 		html += '<td><input type="radio" name="spe_sel2" value="' + no + '" '
@@ -4450,7 +4450,7 @@ function setup_multiple_spectrum_compare(spectrums) {
 		html += '<td>' + spectrums[1]['data'][no]['file_comment'] + '</td>';
 		html += '</tr>';
 	}
-	html += '</table>';
+	html += '</table></div>';
 	$("#sp_sel").html(html);
 	
 	// 選択変更時の再表示
@@ -4650,7 +4650,7 @@ function draw_graph_common_compare(spectrums) {
 	// 範囲プリセット
 	var range_preset_html = '範囲設定：';
 	for(var i in range_preset) {
-		range_preset_html += '<input type="button" id="range_preset_' + i + '" value="' + range_preset[i][0] + '">';
+		range_preset_html += '<input class="btn btn-default" type="button" id="range_preset_' + i + '" value="' + range_preset[i][0] + '">';
 	}
 	range_preset_html += '<br><br>';
 	$("#range_preset").html(range_preset_html);
@@ -4767,7 +4767,7 @@ function setup_multiple_spectrum_multi(spectrums) {
 	
 	var html = '■スペクトル選択<br>';
 	for(var sp = 0; sp < spectrum_count; sp++) {
-		html += '<table class="csv">';
+		html += '<div class="table-responsive"><table class="csv table">';
 		for(var no = 0; no < spectrums[sp]['data'].length; no++) {
 			var checked = false;
 			for(var c in selected_no[sp]) {
@@ -4787,7 +4787,7 @@ function setup_multiple_spectrum_multi(spectrums) {
 			html += '<td>' + spectrums[sp]['data'][no]['file_comment'] + '</td>';
 			html += '</tr>';
 		}
-		html += '</table><br>';
+		html += '</table></div>';
 	}
 	$("#sp_sel").html(html);
 	
@@ -4981,7 +4981,7 @@ function draw_graph_common_multi(spectrums) {
 	// 範囲プリセット
 	var range_preset_html = '範囲設定：';
 	for(var i in range_preset) {
-		range_preset_html += '<input type="button" id="range_preset_' + i + '" value="' + range_preset[i][0] + '">';
+		range_preset_html += '<input class="btn btn-default" type="button" id="range_preset_' + i + '" value="' + range_preset[i][0] + '">';
 	}
 	range_preset_html += '<br><br>';
 	$("#range_preset").html(range_preset_html);
@@ -5189,10 +5189,10 @@ function update_curosr_nuclear(ev, cpsDecimals) {
 	var html = '';
 	for(var i = 0; i < DISP_COUNT; ++i) {
 		html += '<tr>';
-		html += '<td style="text-align: right;">' + sorted_nuclear_data[i][0] + '</td>';
+		html += '<td>' + sorted_nuclear_data[i][0] + '</td>';
 		html += '<td>' + sorted_nuclear_data[i][1] + '</td>';
-		html += '<td style="text-align: right;">' + sorted_nuclear_data[i][2] + '</td>';
-		html += '<td style="text-align: right;">' + sorted_nuclear_data[i][3] + '</td>';
+		html += '<td>' + sorted_nuclear_data[i][2] + '</td>';
+		html += '<td>' + sorted_nuclear_data[i][3] + '</td>';
 		html += '</tr>';
 	}
 	$("#sp_cursor_nuclear_table").after(html);
@@ -5549,14 +5549,14 @@ function print_sp_info(spectrum) {
 	html += '<p>URL: ';
 	html += '<a href="' + url + '" target="_blank">' + url + '</a></p>';
 	
-	html += '<table class="csv">';
+	html += '<div class="table-responsive"><table class="csv table">';
 	for(var i in sp_info) {
 		html += '<tr>';
 		html += '<th nowrap>' + sp_info[i][0] + '</th>';
 		html += '<td style="text-align: right">' + sp_info[i][1] + '</td>';
 		html += '</tr>';
 	}
-	html += '</table>';
+	html += '</table></div>';
 	
 	if(spectrum['additional_sp_info_html']) {
 		html += '<br>' + spectrum['additional_sp_info_html'];
@@ -5603,7 +5603,7 @@ function print_sp_info_multi(spectrums) {
 	
 	// スペクトル一覧
 	var colors = ["#edc240", "#afd8f8", "#cb4b4b", "#4da74d", "#9440ed"];
-	html += '<table class="csv">';
+	html += '<div class="table-responsive"><table class="csv table">';
 	for(var i = 0; i < spectrums.length; i++) {
 		var name = '';
 		if(spectrums[i]['name'] != undefined) {
@@ -5611,7 +5611,7 @@ function print_sp_info_multi(spectrums) {
 		}
 		html += '<tr><th>' + (i+1) + '</th><td><font color="' + colors[i] + '">■</font>' + name + spectrums[i]['file_comment'] + '</td></tr>';
 	}
-	html += '</table>';
+	html += '</table></div>';
 	
 	
 	// URL情報
