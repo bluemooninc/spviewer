@@ -6,14 +6,6 @@ body {
 	font-family: 'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
 }
 
-div#sp_sel {
-	margin: 2em;
-}
-
-div#sp_info {
-	margin: 2em;
-}
-
 a:link{
 	text-decoration: underline;
 	font-weight:bold;
@@ -152,4 +144,5 @@ table.csv td{
     padding-top:    32px;
     padding-bottom: 24px;
   }
+  
 }
