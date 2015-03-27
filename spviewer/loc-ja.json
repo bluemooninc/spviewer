@@ -1,0 +1,43 @@
+{
+  "SPViewer": "放射線スペクトル表示ツール SPViewer",
+  "info": "放射線スペクトル表示ツール",
+  "spectrumList": "スペクトル選択",
+  "spView": {
+    "title": "スペクトル表示",
+    "info": "■ スペクトル情報",
+    "cursorInfo1": "■ カーソル位置情報",
+    "cursorInfo2": "■ カーソル位置情報",
+    "cursorInfo3": "■ カーソル位置情報",
+    "cursorInfo4": "■ カーソル位置情報",
+    "cursorNuclear": "■ カーソル位置核種情報",
+    "energy":"エネルギー",
+    "isotope":"核種",
+    "halflife":"半減期",
+    "percentage":"放出比",
+    "cursorSelection":"■ 選択範囲情報",
+    "startCh":"始ch",
+    "endCh": "終ch",
+    "startEv": "始ev",
+    "endEv": "終ev",
+    "grossCps": "グロスcps(BG含)",
+    "netCps": "ネットcps(BG除)",
+    "grossCount": "グロスcount(BG含)",
+    "netCount": "ネットcount(BG除)"
+    },
+  "spSet": {
+    "zoom" : "選択範囲を拡大",
+    "zoomout" : "選択範囲を縮小",
+    "bg_range":"BG計算幅",
+    "bg_range_left": "左側BG範囲を選ぶ",
+    "bg_range_right": "右側BG範囲を選ぶ",
+    "v_range":"縦軸表示範囲",
+    "f_type":"フィルタ",
+    "none":"なし",
+    "sma": "単純移動平均",
+    "wma": "加重移動平均",
+    "log": "対数表示",
+    "m_range": "平均範囲",
+    "log": "対数表示",
+    "save_tsv":"TSV変換"
+  }
+}

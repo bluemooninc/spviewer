@@ -11,9 +11,7 @@
         <script language="javascript" type="text/javascript" src="js/jquery.flot.crosshair.min.js"></script>
         <script language="javascript" type="text/javascript" src="js/jquery.flot.selection.min.js"></script>
         <script language="javascript" type="text/javascript" src="spviewer.js"></script>
-        <script type="text/javascript" src="js/json2.js"></script>
-        <script type="text/javascript" src="js/l10n.js"></script>
-        <script type="text/javascript" src="js/localizations.js"></script>
+        <script type="text/javascript" src="js/jquery.localize.js" charset="utf-8"></script>
         <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link rel="stylesheet" type="text/css" href="spviewer.css">
@@ -22,6 +20,11 @@
                 padding-top: 30px; /* 60px to make the container go all the way to the bottom of the topbar */
             }
         </style>
+        <script>
+            $(document).ready(function(){
+              $("[data-localize]").localize("loc", { skipLanguage: "en" });
+            });
+        </script>                
     </head>
     <body>
         <!-- Docs master nav -->
@@ -53,33 +56,33 @@
         </header>
         <main class="bs-masthead" id="content" role="main">
             <div class="container">
-                <h1>SPViewer</h1>
-                <p class="lead">Radiation Measuring Project</p>
+                <h1 data-localize="SPViewer">SPViewer</h1>
+                <p class="lead" data-localize="info">Radiation Measuring Project</p>
                 <p>
 
                 </p>
             </div>
         </main>
-        <div class="container">    
-            <h2 id="spectrumList">Spectrum List</h2>
+        <div class="container">
+            <h2 data-localize="spectrumList">Spectrum List</h2>
             <p id="info">Your locale is unsupported.firefox will work well.</p>
 
             <form id="file_select">
             </form>
 
-            <H2 id="spectrumView">Spectrum View</H2>
+            <H2 data-localize="spView.title">Spectrum View</H2>
 
             <div class="row">
                 <div class="col-md-8">
                     <div id="sp_sel"></div>
 
-                    <div id="sp_info">Spectrum Info</div>
+                    <div data-localize="spView.info">Spectrum Info</div>
 
                     <div id="sp_graph" style="width: 100%; height: 400px;"></div>
 
                     <div class="col-md-4">
+                        <div data-localize="spView.cursorInfo">* Cursor info</div>
                         <div id="sp_cursor_info" class="right-table">
-                            ■ カーソル位置情報
                             <table class="csv table">
                                 <tr>
                                     <th>ch</th>
@@ -101,7 +104,6 @@
                         </div>
 
                         <div id="sp_cursor_info_compare" class="right-table">
-                            ■ カーソル位置情報
                             <table class="csv table">
                                 <tr>
                                     <th>energy</th>
@@ -123,7 +125,6 @@
                         </div>
 
                         <div id="sp_cursor_info_multi" class="right-table">
-                            ■ カーソル位置情報
                             <table class="csv table">
                                 <tr>
                                     <th>energy</th>
@@ -152,65 +153,64 @@
                             </table>
                         </div>
 
-                        <div id="sp_cursor_nuclear" class="right-table">
-                            ■ カーソル位置核種情報
-                            <table class="csv table">
+                        <div data-localize="spView.cursorNuclear" class="right-table">
+                            * Isotope info
+                            <table>
                                 <tr id="sp_cursor_nuclear_table">
-                                    <th id="energy" style="width: 6em;">エネルギー</th>
-                                    <th id="isotope" style="width: 9em;">核種</th>
-                                    <th id="halflife" style="width: 13em;">半減期</th>
-                                    <th id="percentage" style="width: 4em;">放出比</th>
+                                    <th data-localize="spView.energy" style="width: 6em;">energy</th>
+                                    <th data-localize="spView.isotope" style="width: 9em;">isotope</th>
+                                    <th data-localize="spView.halflife" style="width: 13em;">halflife</th>
+                                    <th data-localize="spView.percentage" style="width: 4em;">percentage</th>
                                 </tr>
                             </table>
                         </div>
-
+                        <div data-localize="spView.cursorSelection">* selected region</div>
                         <div id="sp_cursor_selection" class="right-table">
-                            ■ 選択範囲情報
-                            <table class="csv table">
+                            <table>
                                 <tr>
-                                    <th id="startch">始ch</th>
+                                    <th data-localize="spView.startCh">Start ch</th>
                                     <td><span id="sel_s_ch"></span>ch</td>
                                 </tr>
                                 <tr>
-                                    <th id="endch">終ch</th>
+                                    <th data-localize="spView.endCh">End ch</th>
                                     <td><span id="sel_e_ch"></span>ch</td>
                                 </tr>
                                 <tr>
-                                    <th id="startev">始ev</th>
+                                    <th data-localize="spView.startEv">Start ev</th>
                                     <td><span id="sel_s_ev"></span>keV</td>
                                 </tr>
                                 <tr>
-                                    <th id="endev">終ev</th>
+                                    <th data-localize="spView.endEv">End ev</th>
                                     <td><span id="sel_e_ev"></span>keV</td>
                                 </tr>
                                 <tr>
-                                    <th id="grosscps">グロスcps(BG含)</th>
+                                    <th data-localize="spView.grossCps">Gross cps(with BG)</th>
                                     <td><span id="sel_gross"></span></td>
                                 </tr>
                                 <tr>
-                                    <th id="netcps">ネットcps(BG除)</th>
+                                    <th data-localize="spView.netCps">Net cps(w/o BG)</th>
                                     <td><span id="sel_net"></span></td>
                                 </tr>
                                 <tr>
-                                    <th id="grosscount">グロスcount(BG含)</th>
+                                    <th data-localize="spView.grossCount">Gross count(with BG)</th>
                                     <td><span id="sel_gross_count"></span></td>
                                 </tr>
                                 <tr>
-                                    <th id="netcount">ネットcount(BG除)</th>
+                                    <th data-localize="spView.netCount">Net count(w/o BG)</th>
                                     <td><span id="sel_net_count"></span></td>
                                 </tr>
                             </table>
                         </div>
 
                         <div id="sp_cursor_selection_compare" class="right-table">
-                            ■ 選択範囲情報
+                            <div data-localize="spView.cursorInfo">* Cursor info</div>
                             <table class="csv table">
                                 <tr>
-                                    <th id="startch2">始ev</th>
+                                    <th data-localize="spView.startch">Start ch</th>
                                     <td><span id="cmp_sel_s_ev"></span>keV</td>
                                 </tr>
                                 <tr>
-                                    <th id="endch2">終ev</th>
+                                    <th data-localize="spView.endch">End ch</th>
                                     <td><span id="cmp_sel_e_ev"></span>keV</td>
                                 </tr>
                                 <tr>
@@ -227,45 +227,44 @@
                                 </tr>
                             </table>
                         </div>
-
+                        <div data-localize="spView.cursorSelection">* selected region</div>
                         <div id="sp_cursor_selection_multi" class="right-table">
-                            ■ 選択範囲情報
                             <table class="csv table">
                                 <tr>
-                                    <th id="startch3">始ev</th>
+                                <th data-localize="spView.startch">Start ch</th>
                                     <td><span id="multi_sel_s_ev"></span>keV</td>
                                 </tr>
                                 <tr>
-                                    <th id="endch3">終ev</th>
+                                    <th data-localize="spView.endch">End ch</th>
                                     <td><span id="multi_sel_e_ev"></span>keV</td>
                                 </tr>
                                 <tr>
                                     <th>[1] cps
-                                        <font color="#edc240">■</font>
+                                        <font color="#edc240">&#9632;</font>
                                     </th>
                                     <td><span id="multi_sel_cps1"></span></td>
                                 </tr>
                                 <tr>
                                     <th>[2] cps
-                                        <font color="#afd8f8">■</font>
+                                        <font color="#afd8f8">&#9632;</font>
                                     </th>
                                     <td><span id="multi_sel_cps2"></span></td>
                                 </tr>
                                 <tr>
                                     <th>[3] cps
-                                        <font color="#cb4b4b">■</font>
+                                        <font color="#cb4b4b">&#9632;</font>
                                     </th>
                                     <td><span id="multi_sel_cps3"></span></td>
                                 </tr>
                                 <tr>
                                     <th>[4] cps
-                                        <font color="#4da74d">■</font>
+                                        <font color="#4da74d">&#9632;</font>
                                     </th>
                                     <td><span id="multi_sel_cps4"></span></td>
                                 </tr>
                                 <tr>
                                     <th>[5] cps
-                                        <font color="#9440ed">■</font>
+                                        <font color="#9440ed">&#9632;</font>
                                     </th>
                                     <td><span id="multi_sel_cps5"></span></td>
                                 </tr>
@@ -274,14 +273,12 @@
                         <h2 id="spectrumEdit">Setting</h2>
                         <form>
                             <div>
-                                <input class="btn btn-default" type="button" id="zoom" value="選択範囲を拡大">
-                                <input class="btn btn-default" type="button" id="zoomout" value="ズームアウト">
+                                <input class="btn btn-default" type="button" id="zoom" data-localize="spSet.zoom" value="zoom">
+                                <input class="btn btn-default" type="button" id="zoomout" data-localize="spSet.zoomout" value="zoom out">
                             </div>
                             <div class="row">
                                 <div class="col-md-3">
-                                    <div id="bg_range_selector">
-                                        BG計算幅
-                                    </div>
+                                    <div id="bg_range_selector" data-localize="spSet.bg_range">BG width</div>
                                     <select id="bgrange" class="form-control">
                                         <option value="0.001">0.1%</option>
                                         <option value="0.002">0.2%</option>
@@ -291,12 +288,11 @@
                                         <option value="0.03">3%</option>
                                     </select>
                                     <span id="bg_range_selector_manual">
-                                        <input class="btn btn-default" type="button" id="bg_range_left" value="左側BG範囲を選ぶ">
-                                        <input class="btn btn-default" type="button" id="bg_range_right" value="右側BG範囲を選ぶ">
+                                        <input class="btn btn-default" type="button" data-localize="spSet.bg_range_left" value="Left side BG">
+                                        <input class="btn btn-default" type="button" data-localize="spSet.bg_range_right" value="Right side BG">
                                     </span>
                                 </div>
-                                <div class="col-md-3">
-                                    縦軸表示範囲
+                                <div class="col-md-3" data-localize="spSet.v_range">max Y
                                     <select id="max_range" class="form-control">
                                         <option value="100">100%</option>
                                         <option value="90">90%</option>
@@ -312,18 +308,16 @@
                                         <option value="3">3%</option>
                                     </select>
                                 </div>
-                                <div class="col-md-3">
-                                    フィルタ
+                                <div class="col-md-3" data-localize="f_type">Filter
                                     <select id="filter_type" class="form-control">
-                                        <option value="none">なし</option>
-                                        <option value="sma">単純移動平均</option>
-                                        <option value="wma">加重移動平均</option>
+                                        <option value="none" data-localize="spSet.none">None</option>
+                                        <option value="sma" data-localize="spSet.sma">Simple Moving Average</option>
+                                        <option value="wma" data-localize="spSet.wma">Weighted Moving Average</option>
                                     </select>
                                 </div>
-                                <div class="col-md-3">
-                                    平均範囲
+                                <div class="col-md-3" data-localize="m_range">mean range
                                     <select id="filter" class="form-control">
-                                        <option value="0">なし</option>
+                                        <option value="0" data-localize="spSet.none">None</option>
                                         <option value="1">3ch</option>
                                         <option value="2">5ch</option>
                                         <option value="3">7ch</option>
@@ -336,12 +330,12 @@
                             </div>
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" id="log" value="on">対数表示
+                                    <input type="checkbox" id="log" data-localize="spSet.log" value="on">logarithmic graph
                                 </label>
                             </div>
                             <div id="range_preset"></div>
                         </form>
-                        <input class="btn btn-default" type="button" id="save_tsv" value="TSV変換">
+                        <input class="btn btn-default" type="button" id="save_tsv" data-localize="spSet.save_tsv" value="Save TSV">
                         <div id="tsv_data"></div>
                     </div>
                 </div>
@@ -351,109 +345,5 @@
         <div class="container text-right">
             <a href="http://www.mikage.to/radiation/spviewer/">SPViewer Ver 4.8</a>
         </div>
-        <script type="text/javascript">
-            if (location.hash) {
-                String.locale = location.hash.substr(1);
-            }
-            var localize = function (string, fallback) {
-                var localized = string.toLocaleString();
-                if (localized !== string) {
-                    return localized;
-                } else {
-                    return fallback;
-                }
-            };
-
-            var title = document.getElementById("title").firstChild,
-                    info = document.getElementById("info").firstChild,
-                    menu1 = document.getElementById("menu1").firstChild;
-            menu2 = document.getElementById("menu2").firstChild;
-            menu3 = document.getElementById("menu3").firstChild;
-            spectrumList = document.getElementById("spectrumList").firstChild;
-            spectrumView = document.getElementById("spectrumView").firstChild;
-            spectrumEdit = document.getElementById("spectrumEdit").firstChild;
-            sp_info = document.getElementById("sp_info").firstChild;
-            zoom = document.getElementById("zoom").firstChild;
-            zoomout = document.getElementById("zoomout").firstChild;
-            bg_range = document.getElementById("bg_range").firstChild;
-            bg_range_left = document.getElementById("bg_range_left").firstChild;
-            bg_range_right = document.getElementById("bg_range_right").firstChild;
-            v_range = document.getElementById("v_range").firstChild;
-            f_type = document.getElementById("f_type").firstChild;
-            none = document.getElementById("none").firstChild;
-            sma = document.getElementById("sma").firstChild;
-            wma = document.getElementById("wma").firstChild;
-            log = document.getElementById("log").firstChild;
-            sp_cursor_info = document.getElementById("sp_cursor_info").firstChild;
-            sp_cursor_info_compare = document.getElementById("sp_cursor_info_compare").firstChild;
-            sp_cursor_info_multi = document.getElementById("sp_cursor_info_multi").firstChild;
-            sp_cursor_nuclear = document.getElementById("sp_cursor_nuclear").firstChild;
-            energy = document.getElementById("energy").firstChild;
-            isotope = document.getElementById("isotope").firstChild;
-            halflife = document.getElementById("halflife").firstChild;
-            percentage = document.getElementById("percentage").firstChild;
-            sp_cursor_selection = document.getElementById("sp_cursor_selection").firstChild;
-            startch = document.getElementById("startch").firstChild;
-            endch = document.getElementById("endch").firstChild;
-            startev = document.getElementById("startev").firstChild;
-            endev = document.getElementById("endev").firstChild;
-            grosscps = document.getElementById("grosscps").firstChild;
-            netcps = document.getElementById("netcps").firstChild;
-            grosscount = document.getElementById("grosscount").firstChild;
-            netcount = document.getElementById("netcount").firstChild;
-            sp_cursor_selection_compare = document.getElementById("sp_cursor_selection_compare").firstChild;
-            startev2 = document.getElementById("startev2").firstChild;
-            endev2 = document.getElementById("endev2").firstChild;
-            sp_cursor_selection_multi = document.getElementById("sp_cursor_selection_multi").firstChild;
-            startev3 = document.getElementById("startev3").firstChild;
-            endev3 = document.getElementById("endev3").firstChild;
-
-
-            document.title = title.nodeValue = localize("%title", title.nodeValue);
-            document.info = info.nodeValue = localize("%info", info.nodeValue);
-            document.menu1 = menu1.nodeValue = localize("%menu1", menu1.nodeValue);
-            document.menu2 = menu2.nodeValue = localize("%menu2", menu2.nodeValue);
-            document.menu3 = menu3.nodeValue = localize("%menu3", menu3.nodeValue);
-            document.spectrumList = spectrumList.nodeValue = localize("%spectrumList", spectrumList.nodeValue);
-            document.spectrumView = spectrumView.nodeValue = localize("%spectrumView", spectrumView.nodeValue);
-            document.spectrumEdit = spectrumEdit.nodeValue = localize("%spectrumEdit", spectrumEdit.nodeValue);
-            document.sp_info = sp_info.nodeValue = localize("%sp_info", sp_info.nodeValue);
-            document.zoom = zoom.nodeValue = localize("%zoom", zoom.nodeValue);
-            document.zoomout = zoomout.nodeValue = localize("%zoomout", zoomout.nodeValue);
-            document.bg_range = bg_range.nodeValue = localize("%bg_range", bg_range.nodeValue);
-            document.bg_range_left = bg_range_left.nodeValue = localize("%bg_range_left", bg_range_left.nodeValue);
-            document.bg_range_right = bg_range_right.nodeValue = localize("%bg_range_right", bg_range_right.nodeValue);
-            document.v_range = v_range.nodeValue = localize("%v_range", v_range.nodeValue);
-            document.f_type = f_type.nodeValue = localize("%f_type", f_type.nodeValue);
-            document.none = none.nodeValue = localize("%none", none.nodeValue);
-            document.sma = sma.nodeValue = localize("%sma", sma.nodeValue);
-            document.wma = wma.nodeValue = localize("%wma", info.nodeValue);
-            document.log = log.nodeValue = localize("%log", log.nodeValue);
-            document.sp_cursor_info = sp_cursor_info.nodeValue = localize("%sp_cursor_info", sp_cursor_info.nodeValue);
-            document.sp_cursor_info_compare = sp_cursor_info_compare.nodeValue = localize("%sp_cursor_info_compare", sp_cursor_info_compare.nodeValue);
-            document.sp_cursor_info_multi = sp_cursor_info_multi.nodeValue = localize("%sp_cursor_info_multi", sp_cursor_info_multi.nodeValue);
-            document.sp_cursor_nuclear = sp_cursor_nuclear.nodeValue = localize("%sp_cursor_nuclear", sp_cursor_nuclear.nodeValue);
-            document.energy = energy.nodeValue = localize("%info", energy.nodeValue);
-            document.isotope = isotope.nodeValue = localize("%isotope", isotope.nodeValue);
-            document.halflife = halflife.nodeValue = localize("%halflife", halflife.nodeValue);
-            document.percentage = percentage.nodeValue = localize("%percentage", percentage.nodeValue);
-            document.sp_cursor_selection = sp_cursor_selection.nodeValue = localize("%sp_cursor_selection", sp_cursor_selection.nodeValue);
-            document.startch = startch.nodeValue = localize("%startch", startch.nodeValue);
-            document.endch = endch.nodeValue = localize("%endch", endch.nodeValue);
-            document.startev = startev.nodeValue = localize("%startev", startev.nodeValue);
-            document.endev = info.endev = localize("%endev", endev.nodeValue);
-            document.grosscps = grosscps.nodeValue = localize("%grosscps", grosscps.nodeValue);
-            document.netcps = netcps.nodeValue = localize("%netcps", netcps.nodeValue);
-            document.grosscount = grosscount.nodeValue = localize("%grosscount", grosscount.nodeValue);
-            document.netcount = netcount.nodeValue = localize("%netcount", netcount.nodeValue);
-            document.sp_cursor_selection_compare = sp_cursor_selection_compare.nodeValue = localize("%sp_cursor_selection_compare", sp_cursor_selection_compare.nodeValue);
-            document.endev2 = endev2.nodeValue = localize("%endev2", endev2.nodeValue);
-            document.sp_cursor_selection_multi = sp_cursor_selection_multi.nodeValue = localize("%sp_cursor_selection_multi", sp_cursor_selection_multi.nodeValue);
-            document.startev3 = startev3.nodeValue = localize("%startev3", startev3.nodeValue);
-            document.endev3 = endev3.nodeValue = localize("%endev3", endev3.nodeValue);
-
-            document.documentElement.dir = localize("%locale.dir", document.documentElement.dir);
-            document.documentElement.lang = String.locale || document.documentElement.lang;
-        </script>
     </body>
 </html>
