@@ -12,8 +12,13 @@
     <script language="javascript" type="text/javascript" src="spviewer.js"></script>
     <script type="text/javascript" src="js/jquery.localize.js" charset="utf-8"></script>
     <script>
+        var userLang = navigator.language || navigator.userLanguage; 
+        var opts = {
+                language : userLang,
+                skipLanguage : "/^en/"
+        };         
         $(document).ready(function(){
-          $("[data-localize]").localize("loc", { skipLanguage: "en" });
+          $("[data-localize]").localize("loc", opts);
         });
     </script>                
 </head>
