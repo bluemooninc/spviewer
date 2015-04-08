@@ -197,12 +197,13 @@ function init_list(files) {
 		loadfile = decodeURIComponent(hashstr[0]);
 	}
 	
-	var html = '';
-	
-	html += '[スペクトル表示][<a href="#" id="compare_list">BGスペクトル比較（Ｂ－Ａ）</a>][<a href="#" id="multi_list">複数スペクトル比較</a>]';
-	
+	var html = '[' + _('Spectrum display') + ']';
+	html += '[<a href="#" id="compare_list">';
+        html += _('BG spectrum comparison') + '</a>]';
+        html += '[<a href="#" id="multi_list">';
+        html += _('Multiple spectral comparison') + '</a>]';
 	html += '<div class="table-responsive"><table class="csv table">';
-	html += '<tr><th>－</th><th>スペクトルファイル</th></tr>';
+	html += '<tr><th>－</th><th>' + _('Spectrum file') + '</th></tr>';
 	for(var i in files) {
 		if(files[i] != "") {
 			files[i].match(/^([^,]+),?(.+)?/);
