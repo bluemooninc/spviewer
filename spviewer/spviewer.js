@@ -248,11 +248,11 @@ function init_list_compare(files) {
 	}
 	
 	var html = '';
-	
-	html += '[<a href="#" id="list">スペクトル表示</a>][BGスペクトル比較（Ｂ－Ａ）][<a href="#" id="multi_list">複数スペクトル比較</a>]';
-	
+	html += '[<a href="#" id="list">' + _('Spectrum display') + '</a>][';
+        html += _('BG spectrum comparison') + '][<a href="#" id="multi_list">';
+        html += _('Multiple spectral comparison') + '</a>]';	
 	html += '<div class="table-responsive"><table class="csv table">';
-	html += '<tr><th>Ａ(BG)</th><th>Ｂ</th><th>スペクトルファイル</th></tr>';
+	html += '<tr><th>A(BG)</th><th>B</th><th>' + _('Spectrum file') + '</th></tr>';
 	for(var i in files) {
 		if(files[i] != "") {
 			files[i].match(/^([^,]+),?(.+)?/);
@@ -301,11 +301,10 @@ function init_list_multi(files) {
 	}
 	
 	var html = '';
-	
-	html += '[<a href="#" id="list">スペクトル表示</a>][<a href="#" id="compare_list">BGスペクトル比較（Ｂ－Ａ）</a>][複数スペクトル比較]';
-	
-	html += '<div class="table-responsive"><table class="csv table">';
-	html += '<tr><th>－</th><th>スペクトルファイル</th></tr>';
+	html += '[<a href="#" id="list">' + _('Spectrum display') + '</a>][<a href="#" id="compare_list">';
+        html += _('BG spectrum comparison') + '</a>][';
+        html += _('Multiple spectral comparison') + ']<div class="table-responsive"><table class="csv table">';
+	html += '<tr><th>－</th><th>' + _('Spectrum file') + '</th></tr>';
 	for(var i in files) {
 		if(files[i] != "") {
 			files[i].match(/^([^,]+),?(.+)?/);
