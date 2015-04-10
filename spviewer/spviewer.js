@@ -324,7 +324,7 @@ function init_list_multi(files) {
 	}
 	html += '</table></div>';
 	html += '<form"><div class="form-group">';
-	html += '<input class="btn btn-default" type="button" value="スペクトル表示">';
+	html += '<input class="btn btn-default" type="button" value="' + _('Spectrum display') + '">';
 	html += '</div></form>';
 	$("#file_select").html(html);
 	$("#file_select input[type='button']").bind('click', function() {
@@ -334,7 +334,7 @@ function init_list_multi(files) {
 		});
 		if(file.length > 0) {
 			if(file.length > 5) {
-				alert("同時に表示できるスペクトルは5つまでです。");
+				alert(_("Maximum of 5 spectrums can be viewed."));
 			} else {
 				draw_file_multi(files, file);
 			}
@@ -597,11 +597,11 @@ function sp_info_gps(file_comment) {
 		var gpslink = '<a href="http://maps.google.co.jp/maps?q='
 			+ RegExp.$1 + ',' + RegExp.$2
 			+ '&z=18&t=h'
-			+ '" target="_blank">位置をGoogleMapで表示</a><br>'
+			+ '" target="_blank">' + _('Show on GoogleMap') + '</a><br>'
 			+ '(LATT:' + RegExp.$1
 			+ ', LONG:' + RegExp.$2
 			+ ')';
-		sp_info.push(["位置情報", gpslink]);
+		sp_info.push([_("Location"), gpslink]);
 	}
 	return sp_info;
 }
@@ -630,10 +630,10 @@ function draw_graph_ts100b_bq(file, file_comment, data) {
 			continue;
 		}
 		if(line.match(/^SAMPLE WEIGHT,([0-9\.]+),(.*)$/)) {
-			additional_sp_info.push(["試料重量", RegExp.$1 + " " + RegExp.$2]);
+			additional_sp_info.push([_("weight"), RegExp.$1 + " " + RegExp.$2]);
 		}
 		if(line.match(/^ND. THRESHOLD,(.*)$/)) {
-			additional_sp_info.push(["検出限界設定", RegExp.$1]);
+			additional_sp_info.push([_("MD setting"), RegExp.$1]);
 		}
 		if(mode == "" && line.match(/^NUCLUIDE,ACTIVITY\(Bq\/(kg|L)\),ERROR\(Bq\/(kg|L)\)$/)) {
 			mode = "NUCLUIDE";
@@ -836,7 +836,7 @@ function draw_graph_ts100b_common_spectrum(file, file_comment, data, additional_
 	var min_count = find_min_count(spectrum_data_ch);
 	
 	var sp_info = sp_info_gps(file_comment);
-	sp_info.push(["計測時間", format_time(time)]);
+	sp_info.push([_("Live time"), format_time(time)]);
 	
 	var spectrum = {
 		file: file,
@@ -852,7 +852,7 @@ function draw_graph_ts100b_common_spectrum(file, file_comment, data, additional_
 		spectrum_data_ev: convert_count2cps(time, spectrum_data_ev)
 	};
 	if(date_mea) {
-		spectrum['sp_info'].push(["計測時刻", date_mea]);
+		spectrum['sp_info'].push([_("Date"), date_mea]);
 	}
 	for(var i in additional_sp_info) {
 		spectrum['sp_info'].push(additional_sp_info[i]);
@@ -925,7 +925,7 @@ function draw_graph_ts100_spectrum(file, file_comment, data) {
 	var min_count = find_min_count(spectrum_data_ch);
 	
 	var sp_info = sp_info_gps(file_comment);
-	sp_info.push(["計測時間", format_time(time)]);
+	sp_info.push([_("Time"), format_time(time)]);
 	
 	var spectrum = {
 		file: file,
@@ -978,7 +978,7 @@ function draw_graph_ta100_spectrum(file, file_comment, data) {
 	var min_count = find_min_count(spectrum_data_ch);
 	
 	var sp_info = sp_info_gps(file_comment);
-	sp_info.push(["計測時間", format_time(time)]);
+	sp_info.push([_("Time"), format_time(time)]);
 	
 	var spectrum = {
 		file: file,
@@ -1023,20 +1023,20 @@ function draw_graph_tn300b_spectrum(file, file_comment, data) {
 	if(!lines[2].match(/^.*\t([0-9]{4}\/[0-9]{1,2}\/[0-9]{1,2})$/)) {
 		return false;
 	}
-	sp_info.push(["測定日", RegExp.$1]);
+	sp_info.push([_("Day"), RegExp.$1]);
 	if(!lines[3].match(/^.*\t([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2})$/)) {
 		return false;
 	}
-	sp_info.push(["測定開始時刻", RegExp.$1]);
+	sp_info.push([_("Start"), RegExp.$1]);
 	if(!lines[4].match(/^.*\t([0-9]+)/)) {
 		return false;
 	}
 	var time = parseInt(RegExp.$1);
-	sp_info.push(["測定時間", RegExp.$1 + "秒"]);
+	sp_info.push([_("Time"), RegExp.$1 + _("Sec")]);
 	if(!lines[5].match(/^.*\t([0-9\.]+) Bq\/kg$/)) {
 		return false;
 	}
-	sp_info.push(["定量下限値(Bq/kg)", parseFloat(RegExp.$1)]);
+	sp_info.push([_("MDA (Bq/kg)"), parseFloat(RegExp.$1)]);
 	
 	
 	var spinfolist = [0,1,6,7,8,9,10,11];
@@ -1132,7 +1132,7 @@ function draw_graph_tn300b_2_spectrum(file, file_comment, data) {
 	
 	
 	// フォーマットのチェック
-	if(!lines[0].match(/^\[全般\]$/)) {
+	if(!lines[0].match('/^\[' + _(Whole) + '\]$/')) {
 		return false;
 	}
 	
@@ -1149,7 +1149,7 @@ function draw_graph_tn300b_2_spectrum(file, file_comment, data) {
 		if(lines[i].match(/^\[(.*)\]$/)) {
 			sp_info_group = RegExp.$1;
 			
-			if(sp_info_group != 'スペクトル') {
+			if ( sp_info_group != _('Spectrum') ) {
 				additional_sp_info_html += '<tr>';
 				additional_sp_info_html += '<th colspan="2">' + sp_info_group + '</th>';
 				additional_sp_info_html += '</tr>';
@@ -1162,7 +1162,7 @@ function draw_graph_tn300b_2_spectrum(file, file_comment, data) {
 			data[1] = '';
 		}
 		
-		if(sp_info_group == 'スペクトル') {
+		if(sp_info_group == _('Spectrum')) {
 			if(lines[i].match(/^#/)) {
 				continue;
 			}
@@ -1180,7 +1180,7 @@ function draw_graph_tn300b_2_spectrum(file, file_comment, data) {
 				additional_sp_info_html += '<td>' + data[1] + '</td>';
 				additional_sp_info_html += '</tr>';
 				
-				if(data[0] == "測定時間(秒)") {
+				if(data[0] == _('Measurement time (in seconds)')) {
 					var time = parseInt(data[1]);
 				}
 			}
@@ -1325,7 +1325,7 @@ function draw_graph_xml_spectrum(file, file_comment, data) {
 	}
 	
 	var sp_info = sp_info_gps(file_comment);
-	sp_info.push(["計測時間", format_time(time)]);
+	sp_info.push([_("Time"), format_time(time)]);
 	
 	var spectrum = {
 		file: file,
@@ -1338,7 +1338,7 @@ function draw_graph_xml_spectrum(file, file_comment, data) {
 		spectrum_data_ev: convert_count2cps(time, spectrum_data_ev)
 	};
 	if(date_mea) {
-		spectrum['sp_info'].push(["計測時刻", date_mea]);
+		spectrum['sp_info'].push([_("Date"), date_mea]);
 	}
 	return spectrum;
 }
@@ -1355,15 +1355,15 @@ function draw_graph_bqmon_spectrum(file, file_comment, data) {
 	var bqmon_xml = $($.parseXML(data));
 	
 	var sp_info_mapping = [
-		["SampleInfo Name",             "品名",    ""],
-		["SampleInfo Location",        "採取場所", ""],
-		["SampleInfo Time",            "採取日時", ""],
-		["SampleInfo Weight",          "重量",     "kg"],
-		["SampleInfo Volume",          "体積",     "l"],
-		["SampleInfo Note",            "備考",     ""],
-		["DeviceConfigReference Name", "デバイス構成", ""],
-		["StartTime",                  "測定開始日時", ""],
-		["EndTime",                    "測定終了日時", ""]
+		["SampleInfo Name",            _("SampleInfo Name"),    ""],
+		["SampleInfo Location",        _("SampleInfo Location"), ""],
+		["SampleInfo Time",            _("SampleInfo Time"), ""],
+		["SampleInfo Weight",          _("SampleInfo Weight"),     "kg"],
+		["SampleInfo Volume",          _("SampleInfo Volume"),     "l"],
+		["SampleInfo Note",            _("SampleInfo Note"),     ""],
+		["DeviceConfigReference Name", _("DeviceConfigReference Name"), ""],
+		["StartTime",                  _("StartTime"), ""],
+		["EndTime",                    _("EndTime"), ""]
 	];
 	
 	var parse_xml = function(xml, mode) {
