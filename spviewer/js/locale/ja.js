@@ -30,6 +30,13 @@ __Localizer.strings = {
 	'SampleInfo Note':'備考',
 	'DeviceConfigReference Name':'デバイス構成',
 	'StartTime':'測定開始日時',
-	'EndTime':'測定終了日時'
-
+	'EndTime':'測定終了日時',
+        'Condition':'条件',
+        'Concentration calculation result':'濃度演算結果',
+        'Nuclide':'核種',
+        'Concentration tolerancean':'濃度誤差',
+        'Peak':'ピーク',
+        'tolerancean':'誤差',
+        'Peak integration range':'ピーク積分範囲',
+        'I-131 and Cs-134 energy conversion can not be performed because there is no peak area':'I-131とCs-134のピーク領域が無いためエネルギー換算が行えません'
 };

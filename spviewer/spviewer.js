@@ -1541,66 +1541,66 @@ function draw_graph_fnf401_spectrum(file, file_comment, data) {
 	var peak_info = {};
 	for(var i in lines) {
 		var line = lines[i];
-		if(line == "<条件>") {
+		if(line === '<' + _('Condition') + '>') {
 			mode = "CONDITION";
 			continue;
 		}
-		if(line == "<濃度演算結果>") {
+		if(line === '<' + _('Concentration calculation result') + '>') {
 			mode = "ISOTOPE";
 			additional_sp_info_html += '<table class="csv" style="float: left;">';
 			additional_sp_info_html += '<tr>';
-			additional_sp_info_html += '<th>核種</th>';
-			additional_sp_info_html += '<th>濃度[Bq/kg]</th>';
-			additional_sp_info_html += '<th>濃度誤差</th>';
-			additional_sp_info_html += '<th>ピークCh</th>';
+			additional_sp_info_html += '<th>' + _('Nuclide') + '</th>';
+			additional_sp_info_html += '<th>Concentration[Bq/kg]</th>';
+			additional_sp_info_html += '<th>'+_('Concentration tolerancean')+'</th>';
+			additional_sp_info_html += '<th>'+_('Peak')+' Ch</th>';
 			additional_sp_info_html += '<th>Total[counts]</th>';
 			additional_sp_info_html += '<th>BASE[counts]</th>';
 			additional_sp_info_html += '<th>Net[Counts]</th>';
-			additional_sp_info_html += '<th>Net誤差</th>';
+			additional_sp_info_html += '<th>Net '+_('tolerancean')+'</th>';
 			additional_sp_info_html += '</tr>';
 			continue;
 		}
-		if(line == "<スペクトル>") {
+		if(line === '<'+_('Spectrum')+'>') {
 			mode = "SPECTRUM";
 			continue;
 		}
-		if(line == "<ピーク積分範囲>") {
+		if(line === '<' + _('Peak integration range') + '>') {
 			mode = "PEAK";
 			additional_sp_info_html += '<table class="csv" style="float: left; margin-left: 1em;">';
 			additional_sp_info_html += '<tr>';
-			additional_sp_info_html += '<th>核種</th>';
+			additional_sp_info_html += '<th>'+_('Nuclide')+'</th>';
 			additional_sp_info_html += '<th>Lch</th>';
 			additional_sp_info_html += '<th>Hch</th>';
 			additional_sp_info_html += '</tr>';
 			continue;
 		}
-		if(mode == "ISOTOPE" && line.match(/^ *$/)) {
+		if(mode === "ISOTOPE" && line.match(/^ *$/)) {
 			additional_sp_info_html += '</table></div>';
 			mode = "";
 			continue;
 		}
-		if(mode == "PEAK" && line.match(/^ *$/)) {
+		if(mode === "PEAK" && line.match(/^ *$/)) {
 			additional_sp_info_html += '</table></div><div style="clear: left;"></div>';
 			mode = "";
 			continue;
 		}
-		if(mode == "SPECTRUM" && line.match(/^([0-9]+),([0-9]+),([0-9\.]+)$/)) {
+		if(mode === "SPECTRUM" && line.match(/^([0-9]+),([0-9]+),([0-9\.]+)$/)) {
 			var ch = parseInt(RegExp.$1);
 			var count = parseInt(RegExp.$2);
 			data.push([ch, count]);
 			continue;
 		}
-		if(mode == "SPECTRUM" && line.match(/^0,([0-9]+),([0-9\.]+),Live Time$/)) {
+		if(mode === "SPECTRUM" && line.match(/^0,([0-9]+),([0-9\.]+),Live Time$/)) {
 			time = parseInt(RegExp.$1);
 			continue;
 		}
-		if(mode == "CONDITION" && line.match(/^(.*),(.*)$/)) {
+		if(mode === "CONDITION" && line.match(/^(.*),(.*)$/)) {
 			sp_info.push([RegExp.$1, RegExp.$2]);
 			continue;
 		}
-		if(mode == "ISOTOPE" && line.match(/^(.*)(,(.*)){7}$/)) {
+		if(mode === "ISOTOPE" && line.match(/^(.*)(,(.*)){7}$/)) {
 			var fields = line.split(",");
-			if(fields.length == 8 && fields[0] != "核種") {
+			if(fields.length === 8 && fields[0] !== _('Nuclide')) {
 				additional_sp_info_html += '<tr id="isotope_' + fields[0] + '"><th>' + fields[0]
 					+ '</th><td>' + fields[1]
 					+ '</td><td>' + fields[2]
@@ -1613,9 +1613,9 @@ function draw_graph_fnf401_spectrum(file, file_comment, data) {
 			}
 			continue;
 		}
-		if(mode == "PEAK" && line.match(/^(.*)(,(.*)){2}$/)) {
+		if(mode === "PEAK" && line.match(/^(.*)(,(.*)){2}$/)) {
 			var fields = line.split(",");
-			if(fields.length == 3 && fields[0] != "核種") {
+			if(fields.length === 3 && fields[0] !== _('Nuclide')) {
 				additional_sp_info_html += '<tr><th>' + fields[0]
 					+ '</th><td>' + fields[1]
 					+ '</td><td>' + fields[2]
@@ -1628,13 +1628,13 @@ function draw_graph_fnf401_spectrum(file, file_comment, data) {
 			continue;
 		}
 	}
-	if(mode == "PEAK") {
+	if(mode === "PEAK") {
 		additional_sp_info_html += '</table></div><div style="clear: left;"></div>';
 	}
 	
 	// エネルギー換算係数を I-131 と Cs-134 のピーク検出領域から求める
 	if(!peak_info['I-131'] || !peak_info['Cs-134']) {
-		alert("[FNF-401] I-131とCs-134のピーク領域が無いためエネルギー換算が行えません");
+		alert('[FNF-401] ' + _('I-131 and Cs-134 energy conversion can not be performed because there is no peak area'));
 		return false;
 	}
 	
@@ -1642,7 +1642,7 @@ function draw_graph_fnf401_spectrum(file, file_comment, data) {
 	var slope_b = 365 - peak_info['I-131'][2] * slope_a;
 	var slope = [slope_a, slope_b];
 	
-	if(data.length == 2 || !slope || !time) {
+	if(data.length === 2 || !slope || !time) {
 		return false;
 	}
 	
