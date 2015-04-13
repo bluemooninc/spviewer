@@ -38,5 +38,10 @@ __Localizer.strings = {
         'Peak':'ピーク',
         'tolerancean':'誤差',
         'Peak integration range':'ピーク積分範囲',
-        'I-131 and Cs-134 energy conversion can not be performed because there is no peak area':'I-131とCs-134のピーク領域が無いためエネルギー換算が行えません'
+        'I-131 and Cs-134 energy conversion can not be performed because there is no peak area':'I-131とCs-134のピーク領域が無いためエネルギー換算が行えません',
+        'Comment':'コメント',
+        'Dose rate':'線量率',
+        'Detection nuclide':'検出核種',
+        'Detection comment':'検出コメント',
+        'Temperature':'温度'
 };

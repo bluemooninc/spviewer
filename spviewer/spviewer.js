@@ -1868,7 +1868,7 @@ function draw_graph_spe_spectrum(file, file_comment, data) {
 	}
 	
 	var sp_info = sp_info_gps(file_comment);
-	sp_info.push(["計測時間", format_time(time)]);
+	sp_info.push([_('Time'), format_time(time)]);
 	
 	var spectrum = {
 		file: file,
@@ -1880,32 +1880,32 @@ function draw_graph_spe_spectrum(file, file_comment, data) {
 		spectrum_data_ev: convert_count2cps(time, spectrum_data_ev)
 	};
 	if(date_mea) {
-		spectrum['sp_info'].push(["計測時刻", date_mea]);
+		spectrum['sp_info'].push([_('Date'), date_mea]);
 	}
-	if(comment != '') {
-		spectrum['sp_info'].push(["コメント", comment]);
+	if(comment !== '') {
+		spectrum['sp_info'].push([_('Comment'), comment]);
 	}
 	if(doserate) {
-		spectrum['sp_info'].push(["線量率", doserate]);
+		spectrum['sp_info'].push([_('Dose rate'), doserate]);
 	}
 	if(mnd_results) {
-		spectrum['sp_info'].push(["検出核種", mnd_results]);
+		spectrum['sp_info'].push([_('Detection nuclide'), mnd_results]);
 	}
 	if(mnd_message) {
-		spectrum['sp_info'].push(["検出コメント", mnd_message]);
+		spectrum['sp_info'].push([_('Detection comment'), mnd_message]);
 	}
 	if(temper) {
-		spectrum['sp_info'].push(["温度", temper]);
+		spectrum['sp_info'].push([_('Temperature'), temper]);
 	}
 	if(gps_long && gps_latt) {
 		var gpslink = '<a href="http://maps.google.co.jp/maps?q='
 			+ gps_latt + ',' + gps_long
 			+ '&z=18&t=h'
-			+ '" target="_blank">位置をGoogleMapで表示</a><br>'
+			+ '" target="_blank">' + _('Show on GoogleMap') + '</a><br>'
 			+ '(LATT:' + gps_latt
 			+ ', LONG:' + gps_long
 			+ ')';
-		spectrum['sp_info'].push(["位置情報", gpslink]);
+		spectrum['sp_info'].push([_('Location'), gpslink]);
 	}
 	return spectrum;
 }
@@ -1956,7 +1956,7 @@ function draw_graph_pra_spectrum(file, file_comment, data) {
 	
 	var min_count = find_min_count(spectrum_data_ch);
 	
-	sp_info.unshift(["計測時間", format_time(time)]);
+	sp_info.unshift([_('Live time'), format_time(time)]);
 	
 	var spectrum = {
 		file: file,
