@@ -43,5 +43,20 @@ __Localizer.strings = {
         'Dose rate':'線量率',
         'Detection nuclide':'検出核種',
         'Detection comment':'検出コメント',
-        'Temperature':'温度'
+        'Temperature':'温度',
+        'Measurement time (real time)':'測定時間(実時間)',
+        'Instrument name':'測定器名称',
+        'Taken place':'採取地',
+        'Sample name':'試料名称',
+        'Measurement date and time':'計測日時',
+        'Reference date and time':'基準日時',
+        'Sample mass':'試料質量',
+        'Sample volume':'試料体積',
+        'Sample density':'試料密度',
+        'Net number of counts':'ネットカウント数',
+        'Net CPS':'ネットcps',
+        'Energy center position':'エネルギー中心位置',
+	'Energy position left width':'エネルギー位置左幅',
+	'Energy position right width':'エネルギー位置右幅',
+	'Conversion factor':'換算係数'
 };

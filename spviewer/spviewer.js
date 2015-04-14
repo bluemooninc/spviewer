@@ -2241,16 +2241,16 @@ function draw_graph_emf211_spectrum(file, file_comment, data) {
 	}
 	time = parseFloat(lines[5]);		// 4: real time, 5: live time
 	
-	sp_info.push(["測定時間(実時間)", lines[4] + "秒"]);
-	sp_info.push(["測定時間(LiveTime)", lines[5] + "秒"]);
+	sp_info.push([_('Measurement time (real time)'), lines[4] + _('Sec')]);
+	sp_info.push([_('Live time'), lines[5] + _('Sec')]);
 	
 	// 追加情報
-	sp_info.push(["測定器名称", lines[1]]);
-	sp_info.push(["採取地", lines[isotope_start_lineno - 7]]);
-	sp_info.push(["試料名称", lines[isotope_start_lineno - 4]]);
-	sp_info.push(["備考", lines[isotope_start_lineno - 1]]);
-	sp_info.push(["計測日時", lines[isotope_start_lineno - 6]]);
-	sp_info.push(["基準日時", lines[isotope_start_lineno - 5]]);
+	sp_info.push([_('Instrument name'), lines[1]]);
+	sp_info.push([_('Taken place'), lines[isotope_start_lineno - 7]]);
+	sp_info.push([_('Sample name'), lines[isotope_start_lineno - 4]]);
+	sp_info.push([_('Comment'), lines[isotope_start_lineno - 1]]);
+	sp_info.push([_('Measurement date and time'), lines[isotope_start_lineno - 6]]);
+	sp_info.push([_('Reference date and time'), lines[isotope_start_lineno - 5]]);
 	
 //	var pastsecond = 0;
 //	if(lines[isotope_start_lineno - 5].match(/^([0-9]{4})\/([0-9]{2})\/([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})$/)) {
@@ -2265,11 +2265,9 @@ function draw_graph_emf211_spectrum(file, file_comment, data) {
 //	}
 	
 	var sample_g = parseFloat(lines[isotope_start_lineno - 3]);
-	sp_info.push(["試料質量(g)", lines[isotope_start_lineno - 3]]);
-	sp_info.push(["試料体積(cm<sup>3</sup>)", lines[isotope_start_lineno - 2]]);
-	sp_info.push(["試料密度(g/cm<sup>3</sup>)", (parseFloat(lines[isotope_start_lineno - 3])/parseFloat(lines[isotope_start_lineno - 2])).toFixed(4)]);
-	
-	
+	sp_info.push([_('Sample mass') + '(g)', lines[isotope_start_lineno - 3]]);
+	sp_info.push([_('Sample volume') + "(cm<sup>3</sup>)", lines[isotope_start_lineno - 2]]);
+	sp_info.push([_('Sample density') + "(g/cm<sup>3</sup>)", (parseFloat(lines[isotope_start_lineno - 3])/parseFloat(lines[isotope_start_lineno - 2])).toFixed(4)]);		
 	
 	// 核種情報
 	additional_sp_info_html += '<div class="table-responsive"><table class="csv table">';
@@ -2280,8 +2278,8 @@ function draw_graph_emf211_spectrum(file, file_comment, data) {
 	additional_sp_info_html += '<th>H%</th>';
 	additional_sp_info_html += '<th>bq/kg/cps</th>';
 //	additional_sp_info_html += '<th>密度係数</th>';
-	additional_sp_info_html += '<th>ネットカウント数</th>';
-	additional_sp_info_html += '<th>ネットcps</th>';
+	additional_sp_info_html += '<th>' + _('Net number of counts') + '</th>';
+	additional_sp_info_html += '<th>' + _('Net CPS') + '</th>';
 //	additional_sp_info_html += '<th>Bq/kg(概算)</th>';
 	additional_sp_info_html += '</tr>';
 	
@@ -2332,7 +2330,7 @@ function draw_graph_emf211_spectrum(file, file_comment, data) {
 	additional_sp_info_html += '</table></div>';
 	
 	
-	if(data.length == 0 || !time) {
+	if(data.length === 0 || !time) {
 		return false;
 	}
 	
@@ -2418,10 +2416,10 @@ function draw_graph_emf211b_spectrum(file, file_comment, data) {
 	var sp_info_bg = [];
 	
 	var isotope_info = {};
-	isotope_info['エネルギー中心位置'] = [];
-	isotope_info['エネルギー位置左幅'] = [];
-	isotope_info['エネルギー位置右幅'] = [];
-	isotope_info['換算係数'] = [];
+	isotope_info[_('Energy center position')] = [];
+	isotope_info[_('Energy position left width')] = [];
+	isotope_info[_('Energy position right width')] = [];
+	isotope_info[_('Conversion factor')] = [];
 	
 	for(var i = 0; i < lines.length; i++) {
 		if(lines[i].match(/^BG積算時間1=(.*)$/)) {
@@ -2541,7 +2539,7 @@ function draw_graph_emf211b_spectrum(file, file_comment, data) {
 	}
 	
 	
-	if(data['BG'].length == 0 || !time_bg) {
+	if(data['BG'].length === 0 || !time_bg) {
 		return false;
 	}
 	sp_info.push(["計測時間", time + " 秒"]);
