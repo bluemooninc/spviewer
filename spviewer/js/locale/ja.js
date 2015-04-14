@@ -58,5 +58,12 @@ __Localizer.strings = {
         'Energy center position':'エネルギー中心位置',
 	'Energy position left width':'エネルギー位置左幅',
 	'Energy position right width':'エネルギー位置右幅',
-	'Conversion factor':'換算係数'
+	'Conversion factor':'換算係数',
+        'BG integration time':'BG積算時間',
+        'Analysis container type':'分析容器タイプ',
+        'Selection of background':'バックグラウンドの選択',
+        'Moving average width of measurement waveform':'計測波形の移動平均幅',
+        'Attenuation standard date and time':'減衰基準日時',
+        'Mass':'質量'
+
 };

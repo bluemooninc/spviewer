@@ -2422,23 +2422,23 @@ function draw_graph_emf211b_spectrum(file, file_comment, data) {
 	isotope_info[_('Conversion factor')] = [];
 	
 	for(var i = 0; i < lines.length; i++) {
-		if(lines[i].match(/^BG積算時間1=(.*)$/)) {
-			sp_info_bg.push(["BG積算時間", RegExp.$1]);
+		if(lines[i].match('/^'+_('BG integration time')+'=(.*)$/')) {
+			sp_info_bg.push([_('BG integration time'), RegExp.$1]);
 		}
-		if(lines[i].match(/^分析容器タイプ=(.*)$/)) {
-			sp_info.push(["分析容器タイプ", RegExp.$1]);
+		if(lines[i].match('/^'+_('Analysis container type')+'=(.*)$/')) {
+			sp_info.push([_('Analysis container type'), RegExp.$1]);
 		}
-		if(lines[i].match(/^バックグラウンドの選択=(.*)$/)) {
-			sp_info.push(["バックグラウンドの選択", RegExp.$1]);
+		if(lines[i].match('/^'+_('Selection of background')+'=(.*)$/')) {
+			sp_info.push([_('Selection of background'), RegExp.$1]);
 		}
-		if(lines[i].match(/^計測波形の移動平均幅=(.*)$/)) {
-			sp_info.push(["計測波形の移動平均幅", RegExp.$1]);
+		if(lines[i].match('/^'+_('Moving average width of measurement waveform')+'=(.*)$/')) {
+			sp_info.push([_('Moving average width of measurement waveform'), RegExp.$1]);
 		}
-		if(lines[i].match(/^減衰基準日時=(.*)$/)) {
-			sp_info.push(["減衰基準日時", RegExp.$1]);
+		if(lines[i].match('/^'+_('Attenuation standard date and time')+'=(.*)$/')) {
+			sp_info.push([_('Attenuation standard date and time'), RegExp.$1]);
 		}
-		if(lines[i].match(/^質量=(.*)$/)) {
-			sp_info.push(["質量", RegExp.$1]);
+		if(lines[i].match('/^'+_('Mass')+'=(.*)$/')) {
+			sp_info.push([_('Mass'), RegExp.$1]);
 		}
 		if(lines[i].match(/^体積=(.*)$/)) {
 			sp_info.push(["体積", RegExp.$1]);
