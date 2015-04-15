@@ -64,6 +64,18 @@ __Localizer.strings = {
         'Selection of background':'バックグラウンドの選択',
         'Moving average width of measurement waveform':'計測波形の移動平均幅',
         'Attenuation standard date and time':'減衰基準日時',
-        'Mass':'質量'
-
+        'Mass':'質量',
+        'Volume':'体積',
+        'Container type':'容器タイプ',
+        'Person Name':'担当者',
+        'Measurement start time':'計測開始時間',
+        'Sample number':'試料番号',
+        'BG channel position':'BGチャンネル位置',
+        'Channel position':'チャンネル位置',
+        'BG wave height data':'BG波高データ',
+        'Wave height data':'波高データ',
+        'Concentration measurement result:Wave height data':'濃度計測結果：波高データ',
+        'BG measurement time':'BG計測時間',
+        'Concentration measurement result':'濃度計測結果：濃度',
+        'Concentration':'濃度'
 };

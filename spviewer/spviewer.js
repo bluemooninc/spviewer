@@ -2440,65 +2440,65 @@ function draw_graph_emf211b_spectrum(file, file_comment, data) {
 		if(lines[i].match('/^'+_('Mass')+'=(.*)$/')) {
 			sp_info.push([_('Mass'), RegExp.$1]);
 		}
-		if(lines[i].match(/^体積=(.*)$/)) {
-			sp_info.push(["体積", RegExp.$1]);
+		if(lines[i].match('/^'+_('Volume')+'=(.*)$/')) {
+			sp_info.push([_('Volume'), RegExp.$1]);
 		}
-		if(lines[i].match(/^備考=(.*)$/)) {
-			sp_info.push(["備考", RegExp.$1]);
+		if(lines[i].match('/^'+_('Comment')+'=(.*)$/')) {
+			sp_info.push([_('Comment'), RegExp.$1]);
 		}
-		if(lines[i].match(/^容器タイプ=(.*)$/)) {
-			sp_info.push(["容器タイプ", RegExp.$1]);
+		if(lines[i].match('/^'+_('Container type')+'=(.*)$/')) {
+			sp_info.push([_('Container type'), RegExp.$1]);
 		}
-		if(lines[i].match(/^担当者=(.*)$/)) {
-			sp_info.push(["担当者", RegExp.$1]);
+		if(lines[i].match('/^'+_('Person Name')+'=(.*)$/')) {
+			sp_info.push([_('Person Name'), RegExp.$1]);
 		}
-		if(lines[i].match(/^採取日時=(.*)$/)) {
-			sp_info.push(["採取日時", RegExp.$1]);
+		if(lines[i].match('/^'+_('SampleInfo Time')+'=(.*)$/')) {
+			sp_info.push([_('SampleInfo Time'), RegExp.$1]);
 		}
-		if(lines[i].match(/^計測開始時間=(.*)$/)) {
-			sp_info.push(["計測開始時間", RegExp.$1]);
+		if(lines[i].match('/^'+_('Measurement start time')+'=(.*)$/')) {
+			sp_info.push([_('Measurement start time'), RegExp.$1]);
 		}
-		if(lines[i].match(/^採取地=(.*)$/)) {
-			sp_info.push(["採取地", RegExp.$1]);
+		if(lines[i].match('/^'+_('Taken place')+'=(.*)$/')) {
+			sp_info.push([_('Taken place'), RegExp.$1]);
 		}
-		if(lines[i].match(/^試料名称=(.*)$/)) {
-			sp_info.push(["試料名称", RegExp.$1]);
+		if(lines[i].match('/^'+_('Sample name')+'=(.*)$/')) {
+			sp_info.push([_('Sample name'), RegExp.$1]);
 		}
-		if(lines[i].match(/^試料番号=(.*)$/)) {
-			sp_info.push(["試料番号", RegExp.$1]);
+		if(lines[i].match('/^'+_('Sample number')+'=(.*)$/')) {
+			sp_info.push([_('Sample number'), RegExp.$1]);
 		}
-		if(lines[i].match(/^BGチャンネル位置([0-9]+)=([0-9]+)$/)) {
+		if(lines[i].match('/^'+_('BG channel position')+'([0-9]+)=([0-9]+)$/')) {
 			slope_point_bg[parseInt(RegExp.$1) - 1][0] = parseInt(RegExp.$2);
 		}
-		if(lines[i].match(/^チャンネル位置([0-9]+)=([0-9]+)$/)) {
+		if(lines[i].match('/^'+_('Channel position')+'([0-9]+)=([0-9]+)$/')) {
 			slope_point_spe[parseInt(RegExp.$1) - 1][0] = parseInt(RegExp.$2);
 		}
-		if(lines[i].match(/^BG波高データ1=([0-9;]+)$/)) {
+		if(lines[i].match('/^'+_('BG wave height data')+'=([0-9;]+)$/')) {
 			var spectrum_data = (RegExp.$1).split(";");
 			for(var ch = 0; ch < spectrum_data.length; ch++) {
 				data['BG'].push([ch, parseInt(spectrum_data[ch])]);
 			}
 		}
-		if(lines[i].match(/^波高データ1=([0-9;]+)$/)) {
+		if(lines[i].match('/^'+_('Wave height data')+'=([0-9;]+)$/')) {
 			var spectrum_data = (RegExp.$1).split(";");
 			for(var ch = 0; ch < spectrum_data.length; ch++) {
 				data['SPE'].push([ch, parseInt(spectrum_data[ch])]);
 			}
 		}
-		if(lines[i].match(/^濃度計測結果：波高データ=([\-0-9;]+)$/)) {
+		if(lines[i].match('/^'+_('Concentration measurement result:Wave height data')+'=([\-0-9;]+)$/')) {
 			var spectrum_data = (RegExp.$1).split(";");
 			for(var ch = 0; ch < spectrum_data.length; ch++) {
 				data['DIFF'].push([ch, parseInt(spectrum_data[ch])]);
 			}
 		}
-		if(lines[i].match(/^BG計測時間=([0-9]+)$/)) {
+		if(lines[i].match('/^'+_('BG measurement time')+'=([0-9]+)$/')) {
 			time_bg = parseFloat(RegExp.$1);
 		}
-		if(lines[i].match(/^計測時間\(秒\)=([0-9]+)$/)) {
+		if(lines[i].match('/^'+_('Live time')+'\('+_('Sec')+'\)=([0-9]+)$/')) {
 			time = parseFloat(RegExp.$1);
 		}
-		if(lines[i].match(/^濃度計測結果：濃度=([0-9\.;]+)$/)) {
-			isotope_info['濃度'] = (RegExp.$1).split(";");
+		if(lines[i].match('/^'+_('Concentration measurement result')+'=([0-9\.;]+)$/')) {
+			isotope_info[_('Concentration')] = (RegExp.$1).split(";");
 		}
 		if(lines[i].match(/^濃度計測不確かさ=([0-9\.;]+)$/)) {
 			isotope_info['不確かさ'] = (RegExp.$1).split(";");
