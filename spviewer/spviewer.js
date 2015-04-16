@@ -2500,41 +2500,41 @@ function draw_graph_emf211b_spectrum(file, file_comment, data) {
 		if(lines[i].match('/^'+_('Concentration measurement result')+'=([0-9\.;]+)$/')) {
 			isotope_info[_('Concentration')] = (RegExp.$1).split(";");
 		}
-		if(lines[i].match(/^濃度計測不確かさ=([0-9\.;]+)$/)) {
-			isotope_info['不確かさ'] = (RegExp.$1).split(";");
+		if(lines[i].match('/^'+_('Concentration measurement uncertainty')+'=([0-9\.;]+)$/')) {
+			isotope_info[_('Uncertainty')] = (RegExp.$1).split(";");
 		}
-		if(lines[i].match(/^濃度計測結果：ネットレート=([0-9\.;]+)$/)) {
-			isotope_info['ネットレート'] = (RegExp.$1).split(";");
+		if(lines[i].match('/^'+_('Concentration measurement results: net rate')+'=([0-9\.;]+)$/')) {
+			isotope_info[_('Net rate')] = (RegExp.$1).split(";");
 		}
-		if(lines[i].match(/^濃度計測結果：減衰補正=([0-9\.;]+)$/)) {
-			isotope_info['減衰補正'] = (RegExp.$1).split(";");
+		if(lines[i].match('/^'+_('Concentration Measurement Result: attenuation correction')+'=([0-9\.;]+)$/')) {
+			isotope_info[_('Attenuation correction')] = (RegExp.$1).split(";");
 		}
-		if(lines[i].match(/^濃度計測結果：質量補正=([0-9\.;]+)$/)) {
-			isotope_info['質量補正'] = (RegExp.$1).split(";");
+		if(lines[i].match('/^'+_('Concentration measurement result: mass correction')+'=([0-9\.;]+)$/')) {
+			isotope_info[_('Mass correction')] = (RegExp.$1).split(";");
 		}
-		if(lines[i].match(/^濃度計測結果：最小検出限界=([0-9\.;]+)$/)) {
-			isotope_info['最小検出限界'] = (RegExp.$1).split(";");
+		if(lines[i].match('/^'+_('Concentration Measurement Result: minimum detection limit')+'=([0-9\.;]+)$/')) {
+			isotope_info[_('Minimum detection limit')] = (RegExp.$1).split(";");
 		}
-		if(lines[i].match(/^エネルギー中心位置([0-9]+)=([0-9]+)$/)) {
-			isotope_info['エネルギー中心位置'][parseInt(RegExp.$1) - 1] = parseInt(RegExp.$2);
+		if(lines[i].match('/^'+_('Energy center position')+'([0-9]+)=([0-9]+)$/')) {
+			isotope_info[_('Energy center position')][parseInt(RegExp.$1) - 1] = parseInt(RegExp.$2);
 		}
-		if(lines[i].match(/^エネルギー位置左幅([0-9]+)=([0-9\.]+)$/)) {
-			isotope_info['エネルギー位置左幅'][parseInt(RegExp.$1) - 1] = parseFloat(RegExp.$2);
+		if(lines[i].match('/^'+_('Energy position left width')+'([0-9]+)=([0-9\.]+)$/')) {
+			isotope_info[_('Energy position left width')][parseInt(RegExp.$1) - 1] = parseFloat(RegExp.$2);
 		}
-		if(lines[i].match(/^エネルギー位置右幅([0-9]+)=([0-9\.]+)$/)) {
-			isotope_info['エネルギー位置右幅'][parseInt(RegExp.$1) - 1] = parseFloat(RegExp.$2);
+		if(lines[i].match('/^'+_('Energy position right width')+'([0-9]+)=([0-9\.]+)$/')) {
+			isotope_info[_('Energy position right width')][parseInt(RegExp.$1) - 1] = parseFloat(RegExp.$2);
 		}
-		if(lines[i].match(/^I-131換算係数=([0-9\.]+)$/)) {
-			isotope_info['換算係数'][0] = RegExp.$1;
+		if(lines[i].match('/^'+_('I-131 conversion factor')+'=([0-9\.]+)$/')) {
+			isotope_info[_('Conversion factor')][0] = RegExp.$1;
 		}
-		if(lines[i].match(/^Cs-137換算係数=([0-9\.]+)$/)) {
-			isotope_info['換算係数'][1] = RegExp.$1;
+		if(lines[i].match('/^'+_('I-131 conversion factor')+'=([0-9\.]+)$/')) {
+			isotope_info[_('Conversion factor')][1] = RegExp.$1;
 		}
 		if(lines[i].match(/^Cs-134換算係数=([0-9\.]+)$/)) {
-			isotope_info['換算係数'][2] = RegExp.$1;
+			isotope_info[_('Conversion factor')][2] = RegExp.$1;
 		}
 		if(lines[i].match(/^K-40換算係数=([0-9\.]+)$/)) {
-			isotope_info['換算係数'][3] = RegExp.$1;
+			isotope_info[_('Conversion factor')][3] = RegExp.$1;
 		}
 	}
 	
@@ -2542,8 +2542,8 @@ function draw_graph_emf211b_spectrum(file, file_comment, data) {
 	if(data['BG'].length === 0 || !time_bg) {
 		return false;
 	}
-	sp_info.push(["計測時間", time + " 秒"]);
-	sp_info_bg.push(["計測時間", time_bg + " 秒"]);
+	sp_info.push([_('Live time'), time +' '+_('Sec')]);
+	sp_info_bg.push([_('Live time'), time_bg +' '+_('Sec')]);
 	
 	
 	var ch2ev = function(slope_point, ch) {
@@ -2586,21 +2586,21 @@ function draw_graph_emf211b_spectrum(file, file_comment, data) {
 //		additional_sp_info_html += '<div><img src="' + filename + '.' + ext + '"><br><br></div>';
 //	}
 	
-	if(isotope_info['濃度']) {
+	if(isotope_info[_('Concentration')]) {
 		// 核種情報
 		additional_sp_info_html += '<div class="table-responsive"><table class="csv table">';
 		additional_sp_info_html += '<tr>';
-		additional_sp_info_html += '<th>核種</th>';
+		additional_sp_info_html += '<th>'+_('Nuclide')+'</th>';
 		additional_sp_info_html += '<th>keV</th>';
 		additional_sp_info_html += '<th>L%</th>';
 		additional_sp_info_html += '<th>H%</th>';
-		additional_sp_info_html += '<th>放射能濃度</th>';
-		additional_sp_info_html += '<th>不確かさ(±3σ)</th>';
-		additional_sp_info_html += '<th>測定下限値(3σ)</th>';
-		additional_sp_info_html += '<th>換算係数</th>';
-		additional_sp_info_html += '<th>質量補正</th>';
-		additional_sp_info_html += '<th>減衰補正</th>';
-		additional_sp_info_html += '<th>ネットレート</th>';
+		additional_sp_info_html += '<th>'+_('Radioactivity concentration')+'</th>';
+		additional_sp_info_html += '<th>'+_('Uncertainty')+'(±3σ)</th>';
+		additional_sp_info_html += '<th>'+_('Measured lower limit')+'(3σ)</th>';
+		additional_sp_info_html += '<th>'+_('Conversion factor')+'</th>';
+		additional_sp_info_html += '<th>'+_('Mass correction')+'</th>';
+		additional_sp_info_html += '<th>'+_('Attenuation correction')+'</th>';
+		additional_sp_info_html += '<th>'+_('Net rate')+'</th>';
 		additional_sp_info_html += '</tr>';
 		
 		var isotope_list = ['I-131', 'Cs-137', 'Cs-134', 'K-40'];
@@ -2608,9 +2608,9 @@ function draw_graph_emf211b_spectrum(file, file_comment, data) {
 		for(var iso = 0; iso < 4; iso++) {
 			var isotope    = isotope_list[iso];
 			
-			var kev_center = isotope_info['エネルギー中心位置'][iso];
-			var kev_l      = isotope_info['エネルギー位置左幅'][iso];
-			var kev_h      = isotope_info['エネルギー位置右幅'][iso];
+			var kev_center = isotope_info[_('Energy center position')][iso];
+			var kev_l      = isotope_info[_('Energy position left width')][iso];
+			var kev_h      = isotope_info[_('Energy position right width')][iso];
 			
 			var from = ev2ch(slope_point_spe, kev_center - kev_center * kev_l / 100);
 			var to   = ev2ch(slope_point_spe, kev_center + kev_center * kev_h / 100);
@@ -2620,13 +2620,13 @@ function draw_graph_emf211b_spectrum(file, file_comment, data) {
 				+ '</th><td>' + kev_center
 				+ '</th><td>' + kev_l
 				+ '</td><td>' + kev_h
-				+ '</td><td>' + round_to_fixed(2, parseFloat(isotope_info['濃度'][iso]))
-				+ '</td><td>' + round_to_fixed(3, parseFloat(isotope_info['不確かさ'][iso]))
-				+ '</td><td>' + round_to_fixed(3, parseFloat(isotope_info['最小検出限界'][iso]))
-				+ '</td><td>' + round_to_fixed(3, parseFloat(isotope_info['換算係数'][iso]))
-				+ '</td><td>' + round_to_fixed(3, parseFloat(isotope_info['質量補正'][iso]))
-				+ '</td><td>' + round_to_fixed(3, parseFloat(isotope_info['減衰補正'][iso]))
-				+ '</td><td>' + round_to_fixed(3, parseFloat(isotope_info['ネットレート'][iso]))
+				+ '</td><td>' + round_to_fixed(2, parseFloat(isotope_info[_('Concentration')][iso]))
+				+ '</td><td>' + round_to_fixed(3, parseFloat(isotope_info[_('Uncertainty')][iso]))
+				+ '</td><td>' + round_to_fixed(3, parseFloat(isotope_info[_('Minimum detection limit')][iso]))
+				+ '</td><td>' + round_to_fixed(3, parseFloat(isotope_info[_('Conversion factor')][iso]))
+				+ '</td><td>' + round_to_fixed(3, parseFloat(isotope_info[_('Mass correction')][iso]))
+				+ '</td><td>' + round_to_fixed(3, parseFloat(isotope_info[_('Attenuation correction')][iso]))
+				+ '</td><td>' + round_to_fixed(3, parseFloat(isotope_info[_('Net rate')][iso]))
 				+ '</td></tr>';
 			
 		}
@@ -2764,33 +2764,33 @@ function draw_graph_at1320_spectrum(file, file_comment, data) {
 	for(var i = 0; i < lines.length; i++) {
 		
 		if(lines[i].match(/^ATOMTEXSPECTRUM = (.*)$/)) {
-			sp_info.push(["測定No.", RegExp.$1]);
+			sp_info.push([_('Measurement No.'), RegExp.$1]);
 		}
 		if(lines[i].match(/^TIME = (.*)$/)) {
 			time = parseFloat(RegExp.$1);
-			sp_info.push(["測定時間", RegExp.$1 + "秒"]);
+			sp_info.push([_('Measurement time'), RegExp.$1 + "秒"]);
 		}
 		if(lines[i].match(/^BGNDTIME = (.*)$/)) {
 			bg_time = parseFloat(RegExp.$1);
-			bg_sp_info.push(["測定時間", RegExp.$1 + "秒"]);
+			bg_sp_info.push([_('Measurement time'), RegExp.$1 + "秒"]);
 		}
 		if(lines[i].match(/^REMARK = (.*)$/)) {
-			sp_info.push(["試料情報", RegExp.$1]);
+			sp_info.push([_('Sample information'), RegExp.$1]);
 		}
 		if(lines[i].match(/^WEIGHT = (.*)$/)) {
-			sp_info.push(["試料重量", RegExp.$1 + "g"]);
+			sp_info.push([_('Sample weight'), RegExp.$1 + "g"]);
 		}
 		if(lines[i].match(/^DATE = (.*)$/)) {
-			sp_info.push(["測定日時", RegExp.$1]);
+			sp_info.push([_('Measurement date and time'), RegExp.$1]);
 		}
 		if(lines[i].match(/^DU_TYPE = (.*)$/)) {
-			sp_info.push(["試料容器", RegExp.$1]);
+			sp_info.push([_('Sample container'), RegExp.$1]);
 		}
 		if(lines[i].match(/^TEMPERATURE = (.*)$/)) {
-			sp_info.push(["温度", RegExp.$1 + "℃"]);
+			sp_info.push([_('Temperature'), RegExp.$1 + "℃"]);
 		}
 		if(lines[i].match(/^COMMENT = *(.*)$/)) {
-			sp_info.push(["コメント", RegExp.$1]);
+			sp_info.push([_('Comment'), RegExp.$1]);
 		}
 		if(lines[i].match(/^ECALIBRATION = (.*)$/)) {
 			var max_ch = parseInt(RegExp.$1);
@@ -2883,7 +2883,7 @@ function draw_graph_at1320_spectrum(file, file_comment, data) {
 			if(csvdata != '') {
 				var additional_sp_info_html = '';
 				additional_sp_info_html += '<div class="table-responsive"><table class="csv table">';
-				additional_sp_info_html += '<tr><th>核種</th><th>判定</th><th>放射能濃度</th><th>Relative error</th><th>Absolute error</th><th>Statistical error</th></tr>';
+				additional_sp_info_html += '<tr><th>'+_('Nuclide')+'</th><th>'+_('Judgment')+'</th><th>'+_('Radioactivity concentration')+'</th><th>Relative error</th><th>Absolute error</th><th>Statistical error</th></tr>';
 				
 				var csvlines = split_line(csvdata);
 				for(var i = 3; i < csvlines.length; i++) {
@@ -2938,44 +2938,44 @@ function draw_graph_lb2045_spectrum(file, file_comment, data) {
 		if(mode == 'info') {
 			if(lines[i].match(/^Meas. Time \[s\] *: *([0-9]+)$/)) {
 				time = parseInt(RegExp.$1);
-				sp_info.push(["測定時間", time + "秒"]);
+				sp_info.push([_('Measurement time'), time + _('Sec')]);
 				if(lines[i+1].match(/^ *([0-9]+\. .*[0-9]{2}:[0-9]{2}:[0-9]{2})/)) {
-					sp_info.push(["測定日時", RegExp.$1]);
+					sp_info.push([_('Measurement date and time'), RegExp.$1]);
 				}
 				if(lines[i+2].match(/^ *([0-9]+\. .*[0-9]{2}:[0-9]{2}:[0-9]{2})/)) {
-					sp_info.push(["測定日時", RegExp.$1]);
+					sp_info.push([_('Measurement date and time'), RegExp.$1]);
 				}
 			}
 			if(lines[i].match(/^Bkg MeasTime \[s\] *: *([0-9]+)$/)) {
-				sp_info.push(["BG測定時間", RegExp.$1 + "秒"]);
+				sp_info.push([_('BG measurement time'), RegExp.$1 + _('Sec')]);
 			}
 			if(lines[i].match(/^Energy Range \[keV\] *: *([0-9]+)$/)) {
 				ev_range = parseInt(RegExp.$1);
-				sp_info.push(["エネルギーレンジ", ev_range + "keV"]);
+				sp_info.push([_('Energy range'), ev_range + "keV"]);
 			}
 			if(lines[i].match(/^Sample Name *: *([^ ]+)/)) {
-				sp_info.push(["サンプル名", RegExp.$1]);
+				sp_info.push([_('Sample name'), RegExp.$1]);
 			}
 			if(lines[i].match(/^Sample Weight \[kg\]: *([^ ]+)/)) {
-				sp_info.push(["試料重量", RegExp.$1 + "kg"]);
+				sp_info.push([_('weight'), RegExp.$1 + "kg"]);
 			}
 			if(lines[i].match(/Dead Time \[%\] *: *([^ ]+)$/)) {
-				sp_info.push(["デッドタイム", RegExp.$1 + "%"]);
+				sp_info.push([_('Dead time'), RegExp.$1 + "%"]);
 			}
 			if(lines[i].match(/Dead Time Loss \[%\] *: *([^ ]+)$/)) {
-				sp_info.push(["デッドタイムロス", RegExp.$1 + "%"]);
+				sp_info.push([_('Dead time loss'), RegExp.$1 + "%"]);
 			}
 			if(lines[i].match(/Spillover Factor *: *([^ ]+)$/)) {
-				sp_info.push(["スピルオーバー係数", RegExp.$1]);
+				sp_info.push([_('Spillover coefficient'), RegExp.$1]);
 			}
 			if(lines[i].match(/Program Version *: *(.+)$/)) {
-				sp_info.push(["プログラムバージョン", RegExp.$1]);
+				sp_info.push([_('Program version'), RegExp.$1]);
 			}
 			if(lines[i].match(/^Fill Volume \[%\] *: *(.+)$/)) {
-				sp_info.push(["充填率", RegExp.$1 + "%"]);
+				sp_info.push([_('Filling rate'), RegExp.$1 + "%"]);
 			}
 			if(lines[i].match(/^COMMENT *: *(.+)$/)) {
-				sp_info.push(["コメント", RegExp.$1]);
+				sp_info.push([_('Comment'), RegExp.$1]);
 			}
 			if(lines[i].match(/^Spectrum Values *:/) || lines[i].match(/^Spectrum Values \[cps\]:/)) {
 				mode = 'spectrum';
@@ -2990,9 +2990,9 @@ function draw_graph_lb2045_spectrum(file, file_comment, data) {
 					[parseInt(RegExp.$3),parseInt(RegExp.$4)]
 				];
 			}
-		} else if(mode == 'nuclide') {
+		} else if(mode === 'nuclide') {
 			if(lines[i].match(/^$/)) {
-				if(additional_sp_info_html != "") {
+				if(additional_sp_info_html !== "") {
 					additional_sp_info_html += '</table></div>';
 				}
 				mode = 'info';
@@ -3016,7 +3016,7 @@ function draw_graph_lb2045_spectrum(file, file_comment, data) {
 				additional_sp_info_html += '<td>' + field[1] + '</td>';
 				var status = '';
 				if(parseFloat(field[2]) < parseFloat(field[4])) {
-					status = '<br><font size="-2">検出限界未満</font>';
+					status = '<br><font size="-2">'+_('Below the detection limit')+'</font>';
 				}
 				additional_sp_info_html += '<td>' + field[2] + status + '</td>';
 				additional_sp_info_html += '<td>' + field[3] + '</td>';
@@ -3026,14 +3026,14 @@ function draw_graph_lb2045_spectrum(file, file_comment, data) {
 				
 				isotope_no++;
 			}
-		} else if(mode == 'spectrum') {
+		} else if(mode === 'spectrum') {
 			if(lines[i].match(/^Base Values *:/)) {
 				mode = 'background';
 			}
 			if(lines[i].match(/^ *([0-9\.]+);$/)) {
 				data.push([cur_ch++, parseFloat(RegExp.$1) * time]);
 			}
-		} else if(mode == 'background') {
+		} else if(mode === 'background') {
 			if(lines[i].match(/^ *([0-9\.]+);$/)) {
 				data_bg.push([cur_ch_bg++, parseFloat(RegExp.$1) * time]);
 			}
@@ -3041,7 +3041,7 @@ function draw_graph_lb2045_spectrum(file, file_comment, data) {
 	}
 	
 	
-	if(data.length == 0 || !time) {
+	if(data.length === 0 || !time) {
 		return false;
 	}
 	
@@ -3056,7 +3056,7 @@ function draw_graph_lb2045_spectrum(file, file_comment, data) {
 		}
 		
 		var additional_html_callback = function() {
-			if(isotope_no == 2 && region_info.length == 2) {
+			if(isotope_no === 2 && region_info.length === 2) {
 				for(var isotope = 0; isotope < 2; isotope++) {
 					(function(i) {
 						$("#isotope_" + i).bind('mouseenter', function() {
@@ -3099,7 +3099,7 @@ function draw_graph_lb2045_spectrum(file, file_comment, data) {
 		data: [make_data('SPE', cur_ch, data)]
 	};
 	
-	if(cur_ch_bg != 0) {
+	if(cur_ch_bg !== 0) {
 		spectrums['data'].push(make_data('BG', cur_ch_bg, data_bg));
 	}
 	
@@ -3110,7 +3110,7 @@ function draw_graph_canberra_gc2020_spectrum(file, file_comment, data) {
 	var lines = split_line(data);
 	
 	// フォーマットのチェック
-	if(lines[0] != "<MEASURE>") {
+	if(lines[0] !== "<MEASURE>") {
 		return false;
 	}
 	
@@ -3129,82 +3129,82 @@ function draw_graph_canberra_gc2020_spectrum(file, file_comment, data) {
 			mode = RegExp.$1;
 			continue;
 		}
-		if(mode == 'MEASURE') {
+		if(mode === 'MEASURE') {
 			if(lines[i].match(/^LIVETIME=([0-9\.]+)$/)) {
 				time = parseFloat(RegExp.$1);
-				sp_info.push(["測定時間(Live)", time + "秒"]);
+				sp_info.push([_('Measurement time')+'(Live)', time + _('Sec')]);
 			}
 			if(lines[i].match(/^REALTIME=([0-9\.]+)$/)) {
-				sp_info.push(["測定時間(Real)", RegExp.$1 + "秒"]);
+				sp_info.push([_('Measurement time')+'(Real)', RegExp.$1 + _('Sec')]);
 			}
 			if(lines[i].match(/^ACQDATE=(.*)$/)) {
-				sp_info.push(["測定日時", RegExp.$1]);
+				sp_info.push([_('Measurement date and time'), RegExp.$1]);
 			}
 			if(lines[i].match(/^COMMENT=(.*)$/)) {
-				sp_info.push(["コメント", RegExp.$1]);
+				sp_info.push([_('Comment'), RegExp.$1]);
 			}
 			if(lines[i].match(/^POSNAME=(.*)$/)) {
-				sp_info.push(["測定位置", RegExp.$1]);
+				sp_info.push([_('Measurement position'), RegExp.$1]);
 			}
-		} else if(mode == 'SAMPLE') {
+		} else if(mode === 'SAMPLE') {
 			if(lines[i].match(/^SMPGATSTA=(.*)$/)) {
-				sp_info.push(["採取開始日時", RegExp.$1]);
+				sp_info.push([_('Collection start date and time'), RegExp.$1]);
 			}
 			if(lines[i].match(/^SMPGATEND=(.*)$/)) {
-				sp_info.push(["採取終了日時", RegExp.$1]);
+				sp_info.push([_('Collecting end date and time'), RegExp.$1]);
 			}
 			if(lines[i].match(/^SMPCODE=(.*)$/)) {
-				sp_info.push(["試料コード", RegExp.$1]);
+				sp_info.push([_('Sample code'), RegExp.$1]);
 			}
 			if(lines[i].match(/^SMPGRP=(.*)$/)) {
-				sp_info.push(["試料区分", RegExp.$1]);
+				sp_info.push([_('Sample classification'), RegExp.$1]);
 			}
 			if(lines[i].match(/^VESSEL=(.*)$/)) {
-				sp_info.push(["試料容器", RegExp.$1]);
+				sp_info.push([_('Sample container'), RegExp.$1]);
 			}
 			if(lines[i].match(/^HEIGHT=(.*)$/)) {
-				sp_info.push(["充填高さ", RegExp.$1 + " cm"]);
+				sp_info.push([_('Filling height'), RegExp.$1 + " cm"]);
 			}
 			if(lines[i].match(/^DENSITY=(.*)$/)) {
-				sp_info.push(["密度", RegExp.$1 + " g/cm<sup>3</sup>"]);
+				sp_info.push([_('Density'), RegExp.$1 + " g/cm<sup>3</sup>"]);
 			}
 			if(lines[i].match(/^SMPVOL=(.*)$/)) {
-				sp_info.push(["試料量", RegExp.$1]);
+				sp_info.push([_('Amount of sample'), RegExp.$1]);
 			}
 			if(lines[i].match(/^SMPVOLUNT=(.*)$/)) {
-				sp_info.push(["試料量単位", RegExp.$1]);
+				sp_info.push([_('Amount of sample units'), RegExp.$1]);
 			}
 			if(lines[i].match(/^MATERIAL=(.*)$/)) {
-				sp_info.push(["母材", RegExp.$1]);
+				sp_info.push([_('Base material'), RegExp.$1]);
 			}
-		} else if(mode == 'COUNT') {
+		} else if(mode === 'COUNT') {
 			var values = lines[i].split(/\s*,\s*/);
 			for(var v = 0; v < values.length; v++) {
 				data.push([cur_ch++, parseFloat(values[v])]);
 			}
-		} else if(mode == 'RESULT') {
+		} else if(mode === 'RESULT') {
 			if(lines[i].match(/^REN([1-5])=([0-9\.E\-]+)$/)) {
 				var no = parseInt(RegExp.$1);
 				var val = parseFloat(RegExp.$2);
 				ev_slope[no - 1] = val;
 			}
 			if(lines[i].match(/^ANLCODE=(.*)$/)) {
-				sp_info.push(["測定コード", RegExp.$1]);
+				sp_info.push([_('Measurement code'), RegExp.$1]);
 			}
-		} else if(mode == 'RESULTDAT') {
+		} else if(mode === 'RESULTDAT') {
 			nuclide_info_dat.push(lines[i].split(","));
-		} else if(mode == 'RESULTACT') {
+		} else if(mode === 'RESULTACT') {
 			nuclide_info_act.push(lines[i].split(","));
-		} else if(mode == 'RESULTPKS') {
+		} else if(mode === 'RESULTPKS') {
 			nuclide_info_peak.push(lines[i].split(","));
 		}
 	}
 	
-	if(data.length == 0 || !time || ev_slope.length == 0) {
+	if(data.length === 0 || !time || ev_slope.length === 0) {
 		return false;
 	}
 	
-	var format_num
+	var format_num;
 	
 	var additional_sp_info_html = '';
 	
@@ -3212,8 +3212,8 @@ function draw_graph_canberra_gc2020_spectrum(file, file_comment, data) {
 	additional_sp_info_html += 'function gs2020_nuclide(no) { for(var n = 1; n <= 3; n++) { $("#gs2020_nuclide" + n).hide(); } $("#gs2020_nuclide" + no).show(); }';
 	additional_sp_info_html += '</script>';
 	
-	additional_sp_info_html += '[<a href="javascript: gs2020_nuclide(1);">核種分析結果１</a>]';
-	additional_sp_info_html += '[<a href="javascript: gs2020_nuclide(2);">核種定量結果２</a>]';
+	additional_sp_info_html += '[<a href="javascript: gs2020_nuclide(1);">'+_('Nuclide analysis results')+'1</a>]';
+	additional_sp_info_html += '[<a href="javascript: gs2020_nuclide(2);">'+_('Nuclide analysis results')+'2</a>]';
 	additional_sp_info_html += '[<a href="javascript: gs2020_nuclide(3);">ピーク検索結果</a>]';
 	additional_sp_info_html += '<div id="gs2020_nuclide1" style="display: none;">';
 	
