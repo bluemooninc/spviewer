@@ -3214,28 +3214,28 @@ function draw_graph_canberra_gc2020_spectrum(file, file_comment, data) {
 	
 	additional_sp_info_html += '[<a href="javascript: gs2020_nuclide(1);">'+_('Nuclide analysis results')+'1</a>]';
 	additional_sp_info_html += '[<a href="javascript: gs2020_nuclide(2);">'+_('Nuclide analysis results')+'2</a>]';
-	additional_sp_info_html += '[<a href="javascript: gs2020_nuclide(3);">ピーク検索結果</a>]';
+	additional_sp_info_html += '[<a href="javascript: gs2020_nuclide(3);">'+_('Peak search result')+'</a>]';
 	additional_sp_info_html += '<div id="gs2020_nuclide1" style="display: none;">';
 	
 	additional_sp_info_html += '<div class="table-responsive"><table class="csv table">';
 	additional_sp_info_html += '<tr>';
-	additional_sp_info_html += '<th>検出</th>';
-	additional_sp_info_html += '<th>核種名</th>';
-	additional_sp_info_html += '<th>エネルギー<br>(keV)</th>';
+	additional_sp_info_html += '<th>'+_('Detection')+'</th>';
+	additional_sp_info_html += '<th>'+_('Nuclide name')+'</th>';
+	additional_sp_info_html += '<th>'+_('Energy')+'<br>(keV)</th>';
 //	additional_sp_info_html += '<th>ピーク面積<br>(counts)</th>';
 //	additional_sp_info_html += '<th>検出限界<br>(counts)</th>';
-	additional_sp_info_html += '<th>半減期</th>';
-	additional_sp_info_html += '<th>放出比<br>(%)</th>';
-	additional_sp_info_html += '<th>サム効果<br>補正係数</th>';
-	additional_sp_info_html += '<th>自己吸収<br>補正係数</th>';
+	additional_sp_info_html += '<th>'+_('Half-life')+'</th>';
+	additional_sp_info_html += '<th>'+_('Emission ratio')+'<br>(%)</th>';
+	additional_sp_info_html += '<th>'+_('Sam effect')+'<br>'+_('Correction factor')+'</th>';
+	additional_sp_info_html += '<th>'+_('Self-absorption')+'<br>'+_('Correction factor')+'</th>';
 //	additional_sp_info_html += '<th>減衰補正<br>補正係数</th>';
-	additional_sp_info_html += '<th>検出効率<br>(%)</th>';
-	additional_sp_info_html += '<th>放射能<br>(Bq/kg)</th>';
-	additional_sp_info_html += '<th>荷重平均放射能<br>(Bq/kg)</th>';
-	additional_sp_info_html += '<th>検出限界値<br>(Bq/kg)</th>';
+	additional_sp_info_html += '<th>'+_('Detection efficiency')+'<br>(%)</th>';
+	additional_sp_info_html += '<th>'+_('Radioactivity')+'<br>(Bq/kg)</th>';
+	additional_sp_info_html += '<th>'+_('Load average radioactivity')+'<br>(Bq/kg)</th>';
+	additional_sp_info_html += '<th>'+_('Detection limit')+'<br>(Bq/kg)</th>';
 //	additional_sp_info_html += '<th>属性</th>';
 	additional_sp_info_html += '<th>Mark</th>';
-	additional_sp_info_html += '<th>計算方法</th>';
+	additional_sp_info_html += '<th>Method of calculation計算方法</th>';
 	additional_sp_info_html += '</tr>';
 	for(var i = 0; i < nuclide_info_dat.length; i++) {
 		additional_sp_info_html += '<tr id="nuclide_info_dat_' + i + '">';
@@ -3261,7 +3261,7 @@ function draw_graph_canberra_gc2020_spectrum(file, file_comment, data) {
 		additional_sp_info_html += '<td>'  + Number(nuclide_info_dat[i][34]).toExponential(3) + '</td>';
 	//	additional_sp_info_html += '<td>'  + '属性' + '</td>';
 		additional_sp_info_html += '<td style="text-align: center;">' + nuclide_info_dat[i][5] + '</td>';
-		additional_sp_info_html += '<td>'  + (nuclide_info_dat[i][33] == 1 ? '関数適合' : '積算法') + '</td>';
+		additional_sp_info_html += '<td>' + nuclide_info_dat[i][33] === 1 ? _('Function fit') : _('Integration method') + '</td>';
 		var all = '';
 		for(var f = 0; f < nuclide_info_dat[i].length; f++) {
 			if(f <= 4 || f == 6 || f == 7 || f == 8 || f == 9 || f == 12 || f == 24 || f == 25 || f == 26 || f == 27 || f== 5
@@ -3273,10 +3273,16 @@ function draw_graph_canberra_gc2020_spectrum(file, file_comment, data) {
 		additional_sp_info_html += '</tr>';
 	}
 	additional_sp_info_html += '</table></div><br>';
-	additional_sp_info_html += '※Mark：C:積算法，N:近接処理，D:分割，S:寄与差引，E:同一核種処理，W:和処理，';
-	additional_sp_info_html += 'X:レンジ外(測定レンジ外にピークがある)，L:２σ以上，';
-	additional_sp_info_html += 'A:注意(サーチされていない計数が，BG分析なら２σ以上，核種分析ならDL以上)，';
-	additional_sp_info_html += 'T:試料保存期間が半減期×64を超えた為，試料保存中の減衰補正をOFF<br>';
+	additional_sp_info_html += '*Mark：C:'+_('Integration method')
+                +',N:'+_('Proximity processing')
+                +',D:'+_('Split')
+                +',S:'+_('Contribution deduction')
+                +',E:'+_('Same nuclide processing')
+                +',W:'+_('Sum processing');
+                +',X:'+_('Out of range (outside the measurement range is peak')
+                +',L:'+_('2σ more')
+                +',A:'+_('Note (counting that are not search, more than 2σ if BG analysis, more than DL and if nuclide analysis)')
+                +',T:'+_('For sample storage period exceeds a half-life × 64, OFF attenuation correction in the sample storage');
 //	additional_sp_info_html += '※計算方法：G:関数適合，C:積算法<br>';
 	
 	additional_sp_info_html += '</div>';
@@ -3284,15 +3290,15 @@ function draw_graph_canberra_gc2020_spectrum(file, file_comment, data) {
 	
 	additional_sp_info_html += '<div class="table-responsive"><table class="csv table">';
 	additional_sp_info_html += '<tr>';
-	additional_sp_info_html += '<th>核種名</th>';
-	additional_sp_info_html += '<th>エネルギー<br>(keV)</th>';
-	additional_sp_info_html += '<th>ピーク<br>チャンネル<br>(ch)</th>';
-	additional_sp_info_html += '<th>ピーク領域<br>(ch)</th>';
-	additional_sp_info_html += '<th>ベースライン<br>低<br>(ch)</th>';
-	additional_sp_info_html += '<th>ベースライン<br>高<br>(ch)</th>';
-	additional_sp_info_html += '<th>半値幅<br>(ch)</th>';
-	additional_sp_info_html += '<th>グロス<br>カウント<br>(counts)</th>';
-	additional_sp_info_html += '<th>バック<br>グラウンド<br>(counts)</th>';
+	additional_sp_info_html += '<th>'+_('Nuclide name')+'</th>';
+	additional_sp_info_html += '<th>'+_('Energy')+'<br>(keV)</th>';
+	additional_sp_info_html += '<th>'+_('Peak')+'<br>'+_('Channel')+'<br>(ch)</th>';
+	additional_sp_info_html += '<th>'+_('Peak area')+'<br>(ch)</th>';
+	additional_sp_info_html += '<th>'+_('Base line')+'<br>'+_('Low')+'<br>(ch)</th>';
+	additional_sp_info_html += '<th>'+_('Base line')+'<br>'+_('High')+'<br>(ch)</th>';
+	additional_sp_info_html += '<th>'+_('Half width')+'<br>(ch)</th>';
+	additional_sp_info_html += '<th>'+_('Gross')+'<br>'+_('Count')+'<br>(counts)</th>';
+	additional_sp_info_html += '<th>'+_('Back')+'<br>'+_('Ground')+'<br>(counts)</th>';
 //	additional_sp_info_html += '<th>妨害<br>カウント<br>(counts)</th>';
 //	additional_sp_info_html += '<th>ピーク<br>バックグラウンド<br>(counts)</th>';
 //	additional_sp_info_html += '<th>Mark<br>(LSNのみ)</th>';
