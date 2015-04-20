@@ -124,7 +124,7 @@ __Localizer.strings = {
         'Energy':'エネルギー',
         'Half-life':'半減期',
         'Emission ratio':'放出比',
-        'Sam effect':'サム効果',
+        'Sum effect':'サム効果',
         'Correction factor':'補正係数',
         'Self-absorption':'自己吸収',
         'Detection efficiency':'検出効率',

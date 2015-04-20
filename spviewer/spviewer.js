@@ -3226,7 +3226,7 @@ function draw_graph_canberra_gc2020_spectrum(file, file_comment, data) {
 //	additional_sp_info_html += '<th>検出限界<br>(counts)</th>';
 	additional_sp_info_html += '<th>'+_('Half-life')+'</th>';
 	additional_sp_info_html += '<th>'+_('Emission ratio')+'<br>(%)</th>';
-	additional_sp_info_html += '<th>'+_('Sam effect')+'<br>'+_('Correction factor')+'</th>';
+	additional_sp_info_html += '<th>'+_('Sum effect')+'<br>'+_('Correction factor')+'</th>';
 	additional_sp_info_html += '<th>'+_('Self-absorption')+'<br>'+_('Correction factor')+'</th>';
 //	additional_sp_info_html += '<th>減衰補正<br>補正係数</th>';
 	additional_sp_info_html += '<th>'+_('Detection efficiency')+'<br>(%)</th>';
