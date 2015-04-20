@@ -3358,16 +3358,16 @@ function draw_graph_canberra_gc2020_spectrum(file, file_comment, data) {
 	additional_sp_info_html += '<div class="table-responsive"><table class="csv table">';
 	additional_sp_info_html += '<tr>';
 	additional_sp_info_html += '<th>No.</th>';
-	additional_sp_info_html += '<th>ピーク<br>チャンネル<br>(ch)</th>';
-	additional_sp_info_html += '<th>フィルタ<br>幅<br>(ch)</th>';
-	additional_sp_info_html += '<th>半値幅<br>(ch)</th>';
-	additional_sp_info_html += '<th>エネルギー<br>(keV)</th>';
-	additional_sp_info_html += '<th>グロス<br>カウント<br>(counts)</th>';
-	additional_sp_info_html += '<th>バック<br>グラウンド<br>(counts)</th>';
-	additional_sp_info_html += '<th>ネット<br>カウント<br>(counts)</th>';
+	additional_sp_info_html += '<th>'+_('Peak')+'<br>'+_('Channel')+'<br>(ch)</th>';
+	additional_sp_info_html += '<th>'+_('Filter')+'<br>'+_('Width')+'<br>(ch)</th>';
+	additional_sp_info_html += '<th>'+_('Half width')+'<br>(ch)</th>';
+	additional_sp_info_html += '<th>'+_('Enagy')+'<br>(keV)</th>';
+	additional_sp_info_html += '<th>'+_('Gross')+'<br>'+_('Count')+'<br>(counts)</th>';
+	additional_sp_info_html += '<th>'+_('Back')+'<br>'+_('Ground')+'<br>(counts)</th>';
+	additional_sp_info_html += '<th>'+_('Net')+'<br>'+_('Count')+'<br>(counts)</th>';
 	additional_sp_info_html += '<th></th>';
-	additional_sp_info_html += '<th>検出限界<br>カウント<br>(counts)</th>';
-	additional_sp_info_html += '<th>核種名</th>';
+	additional_sp_info_html += '<th>'+_('Detection limit')+'<br>'+_('Count')+'<br>(counts)</th>';
+	additional_sp_info_html += '<th>'+_('Nuclide name')+'</th>';
 	additional_sp_info_html += '</tr>';
 	for(var i = 0; i < nuclide_info_peak.length; i++) {
 		additional_sp_info_html += '<tr id="nuclide_info_peak_' + i + '">';
@@ -3469,41 +3469,41 @@ function draw_graph_a2700_spectrum(file, file_comment, data) {
 				ev_slope[0] = val;
 			}
 			if(line.match(/^REAL TIME \(s\),([0-9\.]+)$/)) {
-				sp_info.push(["測定時間(Real)", RegExp.$1 + " 秒"]);
+				sp_info.push([_('Measurement time') + '(Real)', RegExp.$1 + ' '+_('Sec')]);
 			}
 			if(line.match(/^Live TIME \(s\),([0-9\.]+)$/)) {
-				sp_info.push(["測定時間(Live)", RegExp.$1 + " 秒"]);
+				sp_info.push([_('Measurement time')+'(Live)', RegExp.$1 + ' '+_('Sec')]);
 				var val = parseFloat(RegExp.$1);
 				time = val;
 			}
 			if(line.match(/^BG REAL TIME \(s\),([0-9\.]+)$/)) {
-				sp_info.push(["BG測定時間(Real)", RegExp.$1 + " 秒"]);
+				sp_info.push(['BG '+_('Measurement time')+'(Real)', RegExp.$1 + ' '+_('Sec')]);
 			}
 			if(line.match(/^BG Live TIME \(s\),([0-9\.]+)$/)) {
-				sp_info.push(["BG測定時間(Live)", RegExp.$1 + " 秒"]);
+				sp_info.push(['BG '+_('Measurement time')+'(Live)', RegExp.$1 + ' '+_('Sec')]);
 				var val = parseFloat(RegExp.$1);
 				bg_time = val;
 			}
 			if(line.match(/^START TIME,(.*)$/)) {
-				sp_info.push(["測定日時", RegExp.$1]);
+				sp_info.push([_('Measurement date and time'), RegExp.$1]);
 			}
 			if(line.match(/^ItemName,"?(.*?)"?$/)) {
-				sp_info.push(["測定名", RegExp.$1]);
+				sp_info.push([_('Measurement name'), RegExp.$1]);
 			}
 			if(line.match(/^Comment,"?(.*?)"?$/)) {
-				sp_info.push(["コメント", RegExp.$1]);
+				sp_info.push([_('Comment'), RegExp.$1]);
 			}
 			if(line.match(/^BGItemNm,"?(.*?)"?$/)) {
-				sp_info.push(["BG測定名", RegExp.$1]);
+				sp_info.push(['BG '+_('Measurement name'), RegExp.$1]);
 			}
 			if(line.match(/^BGComment,"?(.*?)"?$/)) {
-				sp_info.push(["BGコメント", RegExp.$1]);
+				sp_info.push(['BG '+_('Comment'), RegExp.$1]);
 			}
 			if(line.match(/^SampleItemNm,"?(.*?)"?$/)) {
-				sp_info.push(["試料測定名", RegExp.$1]);
+				sp_info.push([_('Sample measurement name'), RegExp.$1]);
 			}
 			if(line.match(/^SampleComment,"?(.*?)"?$/)) {
-				sp_info.push(["試料コメント", RegExp.$1]);
+				sp_info.push([_('Sample comment'), RegExp.$1]);
 			}
 			if(line.match(/^CHSize,([0-9]+)$/)) {
 				ch_count = parseInt(RegExp.$1);
@@ -3534,7 +3534,7 @@ function draw_graph_a2700_spectrum(file, file_comment, data) {
 		return false;
 	
 	if(!bg_time && (!ch_count || ch_count != spectrum_data_ch.length)) {
-		alert("ch数エラー");
+		alert(_('ch number of errorsch'));
 		return false;
 	}
 	
@@ -3609,8 +3609,8 @@ function draw_graph_csk2i_spectrum(file, file_comment, data) {
 	var additional_sp_info_html = '';
 	additional_sp_info_html += '<div class="table-responsive"><table class="csv table">';
 	additional_sp_info_html += '<tr>';
-	additional_sp_info_html += '<th>核種</th>';
-	additional_sp_info_html += '<th>濃度[Bq/kg]</th>';
+	additional_sp_info_html += '<th>'+_('Nuclide')+'</th>';
+	additional_sp_info_html += '<th>'+_('Concentration')+'[Bq/kg]</th>';
 	additional_sp_info_html += '<th>CPS</th>';
 	additional_sp_info_html += '</tr>';
 	
@@ -3622,22 +3622,22 @@ function draw_graph_csk2i_spectrum(file, file_comment, data) {
 		var line = lines[i];
 		if(mode == 'info') {
 			if(line.match(/^【検体名】\t(.*)$/)) {
-				sp_info.push(["検体名", RegExp.$1]);
+				sp_info.push([_('Specimen name'), RegExp.$1]);
 			}
 			if(line.match(/^【採取場所】\t(.*)$/)) {
-				sp_info.push(["採取場所", RegExp.$1]);
+				sp_info.push([_('SampleInfo Location'), RegExp.$1]);
 			}
 			if(line.match(/^【採取日時】\t(.*)$/)) {
-				sp_info.push(["採取日時", RegExp.$1]);
+				sp_info.push([_('SampleInfo Time'), RegExp.$1]);
 			}
 			if(line.match(/^【重量】\t(.*)$/)) {
-				sp_info.push(["重量", RegExp.$1 + " g"]);
+				sp_info.push([_('SampleInfo Weight'), RegExp.$1 + " g"]);
 			}
 			if(line.match(/^【備考】\t(.*)$/)) {
-				sp_info.push(["備考", RegExp.$1]);
+				sp_info.push([_('SampleInfo Note'), RegExp.$1]);
 			}
 			if(line.match(/^収録時間\t(.*)$/)) {
-				sp_info.push(["収録時間", RegExp.$1 + " 秒"]);
+				sp_info.push([_('Duration'), RegExp.$1 + ' '+_('Sec')]);
 				var val = parseFloat(RegExp.$1);
 				time = val;
 			}
@@ -3653,7 +3653,7 @@ function draw_graph_csk2i_spectrum(file, file_comment, data) {
 				spectrum_data_ev.push([parseFloat(ev), parseInt(count)]);
 			}
 			if(line.match(/^BGの収録時間\t(.*)$/)) {
-				sp_info.push(["BGの収録時間", RegExp.$1 + " 秒"]);
+				sp_info.push(['BG '+_('Duration'), RegExp.$1 + ' '+_('Sec')]);
 				var val = parseFloat(RegExp.$1);
 				bg_time = val;
 				ch_count = 0;
@@ -3699,8 +3699,8 @@ function draw_graph_csk2i_spectrum(file, file_comment, data) {
 			additional_sp_info_html += '<div class="table-responsive"><table class="csv table">';
 			additional_sp_info_html += '<tr>';
 			additional_sp_info_html += '<th>ROI</th>';
-			additional_sp_info_html += '<th>開始(keV)</th>';
-			additional_sp_info_html += '<th>終了(keV)</th>';
+			additional_sp_info_html += '<th>'+_('Start')+'(keV)</th>';
+			additional_sp_info_html += '<th>'+_('End')+'(keV)</th>';
 			additional_sp_info_html += '</tr>';
 		}
 	}
@@ -3822,45 +3822,45 @@ function draw_graph_csk3ix_spectrum(file, file_comment, data) {
 		var line = lines[i];
 		if(mode == 'info') {
 			if(line.match(/^保存日時,([^,]*)/)) {
-				sp_info.push(["保存日時", RegExp.$1]);
+				sp_info.push([_('Save date and time'), RegExp.$1]);
 			}
 			if(line.match(/^測定番号,([^,]*)/)) {
-				sp_info.push(["測定番号", RegExp.$1]);
+				sp_info.push([_('Measurement number'), RegExp.$1]);
 			}
 			if(line.match(/^検体名,([^,]*)/)) {
-				sp_info.push(["検体名", RegExp.$1]);
+				sp_info.push([_('Specimen name'), RegExp.$1]);
 			}
 			if(line.match(/^採取場所,([^,]*)/)) {
-				sp_info.push(["採取場所", RegExp.$1]);
+				sp_info.push([_('SampleInfo Location'), RegExp.$1]);
 			}
 			if(line.match(/^採取日,([^,]*)/)) {
-				sp_info.push(["採取日", RegExp.$1]);
+				sp_info.push([_('Day of collection'), RegExp.$1]);
 			}
 			if(line.match(/^検体重量,([^,]*)/)) {
-				sp_info.push(["重量", RegExp.$1 + " g"]);
+				sp_info.push([_('SampleInfo Weight'), RegExp.$1 + " g"]);
 			}
 			if(line.match(/^備考,([^,]*)/)) {
-				sp_info.push(["備考", RegExp.$1]);
+				sp_info.push([_('Comment'), RegExp.$1]);
 			}
 			if(line.match(/^測定容器番号,([^,]*)/)) {
-				sp_info.push(["測定容器番号", RegExp.$1]);
+				sp_info.push([_('Measuring container number'), RegExp.$1]);
 			}
 			if(line.match(/^検査場所,([^,]*)/)) {
-				sp_info.push(["検査場所", RegExp.$1]);
+				sp_info.push([_('Inspection station'), RegExp.$1]);
 			}
 			if(line.match(/^検査担当者,([^,]*)/)) {
-				sp_info.push(["検査担当者", RegExp.$1]);
+				sp_info.push([_('Inspection personnel'), RegExp.$1]);
 			}
 			if(line.match(/^測定開始日時,([^,]*)/)) {
-				sp_info.push(["測定開始日時", RegExp.$1]);
+				sp_info.push([_('StartTime'), RegExp.$1]);
 			}
 			if(line.match(/^測定時間,([^,]*)/)) {
-				sp_info.push(["測定時間", RegExp.$1 + " 秒"]);
+				sp_info.push([_('Measurement time'), RegExp.$1 + ' '+_('Sec')]);
 				var val = parseFloat(RegExp.$1);
 				time = val;
 			}
 			if(line.match(/^BG測定時間,([^,]*)/)) {
-				sp_info.push(["BG測定時間", RegExp.$1 + " 秒"]);
+				sp_info.push(['BG '+_('Measurement time'), RegExp.$1 +' '+_('Sec')]);
 				var val = parseFloat(RegExp.$1);
 				bg_time = val;
 			}
@@ -4261,7 +4261,7 @@ function draw_graph_common(spectrum) {
 	});
 	
 	// 範囲プリセット
-	var range_preset_html = '範囲設定：';
+	var range_preset_html = _('Range setting')+':';
 	for(var i in range_preset) {
 		range_preset_html += '<input class="btn btn-default" type="button" id="range_preset_' + i + '" value="' + range_preset[i][0] + '">';
 	}
@@ -4370,8 +4370,8 @@ function draw_graph_common(spectrum) {
 
 function save_tsv(spectrum) {
 	var html = '';
-	html += 'TSVデータ: 測定時間: ' + spectrum['time'] + ' 秒 ';
-	html += '<input class="btn btn-default" type="button" id="tsv_data_close" value="閉じる">';
+	html += _('TSV data')+': '+_('Measurement time')+': ' + spectrum['time']+' '+_('Sec')+' ';
+	html += '<input class="btn btn-default" type="button" id="tsv_data_close" value="'+_('Close')+'">';
 	html += '<textarea id="tsv_data_text" rows="20" class="form-control" disabled></textarea>';
 	$("#tsv_data").html(html);
 	
@@ -4434,7 +4434,7 @@ function setup_multiple_spectrum_compare(spectrums) {
 		}
 	}
 	
-	var html = '■スペクトル選択<div class="table-responsive"><table class="csv table">';
+	var html = '*'+_('Spectral selection')+'<div class="table-responsive"><table class="csv table">';
 	for(var no = 0; no < spectrums[0]['data'].length; no++) {
 		html += '<tr>';
 		html += '<td><input type="radio" name="spe_sel1" value="' + no + '" '
@@ -4652,7 +4652,7 @@ function draw_graph_common_compare(spectrums) {
 	});
 	
 	// 範囲プリセット
-	var range_preset_html = '範囲設定：';
+	var range_preset_html = _('Range setting')+':';
 	for(var i in range_preset) {
 		range_preset_html += '<input class="btn btn-default" type="button" id="range_preset_' + i + '" value="' + range_preset[i][0] + '">';
 	}
@@ -4769,7 +4769,7 @@ function setup_multiple_spectrum_multi(spectrums) {
 		}
 	}
 	
-	var html = '■スペクトル選択<br>';
+	var html = '*'+_('Spectral selection')+'<br>';
 	for(var sp = 0; sp < spectrum_count; sp++) {
 		html += '<div class="table-responsive"><table class="csv table">';
 		for(var no = 0; no < spectrums[sp]['data'].length; no++) {
@@ -4983,7 +4983,7 @@ function draw_graph_common_multi(spectrums) {
 	});
 	
 	// 範囲プリセット
-	var range_preset_html = '範囲設定：';
+	var range_preset_html = _('Range setting')+':';
 	for(var i in range_preset) {
 		range_preset_html += '<input class="btn btn-default" type="button" id="range_preset_' + i + '" value="' + range_preset[i][0] + '">';
 	}
@@ -5590,10 +5590,10 @@ function print_sp_info_compare(spectrums) {
 	if(spectrums[1]['additional_sp_info_html']) {
 		html += '<br>' + spectrums[1]['additional_sp_info_html'];
 	}
-	html += '※スペクトルファイルの詳細情報は試料本体（BGではない方）のみ表示されます．<br>';
+	html += '*' + _('Detailed information of the spectrum file, (and which is not a BG) sample body appears only.')+'<br>';
 	
 	if(spectrums[0]['without_bg'] && spectrums[1]['without_bg']) {
-		html += '※スペクトルＢのデータはスペクトルＡを減算済みとして，スペクトルＢのグラフはＡの結果を加算して表示しています．<br>';
+		html += '*'+_('A spectral data of the spectrum B as a subtraction already, the graph of the spectrum B is displayed by adding the results of the A.')+'<br>';
 	}
 	
 	$("#sp_info").html(html);
@@ -5613,7 +5613,7 @@ function print_sp_info_multi(spectrums) {
 		if(spectrums[i]['name'] != undefined) {
 			name = '【' + spectrums[i]['name'] + '】 ';
 		}
-		html += '<tr><th>' + (i+1) + '</th><td><font color="' + colors[i] + '">■</font>' + name + spectrums[i]['file_comment'] + '</td></tr>';
+		html += '<tr><th>' + (i+1) + '</th><td><font color="' + colors[i] + '">*</font>' + name + spectrums[i]['file_comment'] + '</td></tr>';
 	}
 	html += '</table></div>';
 	
@@ -5649,7 +5649,7 @@ function print_sp_info_multi(spectrums) {
 	html += '<p>URL: ';
 	html += '<a href="' + url + '" target="_blank">' + url + '</a></p>';
 	
-	html += '※スペクトルファイルの詳細情報は[スペクトル表示]で１ファイルのみ選んだときのみ表示されます．<br>';
+	html += '*'+_('Detailed information of the spectrum file is displayed only when you select only one file (spectrum display).')+'<br>';
 	
 	$("#sp_info").html(html);
 }
